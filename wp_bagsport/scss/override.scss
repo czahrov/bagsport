@@ -37,3 +37,49 @@
 	
 }
 
+#blog
+{
+	
+	.item{
+		margin: 20px 0;
+		
+		.img{
+			background:{
+				position: center;
+				size: cover;
+				repeat: no-repeat;
+				
+			};
+			height: 250px;
+			
+		}
+		
+		.text{
+			
+		}
+		
+	}
+	
+	.pagination{
+		flex-direction: column;
+		align-items: center;
+		
+	}
+	
+}
+
+#single
+{
+	
+	.title{
+		margin: 20px 0;
+		text-align: center;
+		
+	}
+	
+	.content{
+		margin-bottom: 50px;
+		
+	}
+	
+}

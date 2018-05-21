@@ -48,10 +48,10 @@
 					<div class="d-flex flex-column">
 						<p>
 							<span>
-								<a title="Kliknij, aby zadzwonić." style="text-decoration: none;"" href="tel: 540 000 456">
+								<a title="Kliknij, aby zadzwonić." style="text-decoration: none;" href="tel: 540 000 456">
 									Infolinia 540 000 456
 								</a>
-							<span>
+							</span>
 						</p>
 						<p class="font-grey">Pn-Pt 8:00 - 16:00</p>
 					</div>
@@ -61,7 +61,7 @@
 					<div class="d-flex flex-column">
 						<p>
 							<span>
-								<a title="Kliknij, aby napisać e-mail." style="text-decoration: none;"" href="mailto:biuro@bagsport.pl">
+								<a title="Kliknij, aby napisać e-mail." style="text-decoration: none;" href="mailto:biuro@bagsport.pl">
 									biuro@bagsport.pl
 								</a>
 							</span>
