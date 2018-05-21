@@ -1,0 +1,17 @@
+#banner {
+  width: 100%;
+  height: 300px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover; }
+
+#page {
+  width: 100%; }
+  #page .content {
+    margin: 50px 0;
+    padding: 0 20px; }
+
+#home .content {
+  margin: 50px 0; }
+
+/*# sourceMappingURL=override.css.map */
