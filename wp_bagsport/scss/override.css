@@ -1,6 +1,10 @@
+.accordion .textwidget {
+  display: none; }
+
 #banner {
   width: 100%;
   height: 300px;
+  background-color: silver;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover; }
@@ -11,9 +15,6 @@
     margin: 50px 0;
     padding: 0 20px; }
 
-#home .content {
-  margin: 50px 0; }
-
 #blog .item {
   margin: 20px 0; }
   #blog .item .img {
@@ -21,6 +22,8 @@
     background-size: cover;
     background-repeat: no-repeat;
     height: 250px; }
+  #blog .item .text .excerpt .more:hover {
+    color: #e52b50; }
 #blog .pagination {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
@@ -29,6 +32,20 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center; }
+  #blog .pagination .nav-links {
+    margin-bottom: 50px; }
+    #blog .pagination .nav-links .page-numbers {
+      display: inline-block;
+      margin: 0 2px;
+      padding: 10px 15px;
+      text-align: center;
+      font-size: 16px;
+      font-weight: 500; }
+      #blog .pagination .nav-links .page-numbers.current, #blog .pagination .nav-links .page-numbers:hover {
+        background-color: #e52b50;
+        color: #fff;
+        cursor: pointer;
+        text-decoration: none; }
 
 #single .title {
   margin: 20px 0;

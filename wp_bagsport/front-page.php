@@ -2,110 +2,9 @@
 	get_header();
 	?>
 <!-- Page Content -->
-<div id='home' class="container">
+<div id='front' class="container">
 	<div class="row">
-		<div class="col-lg-3">
-			<h1 class="my-4">
-				<span>
-					Kategorie
-					<div class="h1-line"></div>
-				</span>
-				produktów
-			</h1>
-			<div class="list-group">
-				<a href="#" class="list-group-item">Biuro i biznes</a>
-				<a href="#" class="list-group-item">Czas i pogoda</a>
-				<a href="#" class="list-group-item">Do picia</a>
-				<a href="#" class="list-group-item">Dom i Ogród</a>
-				<a href="#" class="list-group-item">Dzieci i zabawa</a>
-				<a href="#" class="list-group-item">Elektronika</a>
-				<a href="#" class="list-group-item">Materiały piśmiennicze</a>
-				<a href="#" class="list-group-item">Narzędzia, latarki, breloki</a>
-				<a href="#" class="list-group-item">Parasole i peleryny</a>
-				<a href="#" class="list-group-item">Torby i plecaki</a>
-				<a href="#" class="list-group-item">Wakacje, sport i rekreacja</a>
-				<a href="#" class="list-group-item">Zdrowie i uroda</a>
-				<a href="#" class="list-group-item">Świateczne</a>
-				<?php wp_nav_menu( array( 'theme_location' => 'menu-sklep' ) ); ?>
-			</div>
-			<div class="hot-products ">
-				<h1 class="my-4">
-					<span>
-						Hot
-						<div class="h1-line"></div>
-					</span>
-					produkty
-				</h1>
-				<div class="hot-products-content d-flex">
-					<div class="hot-products-img">
-						<div class="hot-img" style="background-image: url('http://poligon.scepter.pl/SzymonJ/wp_bagsport/wp-content/themes/wp_bagsport/img/korkociag.jpg');">
-						</div>
-					</div>
-					<div class="hot-content">
-						<h4> Korkociąg do wina</h4>
-						<h5> <span>15,20 zł</span> 8,20 zł</h5>
-					</div>
-				</div>
-				<!-- /.hot single -->  
-				<div class="hot-products-content d-flex">
-					<div class="hot-products-img">
-						<div class="hot-img" style="background-image: url('http://poligon.scepter.pl/SzymonJ/wp_bagsport/wp-content/themes/wp_bagsport/img/cooler.jpg');"></div>
-					</div>
-					<div class="hot-content">
-						<h4> Cooler do wina</h4>
-						<h5> <span>15,20 zł</span> 8,20 zł</h5>
-					</div>
-				</div>
-				<!-- /.hot single -->  
-				<div class="hot-products-content d-flex">
-					<div class="hot-products-img">
-						<div class="hot-img" style="background-image: url('http://poligon.scepter.pl/SzymonJ/wp_bagsport/wp-content/themes/wp_bagsport/img/dl.jpg');"></div>
-					</div>
-					<div class="hot-content">
-						<h4> Długopis w drewnianym etui</h4>
-						<h5> <span>15,20 zł</span> 8,20 zł</h5>
-					</div>
-				</div>
-				<!-- /.hot single -->  
-				<div class="hot-products-content d-flex">
-					<div class="hot-products-img">
-						<div class="hot-img" style="background-image: url('http://poligon.scepter.pl/SzymonJ/wp_bagsport/wp-content/themes/wp_bagsport/img/parag.jpg');"></div>
-					</div>
-					<div class="hot-content">
-						<h4> Wodoodporny parasol, rączka C</h4>
-						<h5> <span>15,20 zł</span> 8,20 zł</h5>
-					</div>
-				</div>
-				<!-- /.hot single -->  
-			</div>
-			<!-- /.hot products -->   
-			<div class="faq">
-				<h1 class="my-4">
-					<span>
-						FaQ
-						<div class="h1-line"></div>
-					</span>
-				</h1>
-				<ul class="accordion">
-					<li>
-						<a>Jak zamawiać produkty</a>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit, ipsum, fuga, in, obcaecati magni ullam nobis voluptas fugiat tenetur voluptatum quas.</p>
-					</li>
-					<li>
-						<a>Ile trwa dostawa?</a>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit, ipsum, fuga, in, obcaecati magni ullam nobis voluptas fugiat tenetur voluptatum quas.</p>
-					</li>
-					<li>
-						<a>Czy wycena zobowiązuje?</a>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit, ipsum, fuga, in, obcaecati magni ullam nobis voluptas fugiat tenetur voluptatum quas.</p>
-					</li>
-					<li>
-						<a>Czy można zamówić projekt?</a>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit, ipsum, fuga, in, obcaecati magni ullam nobis voluptas fugiat tenetur voluptatum quas.</p>
-					</li>
-				</ul>
-			</div>
-		</div>
+		<?php get_template_part( "template/segment/side-panel" ); ?>
 		<!-- /.col-lg-3 -->
 		<div class="col-lg-9">
 			<h1 class="my-4">
@@ -126,9 +25,6 @@
 						<source src="http://serwiswizowy.com/wp-content/themes/serwiswizowy/media/splash.mp4" type="video/mp4">
 						Twoja przeglądarka nie obsługuje formatów VIDEO. Sugerujemy aktualizację przeglądarki www. 
 					</video>
-				</div>
-				<div class='content col-lg-12'>
-					<?php echo apply_filters( 'the_content', get_post()->post_content ); ?>
 				</div>
 				<div class="col-lg-12">
 					<h1 class="my-4">
@@ -416,6 +312,10 @@
 		<!-- /.col-lg-9 -->
 	</div>
 	<!-- /.row -->
+	<?php get_template_part( "template/segment/ogladane" ); ?>
+	<div class='seo'>
+		<?php echo apply_filters( 'the_content', get_post()->post_content ); ?>
+	</div>
 </div>
 <!-- /.container -->
 <?php get_footer(); ?>

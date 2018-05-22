@@ -436,7 +436,7 @@ a.button-show-item{
 }
 
 .accordion li p {
-	display: none;
+	/* display: none; */
 	font-size: 13px;
 	font-weight: 400;
 	color: #222222;

@@ -2,9 +2,7 @@
 
 add_theme_support('post-thumbnails');
 
-/*
-	Generuje breadcrumb
-*/
+/* Generuje breadcrumb */
 function printBreadcrumb(){
         /*
                 <header class='breadcrumb d-flex align-items-center'>
@@ -44,9 +42,7 @@ function printBreadcrumb(){
        
 }
 
-/*
-Menu 
-*/
+/* Menu */
 
 function register_my_menus() {
   register_nav_menus(
@@ -62,11 +58,22 @@ function register_my_menus() {
 }
 add_action( 'init', 'register_my_menus' );
 
-/*
-Menu active 
-*/
+/* Menu active  */
 
 add_filter('nav_menu_css_class' , 'special_nav_class' , 1 , 2);
+
+/* sidebar */
+register_sidebar( array(
+	'id' => 'sidebar-faq',
+	'name' => 'Boczne FAQ',
+	'description' => 'FAQ wyświetlane w panelu bocznym',
+	'class' => 'side-faq',
+	'before_widget' => '<li>',
+	'after_widget' => '</li>',
+	'before_title' => '<a>',
+	'after_title' => '</a>',
+	
+) );
 
 function special_nav_class ($classes, $item) {
     if (in_array('current-menu-item', $classes) ){

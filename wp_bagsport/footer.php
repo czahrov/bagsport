@@ -1,4 +1,3 @@
-		<?php get_template_part( "template/segment/ogladane" ); ?>
 		<!-- /.most-popular -->
 		<div class="container">
 			<div class="d-flex justify-content-center flex-column text-center seo">

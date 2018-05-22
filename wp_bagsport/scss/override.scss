@@ -1,4 +1,61 @@
+$paleta:(
+	rozowy: #e52b50,
+	szary: #58585a,
+	pomarancz: #f58220,
+	zolty: #ffcb08,
+	niebieski: #0095da,
+	czerwony: #ed1c24
+	
+);
+
+$font-family:(
+	base: ( 'Poppins', 'Times New Roman', serif )
+	
+);
+
+$font-size:(
+	base: 20px,
+	medium: 24px
+	
+);
+
+@mixin bgKolor( $name )
+{
+	background-color: map-get( $paleta, $name );
+	
+}
+
+@mixin fontKolor( $name )
+{
+	color: map-get( $paleta, $name );
+	
+}
+
+@mixin borderKolor( $name )
+{
+	border-color: map-get( $paleta, $name );
+	
+}
+
+@mixin setFont( $family, $size: base ){
+	font:{
+		family: map-get( $font-family, $family );
+		size: map-get( $font-size, $size );
+		
+	};
+	
+}
+
 *{
+	
+}
+
+.accordion{
+	
+	.textwidget{
+		display: none;
+		
+	}
 	
 }
 
@@ -7,6 +64,7 @@
 	width: 100%;
 	height: 300px;
 	background:{
+		color: silver;
 		position: center;
 		repeat: no-repeat;
 		size: cover;
@@ -27,13 +85,8 @@
 	
 }
 
-#home
+#front
 {
-	
-	.content{
-		margin: 50px 0;
-		
-	}
 	
 }
 
@@ -56,6 +109,19 @@
 		
 		.text{
 			
+			.excerpt{
+				
+				.more{
+					
+					&:hover{
+						@include fontKolor( rozowy );
+						
+					}
+					
+				}
+				
+			}
+			
 		}
 		
 	}
@@ -63,6 +129,30 @@
 	.pagination{
 		flex-direction: column;
 		align-items: center;
+		
+		.nav-links{
+			margin-bottom: 50px;
+			
+			.page-numbers{
+				display: inline-block;
+				margin: 0 2px;
+				padding: 10px 15px;
+				text-align: center;
+				font-size: 16px;
+				font-weight: 500;
+				
+				&.current,
+				&:hover{
+					@include bgKolor( rozowy );
+					color: #fff;
+					cursor: pointer;
+					text-decoration: none;
+					
+				}
+				
+			}
+			
+		}
 		
 	}
 	

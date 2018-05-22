@@ -15,7 +15,7 @@
 	?>
 	<div class='item row'>
 		<div class='img col-12 col-md-6 col-lg-3' style="background-image:url(<?php echo get_the_post_thumbnail_url( $post->ID, 'medium' ); ?>);"></div>
-		<div class='text col-12 col-md-6 col-lg-9'>
+		<div class='text col-12 col-md-6 col-lg-9 d-flex flex-column '>
 			<div class='title'>
 				<?php echo get_the_title( $post->ID ); ?>
 			</div>
@@ -40,19 +40,23 @@
 						
 					}
 				?>
+				<a class='more' href='<?php the_permalink( $post->ID ); ?>'>czytaj dalej</a>
 			</div>
-			<a class='more d-flex justify-content-end' href='<?php the_permalink( $post->ID ); ?>'>czytaj dalej</a>
+			
 		</div>
 		
 	</div>
 	<?php 
 		endforeach;
 		
-		echo get_the_posts_pagination( array(
-			// 'screen_reader_text' => '',
+		the_posts_pagination( array(
+			'screen_reader_text' => ' ',
 			'base' => sprintf( '%s/%%_%%', home_url( 'category/blog' ) ),
 			'format' => '?page=%#%',
 			'current' => max( 1, get_query_var('page') ),
+			'end_size' => 3,
+			'mid_size' => 3,
+			'prev_next' => false,
 			
 		) );
 	?>
