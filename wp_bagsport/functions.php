@@ -83,7 +83,7 @@ function special_nav_class ($classes, $item) {
 }
 
 /* Funkcja generująca widok produktów */
-function printBlog( $categoryName = "produkty" ){
+function printProducts( $categoryName = "produkty" ){
         $items = get_posts( array(
                 'category_name' => $categoryName,
                 'numberposts' => -1,
@@ -91,37 +91,34 @@ function printBlog( $categoryName = "produkty" ){
         ) );
        
         foreach( $items as $item ){
+				$data = getProductData( $item->ID );
                 printf(
                         '<div class="col-lg-4 col-md-6 mb-4 single-item">
                            <div class="card h-100 d-flex">
-                                  <a href="#">
-                                         <div class="card-img" style="background-image: url(%s);">
-                                                <div class="icon">
-                                                   <span class="fa fa-search-plus"></span>
-                                                </div>
-                                         </div>
+                                  <a href="%s">
+                                         <div class="card-img" style="background-image: url(%s);"></div>
                                   </a>
                                   <div class="card-body d-flex flex-column">
-                                         <a href="#"></a>
+                                         <a href="%1$s"></a>
                                          <div class="hover-element-shop">
-                                                <a href="#"></a>
+                                                <a href="%1$s"></a>
                                                 <a href="%s">wyślij zapytanie</a>
                                         </div>
                                          <h4 class="card-title grow ">
-                                                <a href="#">%s</a>
+                                                <a href="%1$s">%s</a>
                                          </h4>
                                          <div class="price">
-                                                <h5>%s</h5>
+                                                <h5>%.2f zł</h5>
                                          </div>
-                                         <a href="%s" class="button-show-item">Zobacz</a>
+                                         <a href="%1$s" class="button-show-item">Zobacz</a>
                                   </div>
                            </div>
                         </div>',
-                        get_the_post_thumbnail_url( $item->ID, 'full' ),                // adres obrazka produktu
-                        "/ask?{$item->ID}",             // link do "wyślij zapytanie"
+						home_url( sprintf( 'produkt?id=%s', $item->ID ) ),
+                        $data['galeria'][0],                // adres obrazka produktu
+                        home_url( "zapytaj/?id={$item->ID}" ),             // link do "wyślij zapytanie"
                         $item->post_title,              // nazwa produktu
-                        get_post_meta( $item->ID, 'price', true ),              // cena produktu
-                        get_the_permalink( $item->ID )          // link do "zobacz"
+                        (float)get_post_meta( $item->ID, 'brutto', true )              // cena produktu
                        
                 );
                
@@ -129,51 +126,80 @@ function printBlog( $categoryName = "produkty" ){
        
 }
 
-/* Funkcja generująca widok Bloga */
-function printProducts( $categoryName = "blog" ){
-        $items = get_posts( array(
-                'category_name' => $categoryName,
-                'numberposts' => -1,
-               
-        ) );
-       
-        foreach( $items as $item ){
-                printf(
-                        '<div class="col-lg-4 col-md-6 mb-4 single-item">
-                           <div class="card h-100 d-flex">
-                                  <a href="#">
-                                         <div class="card-img" style="background-image: url(%s);">
-                                                <div class="icon">
-                                                   <span class="fa fa-search-plus"></span>
-                                                </div>
-                                         </div>
-                                  </a>
-                                  <div class="card-body d-flex flex-column">
-                                         <a href="#"></a>
-                                         <div class="hover-element-shop">
-                                                <a href="#"></a>
-                                                <a href="%s">wyślij zapytanie</a>
-                                        </div>
-                                         <h4 class="card-title grow ">
-                                                <a href="#">%s</a>
-                                         </h4>
-                                         <div class="price">
-                                                <h5>%s</h5>
-                                         </div>
-                                         <a href="%s" class="button-show-item">Zobacz</a>
-                                  </div>
-                           </div>
-                        </div>',
-                        get_the_post_thumbnail_url( $item->ID, 'full' ),                // adres obrazka produktu
-                        "/ask?{$item->ID}",             // link do "wyślij zapytanie"
-                        $item->post_title,              // nazwa produktu
-                        get_post_meta( $item->ID, 'price', true ),              // cena produktu
-                        get_the_permalink( $item->ID )          // link do "zobacz"
-                       
-                );
-               
-        }
-       
+/* funkcja generująca tablicę z danymi produktu */
+function getProductData( $id = null ){
+	$data = array(
+		'galeria' => array(),
+		'kategoria' => 'brak danych',
+		'nazwa' => 'brak danych',
+		'opis' => 'brak danych',
+		'brutto' => 'brak danych',
+		'dostępność' => 'brak danych',
+		'kolor' => 'brak danych',
+		'wymiary' => 'brak danych',
+		
+	);
+	
+	/* czy ID wskazuje na wpis WP */
+	$post = get_post( $id );
+	if( $post !== null ){
+		$data['nazwa'] = $post->post_title;
+		$data['kategoria'] = 'Produkcja własna';
+		$data['opis'] = apply_filters( 'the_content', $post->post_content );
+		$data['brutto'] = (float)get_post_meta( $post->ID, 'brutto', true );
+		$data['dostępność'] = get_post_meta( $post->ID, 'dostępność', true );
+		$data['kolor'] = get_post_meta( $post->ID, 'kolor', true );
+		$data['wymiary'] = get_post_meta( $post->ID, 'rozmiar', true );
+		preg_match( "~ids=\"([^\"]+)\"~", get_post_meta( $post->ID, 'galeria', true ), $match );
+		$data['galeria'] = array_map( function( $img ){
+			return wp_get_attachment_url( $img );
+			
+		}, explode( ",", $match[1] ) );
+		
+	}
+	else{
+		/* produkt należy pobrać z bazy danych XML */
+		
+	}
+	
+	
+	return $data;
+}
+
+/* funkcja generująca og tagi do social mediów */
+function OGTags( $id ){
+	$post = get_post( $id );
+	$data = getProductData( $post->ID );
+	
+	printf(
+'<meta property="og:title" content="%s" />
+<meta property="og:type" content="%s" />
+<meta property="og:url" content="%s" />
+<meta property="og:site_name" content="%s" />
+<meta property="og:image" content="%s" />
+<meta property="og:description" content="%s" />',
+	$data['nazwa'],
+	'product',
+	home_url( "produkt/?id={$post->ID}" ),
+	get_bloginfo( 'name' ),
+	$data['galeria'][0],
+	implode( " ", array_slice( explode( " ", strip_tags( $data['opis'] ) ) , 0, 50 ) )
+	
+	);
+	
+}
+
+/* pobieranie informacji o stronie ( ze specjalnej strony ) */
+function getInfo( $name = null ){
+	static $meta = null;
+	
+	if( $meta === null ){
+		$meta = get_post_meta( get_page_by_title( 'Ustawienia' )->ID );
+		
+	}
+	
+	return $meta[ $name ][0];
+	
 }
 
 // XML

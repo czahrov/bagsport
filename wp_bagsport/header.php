@@ -1,13 +1,13 @@
 <?php
 	session_start();
 	if( $_SESSION['sprytne'] !== 'bardzo' and !isset( $_GET['sprytne'] ) ){
-	 include( 'wbudowie.php' );
-	 exit;
-	
+		include( 'wbudowie.php' );
+		exit;
+		
 	}
 	else{
-	 $_SESSION['sprytne'] = 'bardzo';
-	
+		$_SESSION['sprytne'] = 'bardzo';
+		
 	}
 	
 	define( 'DMODE', true );
@@ -15,6 +15,7 @@
 	$buster = DMODE?( time() ):( false );
 	
 	wp_enqueue_style( "bootstrap", get_stylesheet_directory_uri() . "/css/bootstrap.css" );
+	wp_enqueue_style( "FA", get_stylesheet_directory_uri() . "/css/fontawesome-all{$infix}.css", array(), $buster );
 	wp_enqueue_style( "style", get_stylesheet_directory_uri() . "/style{$infix}.css", array(), $buster );
 	wp_enqueue_style( "override", get_stylesheet_directory_uri() . "/scss/override{$infix}.css", array(), $buster );
 	
@@ -22,7 +23,11 @@
 	wp_enqueue_script( "bootstrap-bundle", get_stylesheet_directory_uri() . "/js/bootstrap.bundle.js", array(), false, true );
 	wp_enqueue_script( "bootstrap-js", get_stylesheet_directory_uri() . "/js/bootstrap.js", array(), false, true );
 	wp_enqueue_script( "jQ", get_stylesheet_directory_uri() . "/js/jquery.js", array(), false, true );
+	wp_enqueue_script( "GSAP-CSS", get_stylesheet_directory_uri() . "/js/CSSPlugin.min.js", array(), false, true );
+	wp_enqueue_script( "GSAP-TweenLite", get_stylesheet_directory_uri() . "/js/TweenLite.min.js", array(), false, true );
 	wp_enqueue_script( "akordeon-js", get_stylesheet_directory_uri() . "/js/akordeon{$infix}.js", array(), $buster, true );
+	wp_enqueue_script( "slider-partnerzy", get_stylesheet_directory_uri() . "/js/partnerzy{$infix}.js", array(), $buster, true );
+	wp_enqueue_script( "produkt", get_stylesheet_directory_uri() . "/js/produkt{$infix}.js", array(), $buster, true );
 	
 	?>
 <!DOCTYPE html>
@@ -32,6 +37,12 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no">
 		<meta name="description" content="Torby reklamowe, gadżety reklamowe, sklep z gadżetami">
 		<meta name="author" content="Scepter Agencja interaktywna">
+		<?php
+			if( get_post()->post_title == 'Produkt' ){
+				OGTags( $_GET['id'] );
+			}
+			
+		?>
 		<title><?php wp_title(''); ?><?php if (!(is_404()) && (is_single()) || (is_page()) || (is_archive())) { ?> &raquo; <?php } ?><?php bloginfo('name'); ?></title>
 		<!-- Custom styles for this template -->
 		<link href="https://fonts.googleapis.com/css?family=Poppins:400,500,600,700" rel="stylesheet">
@@ -48,12 +59,14 @@
 					<div class="d-flex flex-column">
 						<p>
 							<span>
-								<a title="Kliknij, aby zadzwonić." style="text-decoration: none;" href="tel: 540 000 456">
-									Infolinia 540 000 456
+								<a title="Kliknij, aby zadzwonić." style="text-decoration: none;" href="tel:<?php echo str_replace( " ", "", getInfo( 'infolinia' ) ); ?>">
+									<?php printf( 'Infolinia: %s', getInfo( 'infolinia' ) ); ?>
 								</a>
 							</span>
 						</p>
-						<p class="font-grey">Pn-Pt 8:00 - 16:00</p>
+						<p class="font-grey">
+							<?php echo getInfo( 'godziny_otwarcia' ); ?>
+						</p>
 					</div>
 				</div>
 				<div class="icon-phone d-flex flex-wrap">
@@ -61,8 +74,8 @@
 					<div class="d-flex flex-column">
 						<p>
 							<span>
-								<a title="Kliknij, aby napisać e-mail." style="text-decoration: none;" href="mailto:biuro@bagsport.pl">
-									biuro@bagsport.pl
+								<a title="Kliknij, aby napisać e-mail." style="text-decoration: none;" href="<?php printf( 'mailto:%s', getInfo( 'kontakt_e-mail' ) ); ?>">
+									<?php echo getInfo( 'kontakt_e-mail' ); ?>
 								</a>
 							</span>
 						</p>
@@ -76,8 +89,8 @@
 					<div class="d-flex flex-column">
 						<p>
 							<span>
-								<a title="Kliknij, aby wyświetlić na mapie." style="text-decoration: none;" target="_blank" href="https://www.google.com/maps/place/Bank+BG%C5%BB,+Nawojowska+4,+33-300+Nowy+S%C4%85cz/@49.6136999,20.7003392,17z/data=!3m1!4b1!4m5!3m4!1s0x473de5399421778d:0x8d5bba09187d65a1!8m2!3d49.6137143!4d20.7026215">
-									Nawojowska 4
+								<a title="Kliknij, aby wyświetlić na mapie." style="text-decoration: none;" target="_blank" href="<?php printf( 'https://maps.google.com/?q=%s', getInfo( 'adres_firmy' ) ); ?>">
+									<?php echo getInfo( 'adres_firmy' ); ?>
 								</a>
 							</span>
 						</p>
@@ -94,7 +107,6 @@
 				</button>
 				<div class="collapse navbar-collapse" id="navbarResponsive">
 					<ul class="navbar-nav mr-auto">
-						<li class="nav-item active">
 						<li<?php if(is_home()) {?> class="active"<?php } ?>>
 							<?php wp_nav_menu( array( 'theme_location' => 'header-menu' ) ); ?>
 						</li>
@@ -111,3 +123,4 @@
 			</div>
 		</div>
 		<!-- <div class="ciotka"></div> -->
+		<?php get_template_part( 'template/segment/quickpanel' ); ?>

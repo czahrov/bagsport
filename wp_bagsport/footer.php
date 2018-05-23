@@ -55,7 +55,7 @@
 						Copyright Bagsport 2018
 					</div>
 					<div class="author">
-						Projekt i wykonanie: <a href="#">Scepter Agencja interaktywna</a>
+						Projekt i wykonanie: <a href="http://www.scepter.pl">Scepter Agencja interaktywna</a>
 					</div>
 				</div>
 			</div>
