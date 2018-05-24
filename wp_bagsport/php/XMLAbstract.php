@@ -244,7 +244,8 @@ class XMLAbstract{
 			XML_product.*
 			FROM XML_category
 			JOIN XML_product ON XML_product.cat_id = XML_category.ID
-			WHERE XML_category.ID = '{$catID}' AND XML_category.parent = '{$parentID}'";
+			WHERE XML_category.ID = '{$catID}'";
+		if( $parentID !== null  ) $sql .= " AND XML_category.parent = '{$parentID}'";
 		$query = mysqli_query( $this->_connect, $sql );
 		$fetch = mysqli_fetch_all( $query, MYSQLI_ASSOC );
 		mysqli_free_result( $query );

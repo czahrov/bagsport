@@ -19,7 +19,7 @@
 					</p>
 				</div>
 			</div>
-		<?php printProducts("produkty"); ?>
+		<?php printProducts("Produkcja własna"); ?>
 		</div>
 		<!-- /.row -->
 	</div>

@@ -43,12 +43,10 @@ class XMLMan{
 			
 			switch( $mode ){
 				case 'url':
-					$cats = array_slice( explode( ",", $atts ), -2 );
-					$parent_id = $handle->getCategory( 'slug', $cats[0], 'ID' );
-					$cat_id = $handle->getCategory( 'slug', $cats[1], 'ID' );
+					$cat_id = $handle->getCategory( 'name', $atts, 'ID' );
 					
-					if( is_numeric( $parent_id ) && is_numeric( $cat_id ) ){
-						$ret = $handle->getCategoryProducts( $cat_id, $parent_id );
+					if( is_numeric( $cat_id ) ){
+						$ret = $handle->getCategoryProducts( $cat_id );
 						
 					}
 					

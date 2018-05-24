@@ -1,6 +1,15 @@
 <?php
-	$id = (int)$_GET['id'];
-	$item = getProductData( $id );
+	$id = $_GET['id'];
+	if( get_post( $id ) !== null ){
+		$item = getProductData( get_post( $id ) );
+		
+	}
+	else{
+		global $XM;
+		// $item = $XM->getProducts( 'single', $id );
+		$item = getProductData( $XM->getProducts( 'single', $id )[0] );
+		
+	}
 	
 ?>
 <div id='produkt' class=''>

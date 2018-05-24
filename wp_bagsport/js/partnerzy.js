@@ -2,13 +2,17 @@
 (function (slider, viewbox, items){
 	var num = items.length;
 	var current = 0;
-	var duration = 3000;
-	var delay = 0;
+	// var duration = 3000;
+	var duration = window.partners_slider.duration;
+	// var delay = 0;
+	var delay = window.partners_slider.delay;
 	var vbox_width = viewbox.prop( 'scrollWidth' );
 	
 	slider
 	.on({
 		play: function( e ){
+			if( viewbox.prop( 'scrollWidth' ) <= viewbox.width() ) return false;
+				
 			var self = $(this);
 			
 			TweenLite.to(

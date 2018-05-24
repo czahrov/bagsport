@@ -18,7 +18,7 @@
 				<div class="row">
 					<div class="bg-video">
 						<div class="video-content">
-							<a href="" class="call-ask2">zamów katalog</a>
+							<a href="<?php echo home_url( 'zamow-katalog' ); ?>" class="call-ask2">zamów katalog</a>
 						</div>
 						<video autoplay="" loop="" class="bgvideo">
 							<source src="http://serwiswizowy.com/wp-content/themes/serwiswizowy/media/splash.webm" type="video/webm">
@@ -27,27 +27,9 @@
 							Twoja przeglądarka nie obsługuje formatów VIDEO. Sugerujemy aktualizację przeglądarki www. 
 						</video>
 					</div>
-					<div class="col-lg-12">
-						<h1 class="my-4">
-							<span>
-								Polecane
-								<div class="h1-line"></div>
-							</span>
-							produkty
-						</h1>
-					</div>
-					<?php printProducts("produkty"); ?>
+					<?php get_template_part( "template/segment/polecane" ); ?>
 				</div>
 				<!-- /.row -->
-				<div class="d-flex justify-content-center pagination-products">
-					<a class="active" href="">1</a>
-					<a href="">2</a>
-					<a href="">3</a>
-					<a href="">4</a>
-					<a href="">5</a>
-					<span>...</span>
-					<a href="">245</a>
-				</div>
 			</div>
 			<!-- /.col-lg-9 -->
 		</div>

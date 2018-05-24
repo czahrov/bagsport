@@ -2,6 +2,10 @@
 
 add_theme_support('post-thumbnails');
 
+// XML
+require_once __DIR__ . '/php/autoloader.php';
+require_once __DIR__ . '/XML_setup.php';
+
 /* Generuje breadcrumb */
 function printBreadcrumb(){
         /*
@@ -43,7 +47,6 @@ function printBreadcrumb(){
 }
 
 /* Menu */
-
 function register_my_menus() {
   register_nav_menus(
     array(
@@ -59,7 +62,6 @@ function register_my_menus() {
 add_action( 'init', 'register_my_menus' );
 
 /* Menu active  */
-
 add_filter('nav_menu_css_class' , 'special_nav_class' , 1 , 2);
 
 /* sidebar */
@@ -83,52 +85,92 @@ function special_nav_class ($classes, $item) {
 }
 
 /* Funkcja generująca widok produktów */
-function printProducts( $categoryName = "produkty" ){
-        $items = get_posts( array(
-                'category_name' => $categoryName,
-                'numberposts' => -1,
-               
-        ) );
-       
-        foreach( $items as $item ){
-				$data = getProductData( $item->ID );
-                printf(
-                        '<div class="col-lg-4 col-md-6 mb-4 single-item">
-                           <div class="card h-100 d-flex">
-                                  <a href="%s">
-                                         <div class="card-img" style="background-image: url(%s);"></div>
-                                  </a>
-                                  <div class="card-body d-flex flex-column">
-                                         <a href="%1$s"></a>
-                                         <div class="hover-element-shop">
-                                                <a href="%1$s"></a>
-                                                <a href="%s">wyślij zapytanie</a>
-                                        </div>
-                                         <h4 class="card-title grow ">
-                                                <a href="%1$s">%s</a>
-                                         </h4>
-                                         <div class="price">
-                                                <h5>%.2f zł</h5>
-                                         </div>
-                                         <a href="%1$s" class="button-show-item">Zobacz</a>
-                                  </div>
-                           </div>
-                        </div>',
-						home_url( sprintf( 'produkt?id=%s', $item->ID ) ),
-                        $data['galeria'][0],                // adres obrazka produktu
-                        home_url( "zapytaj/?id={$item->ID}" ),             // link do "wyślij zapytanie"
-                        $item->post_title,              // nazwa produktu
-                        (float)get_post_meta( $item->ID, 'brutto', true )              // cena produktu
-                       
-                );
-               
-        }
-       
+function printProducts( $categoryName = "Produkcja własna", $arg = array() ){
+        
+	foreach( getCategory( $categoryName, $arg ) as $item ){
+		printf(
+			'<div class="col-lg-4 col-md-6 mb-4 single-item">
+			   <div class="card h-100 d-flex">
+					  <a href="%s">
+							 <div class="card-img" style="background-image: url(%s);"></div>
+					  </a>
+					  <div class="card-body d-flex flex-column">
+							 <a href="%1$s"></a>
+							 <div class="hover-element-shop">
+									<a href="%1$s"></a>
+									<a href="%s">wyślij zapytanie</a>
+							</div>
+							 <h4 class="card-title grow ">
+									<a href="%1$s">%s</a>
+							 </h4>
+							 <div class="price">
+									<h5>%.2f zł</h5>
+							 </div>
+							 <a href="%1$s" class="button-show-item">Zobacz</a>
+					  </div>
+			   </div>
+			</div>',
+			home_url( "produkt?id={$item['ID']}" ),
+			$item['galeria'][0],                // adres obrazka produktu
+			home_url( "zapytaj/?id={$item['ID']}" ),             // link do "wyślij zapytanie"
+			$item['nazwa'],              // nazwa produktu
+			(float)$item['brutto']              // cena produktu
+			
+		);
+		
+	}
+	
+}
+
+/* funkcja zwraca tablicę produktów z danej kategorii */
+function getCategory( $name = null, $arg = array() ){
+	/* parametry zestawu pobieranych wpisów */
+	$arg = array_merge(
+		array(
+			'num' => 12,
+			'paged' => 1,
+			'order' => 'DESC',
+			'orderby' => 'date',
+		),
+		$arg
+	);
+	/* tablica z wynikiem */
+	$ret = array();
+	
+	/* pobieranie produktów z WP */
+	if( $name == 'Produkcja własna' ){
+		$items = get_posts( array(
+			'category_name' => 'produkty',
+			'posts_per_page' => $arg['num'],
+			'paged' => $arg['paged'],
+			'order' => $arg['order'],
+			'orderby' => $arg['orderby'],
+			
+		) );
+		
+		$ret =  array_map( function( $item ){
+			return getProductData( $item );
+			
+		}, $items );
+		
+	}
+	/* pobieranie produktów z bazy danych */
+	else{
+		global $XM;
+		$ret = array_map( function( $item ){
+			return getProductData( $item );
+			
+		}, $XM->getProducts( 'url', $name ) );
+		
+	}
+	
+	return $ret;
 }
 
 /* funkcja generująca tablicę z danymi produktu */
-function getProductData( $id = null ){
+function getProductData( $obj = null ){
 	$data = array(
+		'ID' => 'brak danych',
 		'galeria' => array(),
 		'kategoria' => 'brak danych',
 		'nazwa' => 'brak danych',
@@ -140,28 +182,32 @@ function getProductData( $id = null ){
 		
 	);
 	
-	/* czy ID wskazuje na wpis WP */
-	$post = get_post( $id );
-	if( $post !== null ){
-		$data['nazwa'] = $post->post_title;
+	/* czy obiekt jest wpisem wordpress */
+	if( $obj instanceof WP_POST ){
+		$data['ID'] = $obj->ID;
+		$data['nazwa'] = $obj->post_title;
 		$data['kategoria'] = 'Produkcja własna';
-		$data['opis'] = apply_filters( 'the_content', $post->post_content );
-		$data['brutto'] = (float)get_post_meta( $post->ID, 'brutto', true );
-		$data['dostępność'] = get_post_meta( $post->ID, 'dostępność', true );
-		$data['kolor'] = get_post_meta( $post->ID, 'kolor', true );
-		$data['wymiary'] = get_post_meta( $post->ID, 'rozmiar', true );
-		preg_match( "~ids=\"([^\"]+)\"~", get_post_meta( $post->ID, 'galeria', true ), $match );
-		$data['galeria'] = array_map( function( $img ){
-			return wp_get_attachment_url( $img );
-			
-		}, explode( ",", $match[1] ) );
+		$data['opis'] = apply_filters( 'the_content', $obj->post_content );
+		$data['brutto'] = (float)get_post_meta( $obj->ID, 'brutto', true );
+		$data['dostępność'] = get_post_meta( $obj->ID, 'dostępność', true );
+		$data['kolor'] = get_post_meta( $obj->ID, 'kolor', true );
+		$data['wymiary'] = get_post_meta( $obj->ID, 'rozmiar', true );
+		$data['galeria'] = extractGallery( get_post_meta( $obj->ID, 'galeria', true ) );
 		
 	}
 	else{
-		/* produkt należy pobrać z bazy danych XML */
+		/* obiekt pochodzi z bazy danych XML */
+		$data['ID'] = $obj['code'];
+		$data['nazwa'] = $obj['title'];
+		$data['kategoria'] = $obj['cat_name'];
+		$data['opis'] = $obj['description'];
+		$data['brutto'] = $obj['brutto'];
+		$data['dostępność'] = $obj['instock'];
+		$data['kolor'] = $obj['colors'];
+		$data['wymiary'] = $obj['dimension'];
+		$data['galeria'] = explode( ",", preg_replace( "~(\[|\]|\")~", "", $obj['photos'] ) );
 		
 	}
-	
 	
 	return $data;
 }
@@ -202,8 +248,13 @@ function getInfo( $name = null ){
 	
 }
 
-// XML
-require_once __DIR__ . '/php/autoloader.php';
-
-
+/* funkcja wyszukująca galerię wordpressa w treści i zwracająca adresy url grafik w formie tablicy */
+function extractGallery( $content = "" ){
+	preg_match( "~ids=\"([^\"]+)\"~", $content, $match );
+	return array_map( function( $img ){
+		return wp_get_attachment_url( $img );
+		
+	}, explode( ",", $match[1] ) );
+	
+}
 
