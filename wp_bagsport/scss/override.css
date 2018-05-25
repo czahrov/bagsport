@@ -270,9 +270,31 @@ a, a * {
   #wlasna .basic-content * {
     line-height: inherit; }
 
-#produkt .present .arrow-pagination > * {
-  background-color: #fff; }
-#produkt .present .product-single-gallery .single-gallery:hover {
-  border-color: #e52b50; }
+#produkt .present .arrow-pagination {
+  display: none; }
+  #produkt .present .arrow-pagination > * {
+    background-color: #fff; }
+#produkt .present .product-single-gallery .view {
+  overflow: hidden; }
+  #produkt .present .product-single-gallery .view .item .single-gallery:hover {
+    border-color: #e52b50; }
+#produkt .present .popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 50; }
+  #produkt .present .popup .img {
+    height: 80vh;
+    max-height: 1140px;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat; }
+    #produkt .present .popup .img .nav {
+      font-size: 60px; }
+  #produkt .present .popup:not(.open) {
+    display: none !important; }
 
 /*# sourceMappingURL=override.css.map */

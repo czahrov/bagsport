@@ -486,6 +486,7 @@ a{
 	.present{
 		
 		.arrow-pagination{
+			display: none;
 			
 			& > *{
 				background-color: #fff;
@@ -496,12 +497,54 @@ a{
 		
 		.product-single-gallery{
 			
-			.single-gallery{
+			.view{
+				overflow: hidden;
 				
-				&:hover{
-					border-color: map-get( $paleta, rozowy );
+				.item{
+					
+					.single-gallery{
+						
+						&:hover{
+							border-color: map-get( $paleta, rozowy );
+							
+						}
+						
+					}
 					
 				}
+				
+			}
+			
+		}
+		
+		.popup{
+			position: fixed;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background-color: rgba(0,0,0,0.7);
+			z-index: 50;
+			
+			.img{
+				height: 80vh;
+				max-height: 1140px;
+				background:{
+					position: center;
+					size: contain;
+					repeat: no-repeat;
+					
+				};
+				
+				.nav{
+					font-size: 60px;
+					
+				}
+				
+			}
+			
+			&:not(.open){
+				display: none !important;
 				
 			}
 			
@@ -510,3 +553,9 @@ a{
 	}
 	
 }
+
+#side
+{
+	
+}
+
