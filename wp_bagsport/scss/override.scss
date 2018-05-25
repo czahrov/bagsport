@@ -155,6 +155,32 @@ a{
 	
 }
 
+.pagination-products{
+	align-items: center;
+	margin-bottom: 50px;
+	
+	a{
+		display: inline-block;
+		margin: 0 2px;
+		padding: 10px 15px;
+		text-align: center;
+		font-size: 16px;
+		font-weight: 500;
+		
+		&.current,
+		&:hover{
+			@include bgKolor( rozowy );
+			color: #fff;
+			cursor: pointer;
+			text-decoration: none;
+			
+		}
+		
+	}
+
+}
+
+
 #banner
 {
 	width: 100%;
@@ -272,36 +298,6 @@ a{
 			
 			.more{
 				@include fontKolor( rozowy );
-				
-			}
-			
-		}
-		
-	}
-	
-	.pagination{
-		flex-direction: column;
-		align-items: center;
-		
-		.nav-links{
-			margin-bottom: 50px;
-			
-			.page-numbers{
-				display: inline-block;
-				margin: 0 2px;
-				padding: 10px 15px;
-				text-align: center;
-				font-size: 16px;
-				font-weight: 500;
-				
-				&.current,
-				&:hover{
-					@include bgKolor( rozowy );
-					color: #fff;
-					cursor: pointer;
-					text-decoration: none;
-					
-				}
 				
 			}
 			

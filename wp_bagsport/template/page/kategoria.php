@@ -1,13 +1,29 @@
 <?php
+	$nazwa = $_GET['nazwa'];
 	
 ?>
 <div id='kategoria' class=''>
 	<div class='container'>
-		<div class='row'>
+		<div class='row align-items-start'>
 			<?php get_template_part('template/segment/side', 'panel'); ?>
 			<div class='col-lg-9 d-flex flex-wrap'>
+				<div class="col-lg-12">
+					<?php
+						$parts = explode( " ", strip_tags( $nazwa ) );
+						printf(
+							'<h1 class="my-4">
+								<span>
+									%s
+									<div class="h1-line"></div>
+								</span>
+								%s
+							</h1>',
+							array_shift( $parts ),
+							implode( " ", $parts )
+						);
+					?>
+				</div>
 				<?php
-					$nazwa = $_GET['nazwa'];
 					global $XM;
 					// var_dump( $XM );
 					

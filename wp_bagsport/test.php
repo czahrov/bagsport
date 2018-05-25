@@ -7,4 +7,8 @@ if( !isset( $_COOKIE['sprytne'] ) ){
 	
 }
 
-var_dump( get_post( 'V1298-03' ) );
+parse_str( $_SERVER['QUERY_STRING'], $parsed );
+$parsed['msg'] = 'test';
+print_r( $parsed );
+echo http_build_query( $parsed );
+

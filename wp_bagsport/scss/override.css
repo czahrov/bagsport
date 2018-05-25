@@ -94,6 +94,24 @@ a, a * {
 .footer {
   padding-bottom: 100px !important; }
 
+.pagination-products {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 50px; }
+  .pagination-products a {
+    display: inline-block;
+    margin: 0 2px;
+    padding: 10px 15px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 500; }
+    .pagination-products a.current, .pagination-products a:hover {
+      background-color: #e52b50;
+      color: #fff;
+      cursor: pointer;
+      text-decoration: none; }
+
 #banner {
   width: 100%;
   height: 300px;
@@ -155,28 +173,6 @@ a, a * {
       line-height: inherit; }
   #blog .item:hover .more {
     color: #e52b50; }
-#blog .pagination {
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center; }
-  #blog .pagination .nav-links {
-    margin-bottom: 50px; }
-    #blog .pagination .nav-links .page-numbers {
-      display: inline-block;
-      margin: 0 2px;
-      padding: 10px 15px;
-      text-align: center;
-      font-size: 16px;
-      font-weight: 500; }
-      #blog .pagination .nav-links .page-numbers.current, #blog .pagination .nav-links .page-numbers:hover {
-        background-color: #e52b50;
-        color: #fff;
-        cursor: pointer;
-        text-decoration: none; }
 
 #single .title {
   width: 100%;

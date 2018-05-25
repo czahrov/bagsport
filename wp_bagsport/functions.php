@@ -86,8 +86,18 @@ function special_nav_class ($classes, $item) {
 
 /* Funkcja generująca widok produktów */
 function printProducts( $categoryName = "Produkcja własna", $arg = array() ){
-        
-	foreach( getCategory( $categoryName, $arg ) as $item ){
+	$arg = array_merge(
+		array(
+			'per_page' => get_option('posts_per_page'),
+			'page' => max( 1, (int)$_GET['strona'] ),
+			
+		),
+		$arg
+	);
+	
+	$produkty = getCategory( $categoryName, $arg );
+	
+	foreach( array_slice( $produkty, ($arg['page'] - 1) * $arg['per_page'], $arg['per_page'] ) as $item ){
 		printf(
 			'<div class="col-lg-4 col-md-6 mb-4 single-item">
 			   <div class="card h-100 d-flex">
@@ -120,15 +130,50 @@ function printProducts( $categoryName = "Produkcja własna", $arg = array() ){
 		
 	}
 	
+	printPagin( $produkty );
+	
 }
 
-/* funkcja zwraca tablicę produktów z danej kategorii */
+/* funkcja generująca paginację */
+function printPagin( $items, $arg = array() ){
+	$arg = array_merge(
+		array(
+			'per_page' => get_option('posts_per_page'),
+			'page' => max( 1, (int)$_GET['strona'] ),
+			
+		),
+		$arg
+	);
+	
+	if( count( $items ) > $arg['per_page'] ){
+		echo "<div class='pagination-products col-12 d-flex flex-wrap justify-content-center'>";
+		
+		foreach( array_chunk( $items, $arg['per_page'] ) as $num => $page ){
+			parse_str( $_SERVER['QUERY_STRING'], $parsed );
+			$parsed['strona'] = $num + 1;
+			$httpQuery = http_build_query( $parsed );
+			
+			printf(
+				'<a%s href="%s">%s</a>',
+				($num + 1) === $arg['page']?( ' class="active"' ):( '' ),
+				"?{$httpQuery}",
+				$num + 1
+				
+			);
+			
+		}
+		
+		echo"</div>";
+	}
+	
+}
+
+/* funkcja zwraca tablicę wszystkich produktów z danej kategorii */
 function getCategory( $name = null, $arg = array() ){
 	/* parametry zestawu pobieranych wpisów */
 	$arg = array_merge(
 		array(
-			'num' => 12,
-			'paged' => 1,
+			// 'num' => get_option('posts_per_page'),
 			'order' => 'DESC',
 			'orderby' => 'date',
 		),
@@ -140,9 +185,8 @@ function getCategory( $name = null, $arg = array() ){
 	/* pobieranie produktów z WP */
 	if( $name == 'Produkcja własna' ){
 		$items = get_posts( array(
+			'numberposts' => -1,
 			'category_name' => 'produkty',
-			'posts_per_page' => $arg['num'],
-			'paged' => $arg['paged'],
 			'order' => $arg['order'],
 			'orderby' => $arg['orderby'],
 			
