@@ -195,8 +195,8 @@ function getProductData( $obj = null ){
 		$data['galeria'] = extractGallery( get_post_meta( $obj->ID, 'galeria', true ) );
 		
 	}
+	/* obiekt pochodzi z bazy danych XML */
 	else{
-		/* obiekt pochodzi z bazy danych XML */
 		$data['ID'] = $obj['code'];
 		$data['nazwa'] = $obj['title'];
 		$data['kategoria'] = $obj['cat_name'];
@@ -213,9 +213,8 @@ function getProductData( $obj = null ){
 }
 
 /* funkcja generująca og tagi do social mediów */
-function OGTags( $id ){
-	$post = get_post( $id );
-	$data = getProductData( $post->ID );
+function OGTags( $obj ){
+	$data = getProductData( $obj );
 	
 	printf(
 '<meta property="og:title" content="%s" />

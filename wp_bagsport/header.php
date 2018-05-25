@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	if( $_SESSION['sprytne'] !== 'bardzo' and !isset( $_GET['sprytne'] ) ){
+	if( $_SESSION['sprytne'] !== 'bardzo' and !isset( $_GET['sprytne'] ) and !isset( $_COOKIE['sprytne'] ) ){
 		include( 'wbudowie.php' );
 		exit;
 		
@@ -25,6 +25,7 @@
 	wp_enqueue_script( "jQ", get_stylesheet_directory_uri() . "/js/jquery.js", array(), false, true );
 	wp_enqueue_script( "GSAP-CSS", get_stylesheet_directory_uri() . "/js/CSSPlugin.min.js", array(), false, true );
 	wp_enqueue_script( "GSAP-TweenLite", get_stylesheet_directory_uri() . "/js/TweenLite.min.js", array(), false, true );
+	wp_enqueue_script( "GSAP-TimelineLite", get_stylesheet_directory_uri() . "/js/TimelineLite.min.js", array(), false, true );
 	wp_enqueue_script( "akordeon-js", get_stylesheet_directory_uri() . "/js/akordeon{$infix}.js", array(), $buster, true );
 	wp_enqueue_script( "slider-partnerzy", get_stylesheet_directory_uri() . "/js/partnerzy{$infix}.js", array(), $buster, true );
 	wp_enqueue_script( "produkt", get_stylesheet_directory_uri() . "/js/produkt{$infix}.js", array(), $buster, true );
@@ -39,7 +40,18 @@
 		<meta name="author" content="Scepter Agencja interaktywna">
 		<?php
 			if( get_post()->post_title == 'Produkt' ){
-				OGTags( $_GET['id'] );
+				$id = $_GET['id'];
+				$t = get_post( $id );
+				if( $t instanceof WP_POST ){
+					OGTags( $t );
+					
+				}
+				else{
+					global $XM;
+					OGTags( $XM->getProducts( 'single', $id )[0] );
+					
+				}
+				
 			}
 			
 		?>
