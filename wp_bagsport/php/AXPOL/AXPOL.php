@@ -3,6 +3,60 @@ class AXPOL extends XMLAbstract{
 	
 	// filtrowanie kategorii
 	protected function _categoryFilter( &$cat_name, &$subcat_name, $item ){
+		$subcat_name = "";
+		
+		if( in_array( $cat_name, array( 'biuro', 'teczki i notatniki', 'mauro conti', 'moleskine' ) ) ){
+			$cat_name = 'Biuro i biznes';
+			
+		}
+		elseif( in_array( $cat_name, array( 'do picia' ) ) ){
+			$cat_name = 'Do picia';
+			
+		}
+		elseif( in_array( $cat_name, array( 'dom', 'dom i wnętrze' ) ) ){
+			$cat_name = 'Dom i ogród';
+			
+		}
+		elseif( in_array( $cat_name, array( 'do pisania', 'przybory piśmienne' ) ) ){
+			$cat_name = 'Materiały piśmiennicze';
+			
+		}
+		elseif( in_array( $cat_name, array( 'parasole' ) ) ){
+			$cat_name = 'Parasole i peleryny';
+			
+		}
+		elseif( in_array( $cat_name, array( 'rozrywka i szkoła', 'fofcio promo toys' ) ) ){
+			$cat_name = 'Dzieci i zabawa';
+			
+		}
+		elseif( in_array( $cat_name, array( 'breloki', 'narzędzia', 'narzędzia i latarki', 'budowlane' ) ) ){
+			$cat_name = 'Narzędzia, latarki i breloki';
+			
+		}
+		elseif( stripos( (string)$item->TitlePL, 'zegar' ) !== false or stripos( (string)$item->TitlePL, 'pogod' ) !== false ){
+			$cat_name = 'Czas i pogoda';
+			
+		}
+		elseif( in_array( $cat_name, array( 'technologia', 'elektronika', 'akcesoria do telefonów i tabletów', 'air gifts' ) ) ){
+			$cat_name = 'Elektronika';
+			
+		}
+		elseif( in_array( $cat_name, array( 'świąteczne', 'wielkanoc' ) ) ){
+			$cat_name = 'Świąteczne';
+			
+		}
+		elseif( stripos( (string)$item->TitlePL, 'plecak' ) !== false or in_array( $cat_name, array( 'torby i plecaki', 'torby i podróż', 'podróż' ) ) ){
+			$cat_name = 'Torby i plecaki';
+			
+		}
+		elseif( in_array( $cat_name, array( 'wypoczynek i plener', 'wypoczynek', 'sport' ) ) ){
+			$cat_name = 'Wakacje sport i rekreacja';
+			
+		}
+		elseif( in_array( $cat_name, array( 'zdrowie i bezpieczeństwo' ) ) ){
+			$cat_name = 'Zdrowie i uroda';
+			
+		}
 		
 	}
 	
@@ -11,6 +65,7 @@ class AXPOL extends XMLAbstract{
 	protected function _import( $atts, $rehash = false ){
 		// wczytywanie pliku XML z produktami
 		$XML = simplexml_load_file( __DIR__ . "/DND/" . basename( $this->_atts[ 'products' ] ) );
+		$dt = date( 'Y-m-d H:i:s' );
 		
 		if( $rehash === true ){
 			// parsowanie danych z XML
@@ -31,15 +86,14 @@ class AXPOL extends XMLAbstract{
 					
 				}
 				
-				$sql = "UPDATE `XML_product` SET cat_id = '{$cat_id}' WHERE code = ''{$code}";
+				$sql = "UPDATE `XML_product` SET cat_id = '{$cat_id}', data = '{$dt}' WHERE code = '{$code}'";
 				if( mysqli_query( $this->_connect, $sql ) === false ) $this->_log[] = mysqli_error( $this->_connect );
 				
 			}
 			
-			
 		}
 		else{
-			// czyszczenie tabeli przed importem danych
+			// czyszczenie tabeli produktów przed importem danych
 			$this->_clear();
 			
 			// parsowanie danych z XML
@@ -56,7 +110,7 @@ class AXPOL extends XMLAbstract{
 				$cat = addslashes( (string)$item->MainCategoryPL );
 				$subcat = addslashes( (string)$item->SubCategoryPL );
 				$name = addslashes( (string)$item->TitlePL );
-				$dscr = addslashes( (string)$item->DescriptionPL);
+				$dscr = addslashes( (string)$item->DescriptionPL . "<br><br>" . htmlentities( (string)$item->ExtraTextPL ) );
 				$material = addslashes( (string)$item->MaterialPL );
 				$dims = addslashes( (string)$item->Dimensions );
 				$country = addslashes( (string)$item->CountryOfOrigin );
@@ -94,8 +148,8 @@ class AXPOL extends XMLAbstract{
 					
 				}
 				
-				$sql = "INSERT INTO `XML_product` ( `shop`, `code`, `short`, `cat_id`, `brutto`, `netto`, `catalog`, `title`, `description`, `materials`, `dimension`, `country`, `weight`, `colors`, `photos`, `new`, `promotion`, `sale` )
-				VALUES ( '{$this->_atts[ 'shop' ]}', '{$code}', '{$short}', '{$cat_id}', '{$brutto}', '{$netto}', '{$catalog}', '{$name}', '{$dscr}', '{$material}', '{$dims}', '{$country}', '{$weight}', '{$color}', '{$photo}', '{$new}', '{$promotions}', '{$sale}' )";
+				$sql = "INSERT INTO `XML_product` ( `shop`, `code`, `short`, `cat_id`, `brutto`, `netto`, `catalog`, `title`, `description`, `materials`, `dimension`, `country`, `weight`, `colors`, `photos`, `new`, `promotion`, `sale`, `data` )
+				VALUES ( '{$this->_atts[ 'shop' ]}', '{$code}', '{$short}', '{$cat_id}', '{$brutto}', '{$netto}', '{$catalog}', '{$name}', '{$dscr}', '{$material}', '{$dims}', '{$country}', '{$weight}', '{$color}', '{$photo}', '{$new}', '{$promotions}', '{$sale}', '{$dt}' )";
 				if( mysqli_query( $this->_connect, $sql ) === false ) $this->_log[] = mysqli_error( $this->_connect );
 				
 				// echo "\r\n{$category} | {$subcategory}";
@@ -108,7 +162,7 @@ class AXPOL extends XMLAbstract{
 				$kod = $item->Kod;
 				$num = (int)$item->{'na_magazynie_dostepne_teraz'} + (int)$item->{'na_zamowienie_w_ciagu_7-10_dni'};
 				
-				$sql = "UPDATE `XML_product` SET  `instock` = {$num} WHERE `code` = '{$kod}'";
+				$sql = "UPDATE `XML_product` SET  `instock` = {$num}, data = '{$dt}' WHERE `code` = '{$kod}'";
 				if( mysqli_query( $this->_connect, $sql ) === false ){
 					$this->_log[] = mysqli_error( $this->_connect );
 					
@@ -170,7 +224,7 @@ class AXPOL extends XMLAbstract{
 					
 				}
 				
-				$sql = "UPDATE `XML_product` SET  `marking` = '{$mark_s}' WHERE `code` = '{$kod}'";
+				$sql = "UPDATE `XML_product` SET  `marking` = '{$mark_s}', data = '{$dt}' WHERE `code` = '{$kod}'";
 				if( mysqli_query( $this->_connect, $sql ) === false ){
 					$this->_log[] = mysqli_error( $this->_connect );
 					
@@ -200,3 +254,4 @@ class AXPOL extends XMLAbstract{
 	
 	
 }
+
