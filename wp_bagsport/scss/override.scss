@@ -553,5 +553,21 @@ a{
 #side
 {
 	
+	.list-group{
+		
+		.list-group-item{
+			
+			&:hover,
+			&.active{
+				background-color: map-get( $paleta, rozowy );
+				color: #fff;
+				border-color: transparent;
+				
+			}
+			
+		}
+		
+	}
+	
 }
 

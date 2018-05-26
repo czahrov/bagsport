@@ -147,9 +147,11 @@ class XMLAbstract{
 	
 	// funkcja dodająca kategorię do tablicy
 	protected function _addCategory( $cat_name, $subcat_name ){
+		$dt = date( 'Y-m-d H:i:s' );
+		
 		// sprawdza czy nie istnieje już kategoria główna o takiej nazwie, jeśli nie - dodaje ją
 		if( $this->getCategory( 'name', $cat_name ) === null ){
-			$sql = "INSERT INTO `XML_category` ( `name`, `slug` ) VALUES ( '{$cat_name}', '{$this->_slug( $cat_name )}' )";
+			$sql = "INSERT INTO `XML_category` ( `name`, `slug`, `data` ) VALUES ( '{$cat_name}', '{$this->_slug( $cat_name )}', '{$dt}' )";
 			if( mysqli_query( $this->_connect, $sql ) === false ) $this->_log[] = mysqli_error( $this->_connect );
 			
 		}
@@ -159,13 +161,13 @@ class XMLAbstract{
 			$parent = $this->getCategory( 'name', $cat_name, 'ID' );
 			// sprawdza czy istnieje kategoria o takiej nazwie, jeśli nie - dodaje, jeśli tak - aktualizuje ją
 			if( $this->getCategory( 'name', $subcat_name ) === null ){
-				$sql = "INSERT INTO `XML_category` ( `name`, `parent`, `slug` ) VALUES ( '{$subcat_name}', '{$parent}', '{$this->_slug( $subcat_name )}' )";
+				$sql = "INSERT INTO `XML_category` ( `name`, `parent`, `slug`, `data` ) VALUES ( '{$subcat_name}', '{$parent}', '{$this->_slug( $subcat_name )}', '{$dt}' )";
 				
 			}
 			// aktualizacja już istniejącej kategorii
 			else{
 				$cat_id = $this->getCategory( 'name', $subcat_name, 'ID' );
-				$sql = "UPDATE `XML_category` SET parent = '{$parent}' WHERE ID = '{$cat_id}'";
+				$sql = "UPDATE `XML_category` SET parent = '{$parent}', data = '{$dt}' WHERE ID = '{$cat_id}'";
 				
 			}
 			
@@ -193,7 +195,7 @@ class XMLAbstract{
 	}
 	
 	// funkcja przypisująca produkt do kategorii ( listy ID kategorii )
-	protected function _bindCategory( $product_id = null, $cats_id = array() ){
+	/* protected function _bindCategory( $product_id = null, $cats_id = array() ){
 		if( $product_id !== null && !empty( $cats_id ) ){
 			foreach( $cats_id as $cid ){
 				$sql = "INSERT INTO `XML_category_hash` ( `PID`, `CID`, `shop` ) VALUES ( '{$product_id}', '{$cid}', '{$this->_atts[ 'shop' ]}' )";
@@ -206,13 +208,17 @@ class XMLAbstract{
 		}
 		else return false;
 		
-	}
+	} */
 	
 	// funkcja zwracająca produkt po ID
 	public function getProductsBy( $stmt = '' ){
 		if( empty( $stmt ) ) return false;
 		
-		$sql = "SELECT * FROM `XML_product` {$stmt}";
+		$sql = "SELECT cat.name as 'cat_name', prod.*
+		FROM XML_product as prod
+		LEFT JOIN XML_category as cat
+		ON prod.cat_id = cat.ID
+		{$stmt}";
 		$query = mysqli_query( $this->_connect, $sql );
 		$fetch = mysqli_fetch_all( $query, MYSQLI_ASSOC );
 		mysqli_free_result( $query );
@@ -276,6 +282,35 @@ class XMLAbstract{
 		$sql = "UPDATE `XLM_product` SET cat_id = NULL WHERE shop = '{$this->_atts[ 'shop' ]}'";
 		$query = mysqli_query( $this->_connect, $sql );
 		if( mysqli_query( $this->_connect, $sql ) === false ) $this->_log[] = mysqli_error( $this->_connect );
+		
+	}
+	
+	// funkcja czyszcząca tablicę kategorii
+	public function clearCats(){
+		$sql = "TRUNCATE `XML_category`";
+		$query = mysqli_query( $this->_connect, $sql );
+		if( mysqli_query( $this->_connect, $sql ) === false ) $this->_log[] = mysqli_error( $this->_connect );
+		
+	}
+	
+	// funkcja czyszcząca puste kategorie
+	public function clearEmptyCats(){
+		$sql = "SELECT cat.ID
+FROM XML_category as cat
+LEFT JOIN XML_product as prod
+ON cat.ID = prod.cat_id
+WHERE prod.ID IS NULL
+GROUP BY cat.ID";
+		$query = mysqli_query( $this->_connect, $sql );
+		$fetch = mysqli_fetch_all( $query );
+		mysqli_free_result( $query );
+		
+		$list = implode( ", ", array_map( function( $arg ){
+			return $arg[0];
+			
+		}, $fetch ) );
+		$sql = "DELETE FROM XML_category WHERE ID IN ( {$list} )";
+		$query = mysqli_query( $this->_connect, $sql );
 		
 	}
 	

@@ -40,14 +40,20 @@
 							</div>
 							
 						</div>
-						<h1 class="my-4">
-							<span>
-								<div class="h1-line"></div>
-								
-							</span>
-							<?php echo $item['kategoria']; ?>
-							
-						</h1>
+						<?php
+							$parts = explode( " ", strip_tags( $item['kategoria'] ) );
+							printf(
+								'<h1 class="my-4">
+									<span>
+										%s
+										<div class="h1-line"></div>
+									</span>
+									%s
+								</h1>',
+								array_shift( $parts ),
+								implode( " ", $parts )
+							);
+						?>
 						<div class="single-product">
 							<div class="arrow-pagination">
 								<i class="arrow ion-ios-arrow-back"></i>

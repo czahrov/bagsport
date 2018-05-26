@@ -52,7 +52,7 @@ class XMLMan{
 					
 				break;
 				case 'single':
-					$ret = $handle->getProductsBy( "WHERE `code` = '{$atts}'" );
+					$ret = $handle->getProductsBy( "WHERE prod.code = '{$atts}'" );
 					
 				break;
 				case 'custom':

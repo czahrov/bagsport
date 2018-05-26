@@ -6,18 +6,49 @@
 	produktów
 </h1>
 <div class="list-group">
-	<a href="#" class="list-group-item">Biuro i biznes</a>
-	<a href="#" class="list-group-item">Czas i pogoda</a>
-	<a href="#" class="list-group-item">Do picia</a>
-	<a href="#" class="list-group-item">Dom i Ogród</a>
-	<a href="#" class="list-group-item">Dzieci i zabawa</a>
-	<a href="#" class="list-group-item">Elektronika</a>
-	<a href="#" class="list-group-item">Materiały piśmiennicze</a>
-	<a href="#" class="list-group-item">Narzędzia, latarki, breloki</a>
-	<a href="#" class="list-group-item">Parasole i peleryny</a>
-	<a href="#" class="list-group-item">Torby i plecaki</a>
-	<a href="#" class="list-group-item">Wakacje, sport i rekreacja</a>
-	<a href="#" class="list-group-item">Zdrowie i uroda</a>
-	<a href="#" class="list-group-item">Świateczne</a>
+	<?php
+		$kategorie = array(
+			'Biuro i biznes',
+			'Czas i pogoda',
+			'Do picia',
+			'Dom i ogród',
+			'Dzieci i zabawa',
+			'Elektronika',
+			'Materiały piśmiennicze',
+			'Narzędzia, latarki i breloki',
+			'Parasole i peleryny',
+			'Torby i plecaki',
+			'Wakacje, sport i rekreacja',
+			'Zdrowie i uroda',
+			'Świąteczne',
+			
+		);
+		sort( $kategorie );
+		
+		global $XM;
+		foreach( $kategorie as $nazwa ){
+			
+			$menu_class = '';
+			if( stripos( $_SERVER['REQUEST_URI'], 'kategoria' ) ){
+				$menu_class = mb_strtolower( $nazwa ) === mb_strtolower( $_GET['nazwa'] )?( ' active' ):( '' );
+				
+			}
+			elseif( stripos( $_SERVER['REQUEST_URI'], 'produkt' ) ){
+				$item = $XM->getProducts( 'single', $_GET['id'] )[0];
+				$menu_class = mb_strtolower( $nazwa ) === mb_strtolower( $item['cat_name'] )?( ' active' ):( '' );
+				
+			}
+			
+			printf(
+				'<a href="%s/?%s" class="list-group-item%s">%s</a>',
+				home_url( "kategoria" ),
+				http_build_query( array( 'nazwa' => $nazwa ) ),
+				$menu_class,
+				$nazwa
+				
+			);
+			
+		}
+	?>
 	<?php wp_nav_menu( array( 'theme_location' => 'menu-sklep' ) ); ?>
 </div>

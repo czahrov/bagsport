@@ -293,4 +293,9 @@ a, a * {
   #produkt .present .popup:not(.open) {
     display: none !important; }
 
+#side .list-group .list-group-item:hover, #side .list-group .list-group-item.active {
+  background-color: #e52b50;
+  color: #fff;
+  border-color: transparent; }
+
 /*# sourceMappingURL=override.css.map */
