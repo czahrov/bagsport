@@ -97,40 +97,47 @@ function printProducts( $categoryName = "Produkcja własna", $arg = array() ){
 	
 	$produkty = getCategory( $categoryName, $arg );
 	
-	foreach( array_slice( $produkty, ($arg['page'] - 1) * $arg['per_page'], $arg['per_page'] ) as $item ){
-		printf(
-			'<div class="col-lg-4 col-md-6 mb-4 single-item">
-			   <div class="card h-100 d-flex">
-					  <a href="%s">
-							 <div class="card-img" style="background-image: url(%s);"></div>
-					  </a>
-					  <div class="card-body d-flex flex-column">
-							 <a href="%1$s"></a>
-							 <div class="hover-element-shop">
-									<a href="%1$s"></a>
-									<a href="%s">wyślij zapytanie</a>
-							</div>
-							 <h4 class="card-title grow ">
-									<a href="%1$s">%s</a>
-							 </h4>
-							 <div class="price">
-									<h5>%.2f zł</h5>
-							 </div>
-							 <a href="%1$s" class="button-show-item">Zobacz</a>
-					  </div>
-			   </div>
-			</div>',
-			home_url( "produkt?id={$item['ID']}" ),
-			$item['galeria'][0],                // adres obrazka produktu
-			home_url( "zapytaj/?id={$item['ID']}" ),             // link do "wyślij zapytanie"
-			$item['nazwa'],              // nazwa produktu
-			(float)$item['brutto']              // cena produktu
+	if( count( $produkty) > 0 ){
+		foreach( array_slice( $produkty, ($arg['page'] - 1) * $arg['per_page'], $arg['per_page'] ) as $item ){
+			printf(
+				'<div class="col-lg-4 col-md-6 mb-4 single-item">
+				   <div class="card h-100 d-flex">
+						  <a href="%s">
+								 <div class="card-img" style="background-image: url(%s);"></div>
+						  </a>
+						  <div class="card-body d-flex flex-column">
+								 <a href="%1$s"></a>
+								 <div class="hover-element-shop">
+										<a href="%1$s"></a>
+										<a href="%s">wyślij zapytanie</a>
+								</div>
+								 <h4 class="card-title grow ">
+										<a href="%1$s">%s</a>
+								 </h4>
+								 <div class="price">
+										<h5>%.2f zł</h5>
+								 </div>
+								 <a href="%1$s" class="button-show-item">Zobacz</a>
+						  </div>
+				   </div>
+				</div>',
+				home_url( "produkt?id={$item['ID']}" ),
+				$item['galeria'][0],                // adres obrazka produktu
+				home_url( "zapytaj/?id={$item['ID']}" ),             // link do "wyślij zapytanie"
+				$item['nazwa'],              // nazwa produktu
+				(float)$item['brutto']              // cena produktu
+				
+			);
 			
-		);
+		}
+		
+		printPagin( $produkty );
 		
 	}
-	
-	printPagin( $produkty );
+	else{
+		echo "<div class=''>Ta kategoria nie posiada produktów</div>";
+		
+	}
 	
 }
 
