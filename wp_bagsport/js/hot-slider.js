@@ -1,5 +1,5 @@
 /* slider hot produkty */
-(function( main, view, items ){
+(function( main, view, items, navs ){
 	var paused = false;
 	var current = 0;
 	var view_h = view.prop( 'scrollHeight' );
@@ -73,7 +73,7 @@
 				new TimelineLite({
 					align: 'sequenced',
 					onComplete: function(){
-						console.log( current );
+						// console.log( current );
 						paused = false;
 				
 					},
@@ -122,11 +122,27 @@
 		
 	});
 	
+	navs.click( function( e ){
+		switch( $(this).index() ){
+			case 0:
+				main.triggerHandler( 'prev' );
+				
+			break;
+			case 1:
+				main.triggerHandler( 'next' );
+				
+			break;
+			
+		}
+		
+	} );
+	
 	main.triggerHandler( 'start' );
 	
 })
 (
 	$( '.hot-products' ),
 	$( '.hot-products .view' ),
-	$( '.hot-products .view .hot-products-content' )
+	$( '.hot-products .view .hot-products-content' ),
+	$( '.hot-products .arrow-pagination .arrow' )
 );

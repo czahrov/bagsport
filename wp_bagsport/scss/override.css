@@ -132,7 +132,19 @@ a, a * {
 h1.my-4 {
   line-height: 40px; }
 
+.hot-products h1 {
+  position: relative; }
+  .hot-products h1 .arrow-pagination {
+    position: absolute;
+    right: 0;
+    top: 0; }
+    .hot-products h1 .arrow-pagination > * {
+      display: inline-block;
+      position: static;
+      bottom: initial;
+      right: initial; }
 .hot-products .view {
+  position: relative;
   overflow: hidden;
   height: 600px; }
   .hot-products .view .hot-products-content {

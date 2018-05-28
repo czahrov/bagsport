@@ -213,7 +213,28 @@ h1.my-4{
 
 .hot-products{
 	
+	h1{
+		position: relative;
+		
+		.arrow-pagination{
+			position: absolute;
+			right: 0;
+			top: 0;
+			
+			& > *{
+				display: inline-block;
+				position: static;
+				bottom: initial;
+				right: initial;
+				
+			}
+			
+		}
+		
+	}
+		
 	.view{
+		position: relative;
 		overflow: hidden;
 		height: 600px;
 		

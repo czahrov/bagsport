@@ -20,8 +20,14 @@
 			<div class="h1-line"></div>
 		</span>
 		produkty
+		<div class="arrow-pagination">
+			<i class="arrow ion-ios-arrow-back"></i>
+			<i class="arrow ion-ios-arrow-forward"></i>
+			
+		</div>
 	</h1>
 	<div class='view d-flex flex-column'>
+
 		<?php foreach( $items as $item ):
 			preg_match( "(http[^\"]+)", $item['photos'], $match );
 			$img = $match[0];
