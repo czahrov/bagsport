@@ -7,8 +7,5 @@ if( !isset( $_COOKIE['sprytne'] ) ){
 	
 }
 
-parse_str( $_SERVER['QUERY_STRING'], $parsed );
-$parsed['msg'] = 'test';
-print_r( $parsed );
-echo http_build_query( $parsed );
+print_r( $_SERVER );
 

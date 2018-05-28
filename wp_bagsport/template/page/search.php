@@ -31,6 +31,7 @@
 					
 					$found = array_map( function( $arg ){
 						$arg['ID'] = $arg['code'];
+						$arg['nazwa'] = $arg['title'];
 						$arg['galeria'] = explode( ",", str_replace( array( "[", "]", '"' ), "", $arg['photos'] ) );
 						return $arg;
 						

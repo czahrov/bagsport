@@ -2,6 +2,7 @@
 	global $XM;
 	$items = array_map( function( $item ){
 		$item['ID'] = $item['code'];
+		$item['nazwa'] = $item['title'];
 		$item['galeria'] = explode( ",", str_replace( array( "[", "]", '"' ), "", $item['photos'] ) );
 		return $item;
 		
