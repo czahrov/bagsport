@@ -65,7 +65,7 @@
 		<!-- Sub navigation -->
 		<div class="container d-flex justify-content-between d-flex flex-wrap ">
 			<a class="navbar-brand" href="http://poligon.scepter.pl/SzymonJ/wp_bagsport/"></a>
-			<div class="contact-top d-flex flex-wrap">
+			<div class="contact-top d-flex flex-wrap flex-column flex-md-row">
 				<div class="icon-phone d-flex flex-wrap">
 					<i class="top-icons ion-ios-telephone-outline"></i>
 					<div class="d-flex flex-column">
@@ -118,13 +118,13 @@
 				<span class="navbar-toggler-icon"></span>
 				</button>
 				<div class="collapse navbar-collapse" id="navbarResponsive">
-					<ul class="navbar-nav mr-auto">
+					<ul class="navbar-nav">
 						<li<?php if(is_home()) {?> class="active"<?php } ?>>
 							<?php wp_nav_menu( array( 'theme_location' => 'header-menu' ) ); ?>
 						</li>
 					</ul>
 					<form method='GET' action='<?php echo home_url(); ?>' id='search' class='d-flex align-self-stretch'>
-						<input type='text' name='s' class=''>
+						<input type='text' name='s' class='' placeholder="kod, nazwa produktu albo słowo kluczowe">
 						<button class='search_btn d-flex align-items-center justify-content-center'>
 							<i class="fas fa-search"></i>
 						</button>
