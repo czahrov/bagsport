@@ -85,6 +85,14 @@ a, a * {
 .pointer, .pointer * {
   cursor: pointer; }
 
+.hitbox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10; }
+
 .accordion .textwidget {
   display: none; }
 
@@ -123,6 +131,17 @@ a, a * {
 
 h1.my-4 {
   line-height: 40px; }
+
+.hot-products .view {
+  overflow: hidden;
+  height: 600px; }
+  .hot-products .view .hot-products-content {
+    position: relative;
+    margin: 0;
+    -ms-flex-negative: 0;
+        flex-shrink: 0;
+    -ms-flex-preferred-size: 150px;
+        flex-basis: 150px; }
 
 #banner {
   width: 100%;
@@ -168,12 +187,6 @@ h1.my-4 {
     background-clip: content-box;
     background-origin: content-box;
     height: 250px; }
-    #blog .item .img .hitbox {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0; }
   #blog .item .text .date {
     line-height: 34px; }
   #blog .item .text .title {
