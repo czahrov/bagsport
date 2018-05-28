@@ -298,4 +298,21 @@ a, a * {
   color: #fff;
   border-color: transparent; }
 
+#navbarResponsive .navbar-nav {
+  -ms-flex-negative: 0;
+      flex-shrink: 0; }
+
+#search input {
+  padding: 5px 10px;
+  background-color: #e8e8e8;
+  color: #58585a;
+  border: none;
+  font-size: 13px;
+  font-weight: 500; }
+#search .search_btn {
+  width: 60px;
+  background-color: #e52b50;
+  color: #fff;
+  border: none; }
+
 /*# sourceMappingURL=override.css.map */

@@ -123,9 +123,12 @@
 							<?php wp_nav_menu( array( 'theme_location' => 'header-menu' ) ); ?>
 						</li>
 					</ul>
-					<a class="ml-auto search- d-flex">
-					<i class=" ion-ios-search-strong"></i>
-					</a>
+					<form method='GET' action='<?php echo home_url(); ?>' id='search' class='d-flex align-self-stretch'>
+						<input type='text' name='s' class=''>
+						<button class='search_btn d-flex align-items-center justify-content-center'>
+							<i class="fas fa-search"></i>
+						</button>
+					</form>
 				</div>
 			</div>
 		</nav>

@@ -85,7 +85,7 @@ function special_nav_class ($classes, $item) {
 }
 
 /* Funkcja generująca widok produktów */
-function printProducts( $categoryName = "Produkcja własna", $arg = array() ){
+function printProducts( $categoryName = "Produkcja własna", $arg = array(), $input = array() ){
 	$arg = array_merge(
 		array(
 			'per_page' => get_option('posts_per_page'),
@@ -95,7 +95,7 @@ function printProducts( $categoryName = "Produkcja własna", $arg = array() ){
 		$arg
 	);
 	
-	$produkty = getCategory( $categoryName, $arg );
+	$produkty = empty( $input )?( getCategory( $categoryName, $arg ) ):( $input );
 	
 	if( count( $produkty) > 0 ){
 		foreach( array_slice( $produkty, ($arg['page'] - 1) * $arg['per_page'], $arg['per_page'] ) as $item ){

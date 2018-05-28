@@ -571,3 +571,38 @@ a{
 	
 }
 
+#navbarResponsive
+{
+	
+	.navbar-nav{
+		flex-shrink: 0;
+		
+	}
+	
+}
+
+#search
+{
+	
+	input{
+		padding: 5px 10px;
+		background-color: map-get( $paleta, szary-jasny );
+		color: map-get( $paleta, szary );
+		border: none;
+		font:{
+			size: 13px;
+			weight: 500;
+		};
+		
+	}
+	
+	.search_btn{
+		width: 60px;
+		background-color: map-get( $paleta, rozowy );
+		color: #fff;
+		border: none;
+		
+	}
+	
+}
+
