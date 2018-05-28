@@ -153,22 +153,41 @@ function printPagin( $items, $arg = array() ){
 	);
 	
 	if( count( $items ) > $arg['per_page'] ){
+		$current = (int)$arg['page'] - 1;
 		echo "<div class='pagination-products col-12 d-flex flex-wrap justify-content-center'>";
+		$ret = array();
+		$pages = array_chunk( $items, $arg['per_page'] );
 		
-		foreach( array_chunk( $items, $arg['per_page'] ) as $num => $page ){
+		foreach( $pages as $num => $page ){
 			parse_str( $_SERVER['QUERY_STRING'], $parsed );
 			$parsed['strona'] = $num + 1;
 			$httpQuery = http_build_query( $parsed );
 			
-			printf(
+			$ret[] = sprintf(
 				'<a%s href="%s">%s</a>',
-				($num + 1) === $arg['page']?( ' class="active"' ):( '' ),
+				$num === $current?( ' class="active"' ):( '' ),
 				"?{$httpQuery}",
 				$num + 1
 				
 			);
 			
 		}
+		
+		/* [0][1][2]...[x-2][x-1][x][x+1][x+2]...[z-2][z-1][z] */
+		$end = 3;
+		$mid = 2;
+		
+		if( $current + $mid + 1 < count( $ret ) - $end ){
+			array_splice( $ret, $current + $mid + 1, -$end, array( "<a>...</a>" ) );
+			
+		}
+		
+		if( $current - $mid > $end ){
+			array_splice( $ret, $end, $current - $mid - $end, array( "<a>...</a>" ) );
+			
+		}
+		
+		echo implode( "", $ret );
 		
 		echo"</div>";
 	}
