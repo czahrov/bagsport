@@ -36,7 +36,7 @@ class XMLMan{
 	}
 	
 	// funkcja pobierająca produkty z bazy
-	public function getProducts( $mode, $atts ){
+	public function getProducts( $mode, $atts = null ){
 		$ret = array();
 		if( !empty( $this->_proxy ) ){
 			$handle = $this->_proxy[0];
@@ -59,8 +59,8 @@ class XMLMan{
 					$ret = $handle->getProductsBy( $atts );
 					
 				break;
-				case 'similar':
-					$ret = $handle->getSimilarProducts( $atts );
+				case 'mostVisited':
+					$ret = $handle->getMostVisited( $atts );
 					
 				break;
 				
@@ -83,4 +83,10 @@ class XMLMan{
 		
 	}
 	
+	/* naliczanie odwiedzin */
+	public function addVisit( $id ){
+		$this->_proxy[0]->addVisit( $id );
+		
+	}
+
 }

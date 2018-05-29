@@ -155,6 +155,20 @@ h1.my-4 {
     -ms-flex-preferred-size: 150px;
         flex-basis: 150px; }
 
+.most-popular h1 {
+  position: relative; }
+  .most-popular h1 .arrow-pagination {
+    position: absolute;
+    top: 0;
+    right: 0; }
+    .most-popular h1 .arrow-pagination .arrow {
+      display: inline-block;
+      position: static;
+      bottom: initial;
+      right: initial; }
+.most-popular .items {
+  overflow: hidden; }
+
 #banner {
   width: 100%;
   height: 300px;

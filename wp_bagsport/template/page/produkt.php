@@ -1,11 +1,13 @@
 <?php
 	$id = $_GET['id'];
+	
 	if( get_post( $id ) !== null ){
 		$item = getProductData( get_post( $id ) );
 		
 	}
 	else{
 		global $XM;
+		$XM->addVisit( $id );
 		// $item = $XM->getProducts( 'single', $id );
 		$item = getProductData( $XM->getProducts( 'single', $id )[0] );
 		

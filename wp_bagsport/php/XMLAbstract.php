@@ -259,6 +259,55 @@ class XMLAbstract{
 		
 	}
 	
+	/* funkcja zwracająca tablicę najczęściej oglądanych produktów */
+	public function getMostVisited( $atts = array() ){
+		$atts = array_merge(
+			array(
+				'num' => 8,
+			),
+			$atts
+		);
+		
+		$sql = "SELECT *
+FROM XML_product as prod
+JOIN XML_show as visit
+ON prod.code = visit.PID
+ORDER BY visit.visit DESC
+LIMIT {$atts['num']}";
+		$query = mysqli_query( $this->_connect, $sql );
+		$fetch = mysqli_fetch_all( $query, MYSQLI_ASSOC );
+		mysqli_free_result( $query );
+		return $fetch;
+		
+	}
+	
+	/* funkcja naliczająca kolejne wizyty */
+	public function addVisit( $id ){
+		$sql = "SELECT *, COUNT( * ) as 'num' FROM XML_show WHERE PID = '{$id}'";
+		$query = mysqli_query( $this->_connect, $sql );
+		$fetch = mysqli_fetch_assoc( $query );
+		mysqli_free_result( $query );
+		
+		/* aktualizacja */
+		if( $fetch['num'] >= 1 ){
+			$sql =  sprintf(
+				'UPDATE XML_show SET visit = "%u" WHERE PID = "%s"',
+				$fetch['visit'] + 1,
+				$fetch['PID']
+				
+			);
+			$query = mysqli_query( $this->_connect, $sql );
+			
+		}
+		/* nowy rekord */
+		else{
+			$sql = "INSERT INTO XML_show ( `PID`, `visit` ) VALUES ( '{$id}', 1 )";
+			$query = mysqli_query( $this->_connect, $sql );
+			
+		}
+		
+	}
+	
 	// zewnętrzny uchwyt do importowania danych XML
 	public function renew(){
 		$this->_import( $this->_atts );

@@ -142,7 +142,6 @@ a{
 
 }
 
-
 .accordion{
 	
 	.textwidget{
@@ -250,6 +249,34 @@ h1.my-4{
 	
 }
 
+.most-popular{
+	
+	h1{
+		position: relative;
+		
+		.arrow-pagination{
+			position: absolute;
+			top: 0;
+			right: 0;
+			
+			.arrow{
+				display: inline-block;
+				position: static;
+				bottom: initial;
+				right: initial;
+				
+			}
+			
+		}
+		
+	}
+	
+	.items{
+		overflow: hidden;
+		
+	}
+	
+}
 
 
 #banner

@@ -31,6 +31,7 @@
 	wp_enqueue_script( "produkt", get_stylesheet_directory_uri() . "/js/produkt{$infix}.js", array(), $buster, true );
 	wp_enqueue_script( "jQ-touchswipe", get_stylesheet_directory_uri() . "/js/jquery.touchSwipe.min.js", array(), $buster, true );
 	wp_enqueue_script( "hot-slider", get_stylesheet_directory_uri() . "/js/hot-slider{$infix}.js", array(), $buster, true );
+	wp_enqueue_script( "popular-slider", get_stylesheet_directory_uri() . "/js/ogladane{$infix}.js", array(), $buster, true );
 	
 	?>
 <!DOCTYPE html>
