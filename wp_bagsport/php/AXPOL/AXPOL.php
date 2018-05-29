@@ -94,7 +94,7 @@ class AXPOL extends XMLAbstract{
 		}
 		else{
 			// czyszczenie tabeli produktów przed importem danych
-			$this->_clear();
+			// $this->_clear();
 			
 			// parsowanie danych z XML
 			foreach( $XML->children() as $item ){
@@ -110,7 +110,8 @@ class AXPOL extends XMLAbstract{
 				$cat = addslashes( (string)$item->MainCategoryPL );
 				$subcat = addslashes( (string)$item->SubCategoryPL );
 				$name = addslashes( (string)$item->TitlePL );
-				$dscr = addslashes( (string)$item->DescriptionPL . "<br><br>" . htmlentities( (string)$item->ExtraTextPL ) );
+				$dscr = addslashes( (string)$item->DescriptionPL );
+				if( strlen( (string)$item->ExtraTextPL ) > 0 ) $dscr .= addslashes( "<br><br>" . htmlentities( (string)$item->ExtraTextPL ) );
 				$material = addslashes( (string)$item->MaterialPL );
 				$dims = addslashes( (string)$item->Dimensions );
 				$country = addslashes( (string)$item->CountryOfOrigin );
@@ -148,8 +149,77 @@ class AXPOL extends XMLAbstract{
 					
 				}
 				
-				$sql = "INSERT INTO `XML_product` ( `shop`, `code`, `short`, `cat_id`, `brutto`, `netto`, `catalog`, `title`, `description`, `materials`, `dimension`, `country`, `weight`, `colors`, `photos`, `new`, `promotion`, `sale`, `data` )
-				VALUES ( '{$this->_atts[ 'shop' ]}', '{$code}', '{$short}', '{$cat_id}', '{$brutto}', '{$netto}', '{$catalog}', '{$name}', '{$dscr}', '{$material}', '{$dims}', '{$country}', '{$weight}', '{$color}', '{$photo}', '{$new}', '{$promotions}', '{$sale}', '{$dt}' )";
+				/* aktualizacja czy wstawianie? */
+				$sql = "SELECT COUNT(*) as num FROM `XML_product` WHERE code = '{$code}'";
+				$query = mysqli_query( $this->_connect, $sql );
+				$num = mysqli_fetch_assoc( $query )['num'];
+				mysqli_free_result( $query );
+				
+				$insert = array(
+					'shop' => $this->_atts['shop'],
+					'code' => $code,
+					'short' => $short,
+					'cat_id' => $cat_id,
+					'brutto' => $brutto,
+					'netto' => $netto,
+					'catalog' => $catalog,
+					'title' => $name,
+					'description' => $dscr,
+					'materials' => $material,
+					'dimension' => $dims,
+					'country' => $country,
+					'weight' => $weight,
+					'colors' => $color,
+					'photos' => $photo,
+					'new' => $new,
+					'promotion' => $promotions,
+					'sale' => $sale,
+					'data' => $dt,
+				);
+				
+				$t_fields = array();
+				$t_values = array();
+				
+				/* aktualizacja */
+				if( $num > 0 ){
+					$t_sql = array();
+					
+					unset( $insert['code'] );
+					$sql = "UPDATE XML_product SET ";
+					
+					foreach( $insert as $field => $value ){
+						$t_sql[] = "`{$field}` = '{$value}'";
+					}
+					
+					$sql .= implode( ", ", $t_sql );
+					
+					$sql .= " WHERE `code` = '{$code}'";
+					
+				}
+				/* wstawianie */
+				else{
+					
+					foreach( $insert as $field => $value ){
+						$t_fields[] = "`{$field}`";
+						$t_values[] = "'{$value}'";
+						
+					}
+					
+					$sql = sprintf(
+						'INSERT INTO XML_product ( %s ) VALUES ( %s )',
+						implode( ", ", $t_fields ),
+						implode( ", ", $t_values )
+						
+					);
+					
+					
+				}
+				
+				// echo "\r\n $sql \r\n";
+				
+				// $sql = "INSERT INTO `XML_product` ( `shop`, `code`, `short`, `cat_id`, `brutto`, `netto`, `catalog`, `title`, `description`, `materials`, `dimension`, `country`, `weight`, `colors`, `photos`, `new`, `promotion`, `sale`, `data` )
+				// VALUES ( '{$this->_atts[ 'shop' ]}', '{$code}', '{$short}', '{$cat_id}', '{$brutto}', '{$netto}', '{$catalog}', '{$name}', '{$dscr}', '{$material}', '{$dims}', '{$country}', '{$weight}', '{$color}', '{$photo}', '{$new}', '{$promotions}', '{$sale}', '{$dt}' )";
+				
 				if( mysqli_query( $this->_connect, $sql ) === false ) $this->_log[] = mysqli_error( $this->_connect );
 				
 				// echo "\r\n{$category} | {$subcategory}";

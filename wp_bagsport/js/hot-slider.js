@@ -111,11 +111,11 @@
 		
 	})
 	.swipe({
-		swipeUp: function( e ){
+		swipeLeft: function( e ){
 			main.triggerHandler( 'next' );
 			
 		},
-		swipeDown: function( e ){
+		swipeRight: function( e ){
 			main.triggerHandler( 'prev' );
 			
 		},

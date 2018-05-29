@@ -128,6 +128,7 @@ class XMLAbstract{
 	// funkcja czyszcząca wpisy z danego sklepu
 	protected function _clear(){
 		$sql = "DELETE FROM `XML_product` WHERE `shop` = '{$this->_atts[ 'shop' ]}'";
+		echo "\r\n $sql \r\n";
 		if( mysqli_query( $this->_connect, $sql ) === false ){
 			$this->_log[] = mysqli_error( $this->_connect );
 			

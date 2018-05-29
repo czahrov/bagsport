@@ -109,7 +109,7 @@
 				<div class="col-lg-9 col-md-6 mb-4 product-content">
 					<div class="row">
 						<h1>O produkcie</h1>
-						<p class='col-12 fc-rozowy'>
+						<p class='fc-rozowy'>
 							<?php echo $item['opis']; ?>
 						</p>
 						<div class="d-flex flex-column">
