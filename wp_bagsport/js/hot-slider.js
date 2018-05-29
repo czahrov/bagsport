@@ -32,6 +32,15 @@
 				new TimelineLite({
 					align: 'sequenced',
 					onComplete: function(){
+						TweenLite.set(
+							items.eq( current ),
+							{
+								y: '+=' + view_h,
+								
+							}
+							
+						);
+						
 						current++;
 						// console.log( current );
 						paused = false;
@@ -47,15 +56,6 @@
 						ease: Linear.easeNone,
 						
 					}
-				) )
-				.add( TweenLite.set(
-					items.eq( current ),
-					{
-						// y: view_h - distance * current,
-						y: '+=' + view_h,
-						
-					}
-					
 				) );
 				
 			}
