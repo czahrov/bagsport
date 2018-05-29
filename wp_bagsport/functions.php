@@ -100,7 +100,7 @@ function printProducts( $categoryName = "Produkcja własna", $arg = array(), $in
 	if( count( $produkty) > 0 ){
 		foreach( array_slice( $produkty, ($arg['page'] - 1) * $arg['per_page'], $arg['per_page'] ) as $item ){
 			printf(
-				'<div class="col-lg-4 col-md-6 mb-4 single-item">
+				'<div class="col-12 col-md-6 col-lg-4 mb-4 single-item">
 				   <div class="card h-100 d-flex">
 						  <a href="%s">
 								 <div class="card-img" style="background-image: url(%s);"></div>

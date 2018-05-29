@@ -135,6 +135,8 @@
 		
 	} );
 	
+	main.triggerHandler( 'start' );
+	
 })
 (
 	$( '.most-popular' ),
