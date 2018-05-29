@@ -26,12 +26,12 @@
 	wp_enqueue_script( "GSAP-CSS", get_stylesheet_directory_uri() . "/js/CSSPlugin.min.js", array(), false, true );
 	wp_enqueue_script( "GSAP-TweenLite", get_stylesheet_directory_uri() . "/js/TweenLite.min.js", array(), false, true );
 	wp_enqueue_script( "GSAP-TimelineLite", get_stylesheet_directory_uri() . "/js/TimelineLite.min.js", array(), false, true );
+	wp_enqueue_script( "jQ-touchswipe", get_stylesheet_directory_uri() . "/js/jquery.touchSwipe.min.js", array(), $buster, true );
 	wp_enqueue_script( "akordeon-js", get_stylesheet_directory_uri() . "/js/akordeon{$infix}.js", array(), $buster, true );
 	wp_enqueue_script( "slider-partnerzy", get_stylesheet_directory_uri() . "/js/partnerzy{$infix}.js", array(), $buster, true );
-	wp_enqueue_script( "produkt", get_stylesheet_directory_uri() . "/js/produkt{$infix}.js", array(), $buster, true );
-	wp_enqueue_script( "jQ-touchswipe", get_stylesheet_directory_uri() . "/js/jquery.touchSwipe.min.js", array(), $buster, true );
 	wp_enqueue_script( "hot-slider", get_stylesheet_directory_uri() . "/js/hot-slider{$infix}.js", array(), $buster, true );
 	wp_enqueue_script( "popular-slider", get_stylesheet_directory_uri() . "/js/ogladane{$infix}.js", array(), $buster, true );
+	wp_enqueue_script( "produkt", get_stylesheet_directory_uri() . "/js/produkt{$infix}.js", array(), $buster, true );
 	
 	?>
 <!DOCTYPE html>

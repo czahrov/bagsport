@@ -48,8 +48,7 @@
 		nav.parent().hide();
 	}
 	
-	small
-	.click( function( e ){
+	small.click( function( e ){
 		current = $(this).index();
 		
 		main
@@ -57,8 +56,7 @@
 		
 	} );
 	
-	nav
-	.click( function( e ){
+	nav.click( function( e ){
 		switch( $(this).index() ){
 			case 0:
 				/* wstecz */
@@ -172,6 +170,18 @@
 		popup.triggerHandler('loadImg');
 		
 	} );
+	
+	viewbox.swipe({
+		swipeLeft: function( e ){
+			nav.eq(1).click();
+			
+		},
+		swipeRight: function( e ){
+			nav.eq(0).click();
+			
+		},
+		
+	});
 	
 })
 (
