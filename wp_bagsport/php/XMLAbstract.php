@@ -31,12 +31,12 @@ class XMLAbstract{
 				$atts
 			);
 			
-			// test aktualności danych XML
+			/* // test aktualności danych XML
 			if( $this->_check() ){
 				// odświeżanie produktów
 				$this->_import( $this->_atts );
 				
-			}
+			} */
 			
 		}
 		
