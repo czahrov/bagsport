@@ -1,6 +1,65 @@
-<?
+<?php
+
+set_error_handler( function( $level, $message, $file, $line, $context ){
+	switch( $level ){
+		case 2:
+		case 512:
+			$level_text = "warning";
+		break;
+		case 256:
+		case 4096:
+			$level_text = "error";
+		break;
+		case 8:
+		case 1024:
+			$level_text = "notice";
+		break;
+		default:
+			return false;
+		
+	}
+	
+	$msg = sprintf(
+		'%s
+%s
+%u
+%s
+---
+',
+		date( "H:i:s" ),
+		$file,
+		$line,
+		$message
+		
+	);
+	
+	$dst = sprintf(
+		'%s/log/%s/%s.log',
+		__DIR__,
+		date( 'Y-m-d' ),
+		$level_text
+		
+	);
+	
+	if( !file_exists( dirname( $dst ) ) ) mkdir( dirname( $dst ), 0755, true );
+	
+	error_log( $msg, 3, $dst );
+	
+} );
 
 add_theme_support('post-thumbnails');
+
+/* CRON */
+// add_action( string $tag, callable $function_to_add, int $priority = 10, int $accepted_args = 1 )
+add_action( 'xml_update', function(){
+	require_once __DIR__ . "/php/update.php";
+	
+} );
+
+add_action( 'xml_rehash', function( $arg ){
+	require_once __DIR__ . "/php/rehash.php";
+	
+} );
 
 // XML
 require_once __DIR__ . '/php/autoloader.php';
@@ -86,10 +145,11 @@ function special_nav_class ($classes, $item) {
 
 /* Funkcja generująca widok produktów */
 function printProducts( $categoryName = "Produkcja własna", $arg = array(), $input = null ){
+	$strona = isset( $_GET['strona'] )?( (int)$_GET['strona'] ):( 1 );
 	$arg = array_merge(
 		array(
 			'per_page' => get_option('posts_per_page'),
-			'page' => max( 1, (int)$_GET['strona'] ),
+			'page' => $strona,
 			
 		),
 		$arg
