@@ -7,6 +7,7 @@ printf(
 	PHP_EOL
 );
 
+global $SHOP;
 current( $SHOP )->clearCats();
 
 foreach( $SHOP as $name => $single ){

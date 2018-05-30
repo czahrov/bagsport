@@ -12,7 +12,7 @@
 <div class="most-popular">
 	<?php if( DMODE ): ?>
 	<!--
-	<?php print_r( $items[0] ); ?>
+	<?php if( count( $items ) ) print_r( $items[0] ); ?>
 	-->
 	<?php endif; ?>
 	<div class="container">
