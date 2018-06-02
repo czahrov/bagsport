@@ -143,6 +143,18 @@ function special_nav_class ($classes, $item) {
     return $classes;
 }
 
+require_once __DIR__ . "/php/PHPMailer/PHPMailerAutoload.php";
+
+/* funkcja zwracająca obiekt PHPMailer */
+function getMailer(){
+	$ret = new PHPMailer();
+	$ret->Encoding = 'base64';
+	$ret->CharSet = 'utf-8';
+	
+	return $ret;
+}
+
+
 /* Funkcja generująca widok produktów */
 function printProducts( $categoryName = "Produkcja własna", $arg = array(), $input = null ){
 	$strona = isset( $_GET['strona'] )?( (int)$_GET['strona'] ):( 1 );
@@ -366,6 +378,13 @@ function OGTags( $obj ){
 
 /* pobieranie informacji o stronie ( ze specjalnej strony ) */
 function getInfo( $name = null ){
+	/*
+		facebook
+		kontakt_e-mail
+		infolinia
+		adres_firmy
+		godziny_otwarcia
+	*/
 	static $meta = null;
 	
 	if( $meta === null ){

@@ -61,6 +61,24 @@
 .border-czerwony {
   border-color: #ed1c24; }
 
+.fc-ok {
+  color: #14b830; }
+
+.bg-ok {
+  background-color: #14b830; }
+
+.border-ok {
+  border-color: #14b830; }
+
+.fc-fail {
+  color: #b81414; }
+
+.bg-fail {
+  background-color: #b81414; }
+
+.border-fail {
+  border-color: #b81414; }
+
 .ff-base {
   font-family: "Poppins", "Times New Roman", serif; }
 
@@ -168,6 +186,27 @@ h1.my-4 {
       right: initial; }
 .most-popular .items {
   overflow: hidden; }
+
+.nf-form-cont {
+  font-size: 14px; }
+  .nf-form-cont .nf-form-fields-required {
+    padding: 20px 0; }
+  .nf-form-cont .nf-error-wrap {
+    color: #e52b50; }
+
+form {
+  font-size: 14px; }
+  form input, form textarea {
+    padding: 6px 12px;
+    min-height: 34px;
+    width: 100%;
+    border: solid 1px #e8e8e8; }
+  form .submit-wrap input[type=button],
+  form input[type=submit] {
+    width: 100%;
+    background-color: #e52b50;
+    color: #fff;
+    cursor: pointer; }
 
 #banner {
   width: 100%;
@@ -415,27 +454,53 @@ h1.my-4 {
   #kontakt .cell {
     width: 100%;
     margin-bottom: 20px; }
-    #kontakt .cell.napisz .nf-form-cont {
-      font-size: 14px; }
-      #kontakt .cell.napisz .nf-form-cont form .nf-form-fields-required {
-        padding: 20px 0; }
-      #kontakt .cell.napisz .nf-form-cont form .field-wrap input, #kontakt .cell.napisz .nf-form-cont form .field-wrap textarea {
-        padding: 6px 12px;
-        min-height: 34px;
-        border: solid 1px #e8e8e8; }
-      #kontakt .cell.napisz .nf-form-cont form .field-wrap.submit-wrap input {
-        width: 100%;
-        background-color: #e52b50;
-        color: #fff;
-        cursor: pointer; }
-      #kontakt .cell.napisz .nf-form-cont .nf-error-wrap {
-        color: #e52b50; }
     #kontakt .cell.kontakt {
       margin-bottom: 20px; }
       #kontakt .cell.kontakt .title {
         margin-bottom: 20px; }
     #kontakt .cell.odwiedz #mapa {
       height: 500px;
+      background-color: #e8e8e8; }
+
+#zapytaj .mail_status {
+  font-family: "Poppins", "Times New Roman", serif;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 5px 10px;
+  margin-bottom: 50px;
+  color: #fff;
+  text-align: center;
+  background-color: #58585a; }
+  #zapytaj .mail_status.ok {
+    background-color: #14b830; }
+  #zapytaj .mail_status.fail {
+    background-color: #b81414; }
+#zapytaj #ask {
+  width: 100%; }
+  #zapytaj #ask .field {
+    margin-top: 20px; }
+  #zapytaj #ask textarea {
+    height: 200px;
+    resize: none; }
+#zapytaj .details {
+  font-family: "Poppins", "Times New Roman", serif;
+  font-size: 14px;
+  color: #58585a;
+  line-height: 34px; }
+  #zapytaj .details * {
+    line-height: inherit; }
+  #zapytaj .details .line {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between; }
+    #zapytaj .details .line div {
+      padding: 5px; }
+      #zapytaj .details .line div:nth-child(2) {
+        text-align: right; }
+    #zapytaj .details .line:nth-child(even) {
       background-color: #e8e8e8; }
 
 /*# sourceMappingURL=override.css.map */

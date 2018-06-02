@@ -1,5 +1,5 @@
 (function( mapa ){
-	if( !mapa.length ) return false;
+	if( mapa.length == 0 ) return false;
 	$.gmap3({
 		key: 'AIzaSyAyaC8rMFmCUI_Wa0rCdPfn8CCYearGTlY'
 		
