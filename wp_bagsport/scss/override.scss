@@ -1,5 +1,6 @@
 $paleta:(
 	rozowy: #e52b50,
+	szary-ciemny: #222,
 	szary: #58585a,
 	szary-jasny: #e8e8e8,
 	pomarancz: #f58220,
@@ -58,20 +59,17 @@ $font-size:(
 	
 }
 
-@mixin bgKolor( $name )
-{
+@mixin bgKolor( $name ){
 	background-color: map-get( $paleta, $name );
 	
 }
 
-@mixin fontKolor( $name )
-{
+@mixin fontKolor( $name ){
 	color: map-get( $paleta, $name );
 	
 }
 
-@mixin borderKolor( $name )
-{
+@mixin borderKolor( $name ){
 	border-color: map-get( $paleta, $name );
 	
 }
@@ -87,18 +85,30 @@ $font-size:(
 
 @mixin stdHeader(){
 	font:{
-		family: map-get( $font-family, base );
-		size: map-get( $font-size, light );
-		weight: bold;
-		
+		size: 18px;
+		family: ('Poppins', 'Helvetica Neue', Helvetica, Arial, sans-serif);
+		weight: 500;
 	};
+	color: map-get( $paleta, szary-ciemny );
+	line-height: 22px;
+	
+}
+
+@mixin stdTitle(){
+	font:{
+		size: map-get( $font-size, base );
+		family: ('Poppins', 'Times New Roman', serif);
+		weight: 400;
+	};
+	line-height: 30px;		
+	color: map-get( $paleta, szary-ciemny );
 	
 }
 
 @mixin stdContent(){
 	font:{
-		family: map-get( $font-family, base );
-		size: map-get( $font-size, small );
+		size: 15px;
+		family: ('Poppins', 'Times New Roman', serif);
 		
 	};
 	color: map-get( $paleta, szary );
@@ -110,6 +120,12 @@ $font-size:(
 	}
 	
 }
+
+@mixin stdBold(){
+	font-weight: 600;
+	
+}
+
 
 *{
 	cursor: default;
@@ -204,6 +220,27 @@ a{
 		width: initial;
 		
 	}
+	
+}
+
+.stdHeader{
+	@include stdHeader();
+	
+}
+
+.title{
+	@include stdHeader();
+	margin: 40px 0;
+	
+}
+
+.stdBold, strong, b{
+	@include stdBold();
+	
+}
+
+h1, h2, h3, h4, h5, h6{
+	@include stdHeader();
 	
 }
 
@@ -318,6 +355,10 @@ form{
 	
 }
 
+body{
+	@include stdContent();
+	
+}
 
 
 
@@ -341,21 +382,14 @@ form{
 	
 	.title{
 		width: 100%;
-		margin-top: 50px;
 		text-align: center;
 		@include stdHeader();
 		
 	}
 	
 	.content{
-		// margin: 50px 0;
 		padding: 0 20px;
 		@include stdContent();
-		
-		h1, h2, h3, h4, h5, h6{
-			@include stdHeader();
-			
-		}
 		
 	}
 	
@@ -443,13 +477,7 @@ form{
 	
 	.title{
 		width: 100%;
-		margin-top: 50px;
 		text-align: center;
-		
-		&, h1, h2, h3, h4, h5, h6{
-			@include stdHeader();
-			
-		}
 		
 	}
 	
@@ -592,11 +620,6 @@ form{
 	.title{
 		width: 100%;
 		text-align: center;
-		
-		&, h1, h2, h3, h4, h5, h6{
-			@include stdHeader();
-			
-		}
 		
 	}
 	
@@ -797,11 +820,6 @@ form{
 {
 	@include stdContent();
 	margin-top: 50px;
-	
-	h2{
-		@include stdHeader();
-		
-	}
 	
 	.cell{
 		width: 100%;

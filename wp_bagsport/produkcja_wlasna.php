@@ -5,7 +5,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-12">
-				<div class="title my-4">
+				<div class="title stdHeader">
 					<?php the_title(); ?>
 				</div>
 				<div class="basic-content">
