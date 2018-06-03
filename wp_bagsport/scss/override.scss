@@ -332,6 +332,40 @@ h1.my-4{
 	
 }
 
+.gallery_popup{
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0,0,0,0.7);
+	z-index: 50;
+	
+	.img{
+		height: 80vh;
+		max-height: 1140px;
+		background:{
+			position: center;
+			size: contain;
+			repeat: no-repeat;
+			
+		};
+		
+		.nav{
+			font-size: 60px;
+			
+		}
+		
+	}
+	
+	&:not(.open){
+		display: none !important;
+		
+	}
+	
+}
+
+
 form{
 	font-size: map-get( $font-size, small );
 		
@@ -390,6 +424,37 @@ body{
 	.content{
 		padding: 0 20px;
 		@include stdContent();
+		
+	}
+	
+	.custom_gallery{
+		margin: 30px 0;
+		
+		.wrapper{
+			margin: 15px 0;
+			
+			.item{
+				padding: 15px 15px;
+				height: 200px;
+				background:{
+					position: center;
+					size: contain;
+					repeat: no-repeat;
+					clip: content-box;
+					origin: content-box;
+				};
+				border: solid 1px map-get( $paleta, szary-jasny );
+				border-radius: 10px;
+				transition: border 0.3s linear;
+				
+				&:hover{
+					border-color: map-get( $paleta, rozowy );
+					
+				}
+				
+			}
+			
+		}
 		
 	}
 	

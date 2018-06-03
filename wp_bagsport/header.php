@@ -35,6 +35,7 @@
 	wp_enqueue_script( "popular-slider", get_stylesheet_directory_uri() . "/js/ogladane{$infix}.js", array(), $buster, true );
 	wp_enqueue_script( "produkt", get_stylesheet_directory_uri() . "/js/produkt{$infix}.js", array(), $buster, true );
 	wp_enqueue_script( "mapa", get_stylesheet_directory_uri() . "/js/mapa{$infix}.js", array(), $buster, true );
+	wp_enqueue_script( "page", get_stylesheet_directory_uri() . "/js/page{$infix}.js", array(), $buster, true );
 	
 	?>
 <!DOCTYPE html>

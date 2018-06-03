@@ -9,7 +9,7 @@
 				<?php echo get_post()->post_title; ?>
 			</div>
 			<div class='content'>
-				<?php echo apply_filters( 'the_content', get_post()->post_content ); ?>
+				<?php echo apply_filters( 'the_content', apply_filters( 'custom_gallery', get_post()->post_content ) ); ?>
 			</div>
 			
 		</div>

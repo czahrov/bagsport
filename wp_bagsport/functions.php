@@ -406,3 +406,63 @@ function extractGallery( $content = "" ){
 	
 }
 
+/* funkcja (filtr) generująca galerię zamiast galerii WP */
+add_filter( 'custom_gallery', function( $content ){
+	preg_match_all( '/\[gallery.+?ids=\"([\d,]+)\"\]/', $content, $galleries );
+	
+/*  $galleries
+Array
+(
+    [0] => Array
+        (
+            [0] => [gallery columns="9" link="file" ids="201,200,198,197,79,85"]
+            [1] => [gallery columns="9" link="file" ids="201,200,197,85"]
+        )
+
+    [1] => Array
+        (
+            [0] => 201,200,198,197,79,85
+            [1] => 201,200,197,85
+        )
+
+)
+*/
+	
+	if( empty( $galleries[0] ) ) return $content;
+	
+	$replace = array();
+	
+	foreach( $galleries[1] as $num => $set ){
+		$ids = explode( ",", $set );
+		$items = array_map( function( $id ){
+			return sprintf(
+				'<div class="wrapper col-12 col-md-6 col-lg-4 col-xl-3"><div class="item" style="background-image:url(%s);"></div></div>',
+				wp_get_attachment_image_url( $id, 'full' )
+				
+			);
+			
+		}, $ids );
+		
+		$replace[] = sprintf(
+			'<div class="custom_gallery container"><div class="row">%s</div></div>',
+			implode( $items )
+			
+		);
+		
+	}
+	
+	$content = "<div class='gallery_popup d-flex align-items-center'>
+	<div class='container'>
+		<div class='row'>
+			<div class='img fc-rozowy col-12 d-flex align-items-center justify-content-between'>
+				<i class='nav prev pointer fas fa-chevron-circle-left'></i>
+				<i class='nav next pointer fas fa-chevron-circle-right'></i>
+			</div>
+		</div>
+	</div>
+</div>" . str_replace( $galleries[0], $replace, $content );
+	
+	return $content;
+} );
+
+
