@@ -79,27 +79,70 @@ function printBreadcrumb(){
         echo "<header class='d-flex align-items-center'>";
         echo "<p class='link-bread'>Przeglądasz teraz: </p> " ;
        
-        do{
-                printf(
-                        "<h3>
-                                <a href='%s'>%s</a>
-                        </h3>",
-                        get_the_permalink( $current->ID ),
-                        $current->post_title
-                       
-                );
-               
-                if( $current->post_parent == 0 ){
-                        $end = true;
-                       
-                }
-                else{
-                        $current = get_post( $current->post_parent );
-                       
-                }
-               
-        }
-        while( $end === false );
+		if( strpos( $_SERVER['REQUEST_URI'], 'kategoria' ) !== false ){
+			
+			printf(
+					"<h3>
+							<a href='%s'>%s</a>
+					</h3>",
+					$_SERVER['REQUEST_URI'],
+					$_GET['nazwa']
+				   
+			);
+			
+		}
+		elseif( strpos( $_SERVER['REQUEST_URI'], 'produkt' ) !== false ){
+			$id = $_GET['id'];
+			if( get_post( $id ) !== null ){
+				$produkt = getProductData( get_post( $id ) );
+				
+			}
+			else{
+				global $XM;
+				$produkt = getProductData( $XM->getProducts( 'single', $id )[0] );
+				
+			}
+			
+			printf(
+					"<h3>
+							<a href='%s'>%s</a>
+					</h3>
+					<h3>
+							<a href='%s'>%s</a>
+					</h3>",
+					home_url( "kategoria/?nazwa={$produkt['kategoria']}" ),
+					$produkt['kategoria'],
+				   home_url( "produkt/?id={$produkt['ID']}" ),
+					$produkt['nazwa']
+				   
+			);
+			
+		}
+		else{
+			
+			do{
+					printf(
+							"<h3>
+									<a href='%s'>%s</a>
+							</h3>",
+							get_the_permalink( $current->ID ),
+							$current->post_title
+						   
+					);
+				   
+					if( $current->post_parent == 0 ){
+							$end = true;
+						   
+					}
+					else{
+							$current = get_post( $current->post_parent );
+						   
+					}
+				   
+			}
+			while( $end === false );
+			
+		}
        
         echo "</header>";
        
