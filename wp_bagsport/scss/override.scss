@@ -216,6 +216,11 @@ a{
 .contact-top{
 	width: 100%;
 	
+	&, & *{
+		line-height: initial;
+		
+	}
+	
 	@media( min-width: 992px ){
 		width: initial;
 		
@@ -798,6 +803,8 @@ body{
 
 #navbarResponsive
 {
+	position: relative;
+	overflow: hidden;
 	
 	.navbar-nav{
 		flex-shrink: 0;
@@ -834,7 +841,7 @@ body{
 	
 	input{
 		padding: 5px 10px;
-		width: 100%;
+		width: calc( 100% - 60px );
 		background-color: map-get( $paleta, szary-jasny );
 		color: map-get( $paleta, szary );
 		border: none;
@@ -847,9 +854,23 @@ body{
 	
 	.search_btn{
 		width: 60px;
+		flex-shrink: 0;
 		background-color: map-get( $paleta, rozowy );
 		color: #fff;
 		border: none;
+		
+	}
+	
+	@media( min-width: 992px ){
+		
+		input{
+			position: absolute;
+			top: 100%;
+			left: 0;
+			right: 0;
+			height: 100%;
+			
+		}
 		
 	}
 	

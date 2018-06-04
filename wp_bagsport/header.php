@@ -36,6 +36,7 @@
 	wp_enqueue_script( "produkt", get_stylesheet_directory_uri() . "/js/produkt{$infix}.js", array(), $buster, true );
 	wp_enqueue_script( "mapa", get_stylesheet_directory_uri() . "/js/mapa{$infix}.js", array(), $buster, true );
 	wp_enqueue_script( "page", get_stylesheet_directory_uri() . "/js/page{$infix}.js", array(), $buster, true );
+	wp_enqueue_script( "std", get_stylesheet_directory_uri() . "/js/std{$infix}.js", array(), $buster, true );
 	
 	?>
 <!DOCTYPE html>
@@ -130,7 +131,7 @@
 							<?php wp_nav_menu( array( 'theme_location' => 'header-menu' ) ); ?>
 						</li>
 					</ul>
-					<form method='GET' action='<?php echo home_url(); ?>' id='search' class='d-flex align-self-stretch'>
+					<form id='search' class='d-flex align-self-stretch justify-content-end' method='GET' action='<?php echo home_url(); ?>'>
 						<input type='text' name='s' class='' placeholder="kod, nazwa produktu albo słowo kluczowe">
 						<button class='search_btn d-flex align-items-center justify-content-center'>
 							<i class="fas fa-search"></i>

@@ -152,6 +152,8 @@ a, a * {
 
 .contact-top {
   width: 100%; }
+  .contact-top, .contact-top * {
+    line-height: initial; }
   @media (min-width: 992px) {
     .contact-top {
       width: initial; } }
@@ -464,33 +466,36 @@ body {
           -ms-flex-order: 0;
               order: 0; } }
 
-#navbarResponsive .navbar-nav {
-  -ms-flex-negative: 0;
-      flex-shrink: 0; }
-  #navbarResponsive .navbar-nav .menu {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    text-align: center; }
-    #navbarResponsive .navbar-nav .menu .menu-item a {
-      padding: 1.1rem 0.8rem; }
-    @media (min-width: 992px) {
-      #navbarResponsive .navbar-nav .menu {
-        -webkit-box-orient: horizontal;
-        -webkit-box-direction: normal;
-            -ms-flex-direction: row;
-                flex-direction: row; } }
+#navbarResponsive {
+  position: relative;
+  overflow: hidden; }
+  #navbarResponsive .navbar-nav {
+    -ms-flex-negative: 0;
+        flex-shrink: 0; }
+    #navbarResponsive .navbar-nav .menu {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+          -ms-flex-direction: column;
+              flex-direction: column;
+      text-align: center; }
+      #navbarResponsive .navbar-nav .menu .menu-item a {
+        padding: 1.1rem 0.8rem; }
+      @media (min-width: 992px) {
+        #navbarResponsive .navbar-nav .menu {
+          -webkit-box-orient: horizontal;
+          -webkit-box-direction: normal;
+              -ms-flex-direction: row;
+                  flex-direction: row; } }
 
 #search {
   min-height: 52px;
   width: 100%; }
   #search input {
     padding: 5px 10px;
-    width: 100%;
+    width: calc( 100% - 60px );
     background-color: #e8e8e8;
     color: #58585a;
     border: none;
@@ -498,9 +503,18 @@ body {
     font-weight: 500; }
   #search .search_btn {
     width: 60px;
+    -ms-flex-negative: 0;
+        flex-shrink: 0;
     background-color: #e52b50;
     color: #fff;
     border: none; }
+  @media (min-width: 992px) {
+    #search input {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      height: 100%; } }
 
 @media (max-width: 1023px) {
   #polecane .items .single-item .card-body .hover-element-shop {
