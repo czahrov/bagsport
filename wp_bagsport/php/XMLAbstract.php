@@ -51,10 +51,7 @@ class XMLAbstract{
 	
 	// funkcja standaryzująca zapis nazw kategorii ( małe litery )
 	protected function _stdName( $name ){
-		$find = explode( "|", "Ą|Ę|Ż|Ź|Ó|Ł|Ć|Ń|Ś" );
-		$replace = explode( "|", "ą|ę|ż|ź|ó|ł|ć|ń|ś" );
-		
-		return str_replace( $find, $replace, strtolower( strip_tags( trim( (string)$name ) ) ) );
+		return addslashes( mb_strtolower( strip_tags( trim( (string)$name ) ) ) );
 		
 	}
 	
@@ -98,8 +95,10 @@ class XMLAbstract{
 		foreach( array( $this->_atts[ 'products' ], $this->_atts[ 'marking' ], $this->_atts[ 'stock' ] ) as $source ){
 			if( empty( $source ) ) continue;
 			$filepath = $this->_getURL( "DND/" . basename( $source ) );
+			
 			if( !file_exists( $filepath ) or time() - filemtime( $filepath ) >= $this->_atts[ 'lifetime' ] ){
 				// XML nie istnieje, albo jest przestarzały -  pobieranie
+				mkdir( dirname( $filepath ), 0755, true );
 				if( copy( $source, $filepath, stream_context_create( $this->_atts[ 'context' ] ) ) ){
 					$doImport = true;
 					

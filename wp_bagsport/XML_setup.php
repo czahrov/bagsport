@@ -2,11 +2,18 @@
 require_once __DIR__ . "/php/cfg.php";
 
 $SHOP  = array();
-$SHOP['axpol'] = new AXPOL( array(
+/* $SHOP['axpol'] = new AXPOL( array(
 	'shop' => 'AXPOL',
 	'products' => 'ftp://userPL099:QwqChVFh@ftp.axpol.com.pl/axpol_product_data_PL.xml',
 	'stock' => 'ftp://userPL099:QwqChVFh@ftp.axpol.com.pl/axpol_stocklist_pl.xml',
 	'marking' => 'ftp://userPL099:QwqChVFh@ftp.axpol.com.pl/axpol_print_data_PL.xml',
+	
+) ); */
+$SHOP['easygifts'] = new EASYGIFTS( array(
+	'shop' => 'EASYGIFTS',
+	'products' => 'http://www.easygifts.com.pl/data/webapi/pl/xml/offer.xml',
+	'stock' => 'http://www.easygifts.com.pl/data/webapi/pl/xml/stocks.xml',
+	'marking' => '',
 	
 ) );
 
