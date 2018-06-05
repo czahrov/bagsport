@@ -51,12 +51,12 @@ add_theme_support('post-thumbnails');
 
 /* CRON */
 // add_action( string $tag, callable $function_to_add, int $priority = 10, int $accepted_args = 1 )
-add_action( 'xml_update', function(){
+add_action( 'XMLupdate', function(){
 	require_once __DIR__ . "/php/update.php";
 	
 } );
 
-add_action( 'xml_rehash', function( $arg ){
+add_action( 'XMLhash', function( $arg ){
 	require_once __DIR__ . "/php/rehash.php";
 	
 } );
@@ -92,7 +92,7 @@ function printBreadcrumb(){
 			
 		}
 		elseif( strpos( $_SERVER['REQUEST_URI'], 'produkt' ) !== false ){
-			$id = $_GET['id'];
+			$id = isset( $_GET['id'] )?( (int)$_GET['id'] ):( null );
 			if( get_post( $id ) !== null ){
 				$produkt = getProductData( get_post( $id ) );
 				
@@ -261,7 +261,7 @@ function printPagin( $items, $arg = array() ){
 	$arg = array_merge(
 		array(
 			'per_page' => get_option('posts_per_page'),
-			'page' => max( 1, (int)$_GET['strona'] ),
+			'page' => isset( $_GET['strona'] )?( (int)$_GET['strona'] ):( 1 ),
 			
 		),
 		$arg
@@ -410,7 +410,7 @@ function OGTags( $obj ){
 <meta property="og:description" content="%s" />',
 	$data['nazwa'],
 	'product',
-	home_url( "produkt/?id={$post->ID}" ),
+	home_url( "produkt/?id={$data['ID']}" ),
 	get_bloginfo( 'name' ),
 	$data['galeria'][0],
 	implode( " ", array_slice( explode( " ", strip_tags( $data['opis'] ) ) , 0, 50 ) )
@@ -425,6 +425,7 @@ function getInfo( $name = null ){
 		facebook
 		kontakt_e-mail
 		infolinia
+		stacjonarny
 		adres_firmy
 		godziny_otwarcia
 	*/
@@ -442,10 +443,13 @@ function getInfo( $name = null ){
 /* funkcja wyszukująca galerię wordpressa w treści i zwracająca adresy url grafik w formie tablicy */
 function extractGallery( $content = "" ){
 	preg_match( "~ids=\"([^\"]+)\"~", $content, $match );
-	return array_map( function( $img ){
-		return wp_get_attachment_url( $img );
+	if( !empty( $match[1] ) ){
+		return array_map( function( $img ){
+			return wp_get_attachment_url( $img );
+			
+		}, explode( ",", $match[1] ) );
 		
-	}, explode( ",", $match[1] ) );
+	}
 	
 }
 

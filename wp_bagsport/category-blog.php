@@ -4,7 +4,7 @@
 <!-- Page Content -->
 <div id='blog' class="">
 	<div class='container hash fs-medium fc-rozowy'>
-		Blog #ciotkagadżet
+		Blog #BagSport
 	</div>
 	<?php
 		$posts = get_posts( array(
@@ -36,7 +36,7 @@
 								echo $post->post_excerpt;
 							}
 							else{
-								$parts = explode( " ", $post->post_content );
+								$parts = explode( " ", strip_tags( $post->post_content ) );
 								if( count( $parts ) > 50 ){
 									echo implode( " ", array_slice( $parts, 0, 50 ) ) . " (...)";
 									
@@ -48,9 +48,9 @@
 								
 							}
 						?>
-						<a class='more' href='<?php the_permalink( $post->ID ); ?>'>czytaj dalej</a>
 						
 					</div>
+					<a class='more' href='<?php the_permalink( $post->ID ); ?>'>czytaj dalej</a>
 					
 				</div>
 				

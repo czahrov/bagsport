@@ -297,6 +297,7 @@ h1.my-4{
 	
 	h1{
 		position: relative;
+		padding-right: 100px;
 		
 		.arrow-pagination{
 			position: absolute;
@@ -370,6 +371,24 @@ h1.my-4{
 	
 }
 
+.bg-video{
+	width: 100%;
+	
+	video{
+		height: initial;
+		
+	}
+	
+	.video-content{
+		
+		@media( max-width: 767px ){
+			position: static;
+			
+		}
+		
+	}
+	
+}
 
 form{
 	font-size: map-get( $font-size, small );
@@ -521,9 +540,10 @@ body{
 					
 				}
 				
-				.more{
-					
-				}
+			}
+			
+			.more{
+				text-align: right;
 				
 			}
 			
@@ -553,6 +573,54 @@ body{
 	
 	.content{
 		@include stdContent();
+		
+		img{
+			display: inline-block;
+			max-width: 100%;
+			height: auto;
+			
+			&.aligncenter{
+				display: block;
+				margin:{
+					left: auto;
+					right: auto;
+				};
+				
+			}
+			
+			&.alignleft{
+				display: block;
+				margin:{
+					right: auto;
+				};
+				
+			}
+			
+			&.alignright{
+				display: block;
+				margin:{
+					left: auto;
+				};
+				
+			}
+			
+		}
+		
+	}
+	
+	.next{
+			
+		a{
+			padding: 10px 20px;
+			text-align: right;
+			
+			&:hover{
+				color: map-get( $paleta, rozowy );
+				text-decoration: none;
+				
+			}
+			
+		}
 		
 	}
 	
@@ -778,19 +846,27 @@ body{
 {
 	order: 1;
 	
-	.list-group{
+	& > .menu{
 		
-		.list-group-item{
+		.list-group{
 			
-			&:hover,
-			&.active{
-				background-color: map-get( $paleta, rozowy );
-				color: #fff;
-				border-color: transparent;
+			.list-group-item{
+				
+				&:hover,
+				&.active{
+					background-color: map-get( $paleta, rozowy );
+					color: #fff;
+					border-color: transparent;
+					
+				}
 				
 			}
 			
 		}
+		
+	}
+	
+	& > .faq{
 		
 	}
 	
@@ -999,6 +1075,15 @@ body{
 			
 			&:nth-child(even){
 				background-color: map-get( $paleta, szary-jasny );
+				
+			}
+			
+		}
+		
+		.img{
+			
+			img{
+				max-width: 100%;
 				
 			}
 			

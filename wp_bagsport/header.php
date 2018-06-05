@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	if( $_SESSION['sprytne'] !== 'bardzo' and !isset( $_GET['sprytne'] ) and !isset( $_COOKIE['sprytne'] ) ){
+	if( ( !isset( $_SESSION['sprytne'] ) or $_SESSION['sprytne'] !== 'bardzo' ) and !isset( $_GET['sprytne'] ) and !isset( $_COOKIE['sprytne'] ) ){
 		include( 'wbudowie.php' );
 		exit;
 		
@@ -78,11 +78,16 @@
 					<i class="top-icons ion-ios-telephone-outline"></i>
 					<div class="d-flex flex-column">
 						<p>
-							<span>
+							<div>
 								<a title="Kliknij, aby zadzwonić." style="text-decoration: none;" href="tel:<?php echo str_replace( " ", "", getInfo( 'infolinia' ) ); ?>">
 									<?php printf( 'Infolinia: %s', getInfo( 'infolinia' ) ); ?>
 								</a>
-							</span>
+							</div>
+							<div>
+								<a title="Kliknij, aby zadzwonić." style="text-decoration: none;" href="tel:<?php echo str_replace( " ", "", getInfo( 'stacjonarny' ) ); ?>">
+									<?php printf( 'Stacjonarny: %s', getInfo( 'stacjonarny' ) ); ?>
+								</a>
+							</div>
 						</p>
 						<p class="font-grey">
 							<?php echo getInfo( 'godziny_otwarcia' ); ?>

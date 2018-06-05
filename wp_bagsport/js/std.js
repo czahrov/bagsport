@@ -89,4 +89,31 @@
 	$('#navbarResponsive #search button'),
 	$('#navbarResponsive #search input'),
 	$('#navbarResponsive .navbar-nav')
-)
+);
+
+/* zsuwanie i rozsuwanie segmentów a panelu bocznym na mobile */
+(function( polecane, menu, hot, faq ){
+	
+	polecane
+	.on({
+		show: function( e ){
+			
+		},
+		hide: function( e ){
+			console.log( [ this, $(this) ] );
+			
+		},
+		reset: function( e ){
+			
+		},
+		
+	});
+	
+})
+(
+	$('#polecane'),
+	$('#side > .menu'),
+	$('#side > .hot-products'),
+	$('#side > .faq')
+);
+
