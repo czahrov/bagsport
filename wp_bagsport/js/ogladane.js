@@ -8,7 +8,7 @@
 	var duration = 500;
 	var itrv;
 	
-	if( main.prop( 'scrollWidth' ) < main.width() ) return false;
+	if( view_w <= view.width() ) return false;
 	
 	main
 	.on({
