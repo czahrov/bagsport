@@ -2,20 +2,35 @@
 require_once __DIR__ . "/php/cfg.php";
 
 $SHOP  = array();
-/* $SHOP['axpol'] = new AXPOL( array(
-	'shop' => 'AXPOL',
+
+$SHOP['axpol'] = new AXPOL( array(
 	'products' => 'ftp://userPL099:QwqChVFh@ftp.axpol.com.pl/axpol_product_data_PL.xml',
 	'stock' => 'ftp://userPL099:QwqChVFh@ftp.axpol.com.pl/axpol_stocklist_pl.xml',
 	'marking' => 'ftp://userPL099:QwqChVFh@ftp.axpol.com.pl/axpol_print_data_PL.xml',
 	
-) ); */
-$SHOP['easygifts'] = new EASYGIFTS( array(
-	'shop' => 'EASYGIFTS',
-	'products' => 'http://www.easygifts.com.pl/data/webapi/pl/xml/offer.xml',
-	'stock' => 'http://www.easygifts.com.pl/data/webapi/pl/xml/stocks.xml',
-	'marking' => '',
+),
+array(
+	'shop' => 'AXPOL',
 	
 ) );
+/* $SHOP['easygifts'] = new EASYGIFTS( array(
+	'products' => 'http://www.easygifts.com.pl/data/webapi/pl/xml/offer.xml',
+	'stock' => 'http://www.easygifts.com.pl/data/webapi/pl/xml/stocks.xml',
+	
+),
+array(
+	'shop' => 'EASYGIFTS',
+) ); */
+/* $SHOP['macma'] = new MACMA( array(
+	'products' => 'http://www.macma.pl/data/webapi/pl/xml/offer.xml',
+	'stock' => 'http://www.macma.pl/data/webapi/pl/xml/stocks.xml',
+	'prices' => 'http://www.macma.pl/data/webapi/pl/xml/prices.xml',
+	
+),
+array(
+	'shop' => 'MACMA',
+	
+) ); */
 
 // $EASYGIFTS = new EASYGIFTS();
 // $MACMA = new MACMA();

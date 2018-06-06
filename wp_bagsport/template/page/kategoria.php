@@ -27,10 +27,13 @@
 					global $XM;
 					// var_dump( $XM );
 					
-					echo "<!--";
-					print_r( getCategory( $nazwa ) );
-					// print_r( $XM->getProducts( 'url', $nazwa ) );
-					echo "-->";
+					if( DMODE ){
+						echo "<div hidden><!--";
+						print_r( getCategory( $nazwa ) );
+						// print_r( $XM->getProducts( 'url', $nazwa ) );
+						echo "--></div>";
+						
+					}
 					
 					if( !empty( $nazwa ) ){
 						// $XM->getProducts( 'url', $nazwa );

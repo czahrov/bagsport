@@ -1,15 +1,18 @@
 <?php
 class XMLAbstract{
 	protected $_connect = null;
+	protected $_sources = array(
+		// ścieżka do XML z produktami
+		// 'products' => '',
+		// ścieżka do XML ze znakowaniem
+		// 'marking' => '',
+		// ścieżka do XML ze stanem magazynowym
+		// 'stock' => '',
+		
+	);
 	protected $_atts = array(
 		// nazwa sklepu
 		'shop' => '',
-		// ścieżka do XML z produktami
-		'products' => '',
-		// ścieżka do XML ze znakowaniem
-		'marking' => '',
-		// ścieżka do XML ze stanem magazynowym
-		'stock' => '',
 		// po jakim czasie pobrać XML ponownie ( domyślnie 24h )
 		'lifetime' => 86400,
 		// dodatkowe dane autoryzacyjne
@@ -20,7 +23,7 @@ class XMLAbstract{
 	protected $_log = array();
 	
 	// pobiera parametry sklepu, nawiązuje połączenie z bazą
-	public function __construct( $atts ){
+	public function __construct( $sources, $atts ){
 		// ustawia system kodowania na utf-8
 		mb_internal_encoding("UTF-8");
 		
@@ -30,6 +33,8 @@ class XMLAbstract{
 				$this->_atts,
 				$atts
 			);
+			
+			$this->_sources = $sources;
 			
 			/* // test aktualności danych XML
 			if( $this->_check() ){
@@ -92,7 +97,7 @@ class XMLAbstract{
 		$doImport = false;
 		
 		// sprawdzanie dostępności i aktualności plików XML
-		foreach( array( $this->_atts[ 'products' ], $this->_atts[ 'marking' ], $this->_atts[ 'stock' ] ) as $source ){
+		foreach( $this->_sources as $source ){
 			if( empty( $source ) ) continue;
 			$filepath = $this->_getURL( "DND/" . basename( $source ) );
 			
@@ -112,14 +117,14 @@ class XMLAbstract{
 		if( $doImport ) return true;
 		
 		// sprawdzanie czy liczba zaimportowanych produktów jest zgodna z ilością w pliku XML
-		$XML = simplexml_load_file( $this->_getURL( "DND/" . basename( $this->_atts[ 'products' ] ) ) );
+		/* $XML = simplexml_load_file( $this->_getURL( "DND/" . basename( $this->_atts[ 'products' ] ) ) );
 		$sql = "SELECT COUNT( * ) as 'count' from `XML_product` WHERE `shop` = '{$this->_atts[ 'shop' ]}'";
 		$query = mysqli_query( $this->_connect, $sql );
 		$fetch = mysqli_fetch_assoc( $query );
 		if( count( $XML->children() ) > $fetch[ 'count' ] ){
 			$doImport = true;
 		}
-		mysqli_free_result( $query );
+		mysqli_free_result( $query ); */
 		
 		return $doImport;
 	}
@@ -136,7 +141,7 @@ class XMLAbstract{
 	}
 	
 	// funkcja inicjująca parsowanie XML i zapis danych do bazy		[>>>]
-	protected function _import( $atts, $rehash ){
+	protected function _import( $rehash ){
 		
 	}
 	
@@ -310,13 +315,13 @@ LIMIT {$atts['num']}";
 	
 	// zewnętrzny uchwyt do importowania danych XML
 	public function renew(){
-		$this->_import( $this->_atts );
+		$this->_import();
 		
 	}
 	
 	// zewnętrzny uchwyt do aktualizowania kategorii
 	public function rehash(){
-		$this->_import( $this->_atts, true );
+		$this->_import( true );
 		
 	}
 	

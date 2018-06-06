@@ -62,9 +62,9 @@ class AXPOL extends XMLAbstract{
 	
 	// wczytywanie XML, parsowanie danych XML, zapis do bazy danych
 	// rehash - określa czy wykonać jedynie przypisanie kategorii dla produktów
-	protected function _import( $atts, $rehash = false ){
+	protected function _import( $rehash = false ){
 		// wczytywanie pliku XML z produktami
-		$XML = simplexml_load_file( __DIR__ . "/DND/" . basename( $this->_atts[ 'products' ] ) );
+		$XML = simplexml_load_file( __DIR__ . "/DND/" . basename( $this->_sources[ 'products' ] ) );
 		$dt = date( 'Y-m-d H:i:s' );
 		
 		if( $rehash === true ){
@@ -227,7 +227,7 @@ class AXPOL extends XMLAbstract{
 			}
 			
 			// wyciąganie stanu magazynowego z XML
-			$XML = simplexml_load_file( __DIR__ . "/DND/" . basename( $this->_atts[ 'stock' ] ) );
+			$XML = simplexml_load_file( __DIR__ . "/DND/" . basename( $this->_sources[ 'stock' ] ) );
 			foreach( $XML->items->children() as $item ){
 				$kod = $item->Kod;
 				$num = (int)$item->{'na_magazynie_dostepne_teraz'} + (int)$item->{'na_zamowienie_w_ciagu_7-10_dni'};
@@ -241,7 +241,8 @@ class AXPOL extends XMLAbstract{
 			}
 			
 			// wyciąganie znakowania z XML
-			$XML = simplexml_load_file( __DIR__ . "/DND/" . basename( $this->_atts[ 'marking' ] ) );
+			$XML = simplexml_load_file( __DIR__ . "/DND/" . basename( $this->_sources[ 'marking' ] ) );
+			
 			foreach( $XML->children() as $item ){
 				$kod = $item->CodeERP;
 				$marking_a = array();

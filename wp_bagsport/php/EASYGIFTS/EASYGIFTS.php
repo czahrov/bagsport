@@ -62,9 +62,9 @@ class EASYGIFTS extends XMLAbstract{
 	
 	// wczytywanie XML, parsowanie danych XML, zapis do bazy danych
 	// rehash - określa czy wykonać jedynie przypisanie kategorii dla produktów
-	protected function _import( $atts, $rehash = false ){
+	protected function _import( $rehash = false ){
 		// wczytywanie pliku XML z produktami
-		$XML = simplexml_load_file( __DIR__ . "/DND/" . basename( $this->_atts[ 'products' ] ) );
+		$XML = simplexml_load_file( __DIR__ . "/DND/" . basename( $this->_sources[ 'products' ] ) );
 		$dt = date( 'Y-m-d H:i:s' );
 		
 		if( $rehash === true ){
@@ -234,7 +234,7 @@ class EASYGIFTS extends XMLAbstract{
 			}
 			
 			// wyciąganie stanu magazynowego z XML
-			$XML = simplexml_load_file( __DIR__ . "/DND/" . basename( $this->_atts[ 'stock' ] ) );
+			$XML = simplexml_load_file( __DIR__ . "/DND/" . basename( $this->_sources[ 'stock' ] ) );
 			foreach( $XML->children() as $item ){
 				$kod = (string)$item->code_full;
 				$num = (int)$item->quantity_24h;
