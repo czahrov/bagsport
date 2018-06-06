@@ -5,6 +5,59 @@ class EASYGIFTS extends XMLAbstract{
 	protected function _categoryFilter( &$cat_name, &$subcat_name, $item ){
 		$subcat_name = "";
 		
+		if( in_array( $cat_name, array( 'biuro i akcesoria biurowe', 'etui', 'cerruti 1881', 'christian lacroix', 'cacharel', 'nina ricci', 'ungaro', 'victorinox lifestyle - akcesoria podróżne' ) ) ){
+			$cat_name = 'Biuro i biznes';
+			
+		}
+		elseif( in_array( $cat_name, array( 'icewatch', 'smartwatche' ) ) ){
+			$cat_name = 'Czas i pogoda';
+			
+		}
+		elseif( in_array( $cat_name, array( 'aladdin & stanley' ) ) ){
+			$cat_name = 'Do picia';
+			
+		}
+		elseif( in_array( $cat_name, array( 'dom' ) ) ){
+			$cat_name = 'Dom i ogród';
+			
+		}
+		/* elseif( in_array( $cat_name, array( '' ) ) ){
+			$cat_name = 'Dzieci i zabawa';
+			
+		} */
+		elseif( in_array( $cat_name, array( 'czas i elektronika', 'dyski', 'elektronika markowa', 'pendrive\'y', 'power banki', 'mobile', 'selfie sticki', 'silicon power' ) ) ){
+			$cat_name = 'Elektronika';
+			
+		}
+		elseif( in_array( $cat_name, array( 'materiały piśmiennicze', 'długopisy z grawerem za 10 groszy!', 'infinitebook & smart cube' ) ) ){
+			$cat_name = 'Materiały piśmiennicze';
+			
+		}
+		elseif( in_array( $cat_name, array( 'breloki akrylowe', 'narzędzia', 'pinsy', 'victorinox delemont collection' ) ) ){
+			$cat_name = 'Narzędzia, latarki i breloki';
+			
+		}
+		/* elseif( in_array( $cat_name, array( '' ) ) ){
+			$cat_name = 'Parasole i peleryny';
+			
+		} */
+		elseif( in_array( $cat_name, array( 'torby', 'torby by jassz', 'tucano', 'victorinox altmont - plecaki i torby', 'wenger - bagaże biznesowe i akcesoria podróżne' ) ) ){
+			$cat_name = 'Torby i plecaki';
+			
+		}
+		elseif( in_array( $cat_name, array( 'odpoczynek', 'czapki cofee', 'easy siesta', 'gadżety piłkarskie' ) ) ){
+			$cat_name = 'Wakacje, sport i rekreacja';
+			
+		}
+		elseif( in_array( $cat_name, array( 'uroda' ) ) ){
+			$cat_name = 'Zdrowie i uroda';
+			
+		}
+		elseif( in_array( $cat_name, array( 'katalog świąteczny', 'katalog świąteczny 2015' ) ) ){
+			$cat_name = 'Świąteczne';
+			
+		}
+		
 	}
 	
 	// wczytywanie XML, parsowanie danych XML, zapis do bazy danych
@@ -17,9 +70,9 @@ class EASYGIFTS extends XMLAbstract{
 		if( $rehash === true ){
 			// parsowanie danych z XML
 			foreach( $XML->children() as $item ){
-				$code = (string)$item->CodeERP;
-				$category = $this->_stdName( (string)$item->MainCategoryPL );
-				$subcategory = $this->_stdName( (string)$item->SubCategoryPL );
+				$code = (string)$item->baseinfo->code_full;
+				$category = $this->_stdName( (string)$item->categories->category[0]->name );
+				$subcategory = '';
 				
 				$this->_categoryFilter( $category, $subcategory, $item );
 				$this->_addCategory( $category, $subcategory );
