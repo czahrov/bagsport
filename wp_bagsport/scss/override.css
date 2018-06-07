@@ -280,6 +280,12 @@ body {
   body * {
     line-height: inherit; }
 
+.fast-contact-bar .social-ico a:hover {
+  text-decoration: none; }
+
+.filtr .text {
+  display: inline-block; }
+
 #banner {
   width: 100%;
   height: 300px;

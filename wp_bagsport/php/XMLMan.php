@@ -36,7 +36,7 @@ class XMLMan{
 	}
 	
 	// funkcja pobierająca produkty z bazy
-	public function getProducts( $mode, $atts = null ){
+	public function getProducts( $mode, $atts = null, $args =  array() ){
 		$ret = array();
 		if( !empty( $this->_proxy ) ){
 			$handle = $this->_proxy[0];
@@ -46,7 +46,7 @@ class XMLMan{
 					$cat_id = $handle->getCategory( 'name', $atts, 'ID' );
 					
 					if( is_numeric( $cat_id ) ){
-						$ret = $handle->getCategoryProducts( $cat_id );
+						$ret = $handle->getCategoryProducts( $cat_id, null, $args );
 						
 					}
 					

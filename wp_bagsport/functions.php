@@ -197,7 +197,6 @@ function getMailer(){
 	return $ret;
 }
 
-
 /* Funkcja generująca widok produktów */
 function printProducts( $categoryName = "Produkcja własna", $arg = array(), $input = null ){
 	$strona = isset( $_GET['strona'] )?( (int)$_GET['strona'] ):( 1 );
@@ -342,10 +341,11 @@ function getCategory( $name = null, $arg = array() ){
 	/* pobieranie produktów z bazy danych */
 	else{
 		global $XM;
+		if( $arg['orderby'] === 'date' ) $arg['orderby'] = 'data';
 		$ret = array_map( function( $item ){
 			return getProductData( $item );
 			
-		}, $XM->getProducts( 'url', $name ) );
+		}, $XM->getProducts( 'url', $name, $arg ) );
 		
 	}
 	

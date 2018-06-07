@@ -232,22 +232,8 @@ class XMLAbstract{
 	}
 	
 	// pobiera produkty z kategorii o danym ID
-	public function getCategoryProducts( $catID = null, $parentID = null ){
+	public function getCategoryProducts( $catID = null, $parentID = null, $atts = array() ){
 		if( $catID === null ) return false;
-		
-		/* $sql = "SELECT product.* FROM `XML_product` AS product 
-		LEFT JOIN `XML_category_hash` AS hash ON product.code = hash.PID 
-		LEFT JOIN `XML_category` AS category ON hash.CID = category.ID 
-		WHERE category.ID = '{$catID}'"; */
-		
-		/* $sql = "SELECT * FROM `products_view`
-		WHERE cat_ID = {$catID}";
-		if( is_numeric( $parentID ) ) $sql .= " AND cat_parent = {$parentID}";
-		$query = mysqli_query( $this->_connect, $sql );
-		$fetch = mysqli_fetch_all( $query, MYSQLI_ASSOC );
-		mysqli_free_result( $query );
-		return $fetch;
-		*/
 		
 		$sql = "SELECT XML_category.name as 'cat_name',
 			XML_category.slug as 'cat_slug',
@@ -257,6 +243,12 @@ class XMLAbstract{
 			JOIN XML_product ON XML_product.cat_id = XML_category.ID
 			WHERE XML_category.ID = '{$catID}'";
 		if( $parentID !== null  ) $sql .= " AND XML_category.parent = '{$parentID}'";
+		if( !empty( $atts['order'] ) and !empty( $atts['orderby'] ) ){
+			$sql .= " ORDER BY {$atts['orderby']} {$atts['order']}";
+		}
+		
+		// echo $sql;
+		
 		$query = mysqli_query( $this->_connect, $sql );
 		$fetch = mysqli_fetch_all( $query, MYSQLI_ASSOC );
 		mysqli_free_result( $query );
