@@ -117,3 +117,41 @@
 	$('#side > .faq')
 );
 
+/* funkcja modyfikująca zapytanie URL */
+function queryMod( args ){
+	var query = window.location.search;
+	if( typeof args === 'undefined' ) return query;
+	
+	$.each( args, function( name, value ){
+		/* zmienna już istnieje */
+		if( new RegExp( name + "=" ).test( query ) ){
+			var search = new RegExp( name + "=[^&]+" );
+			var replace = name + "=" + value;
+			query = query.replace( search, replace );
+			
+		}
+		/* dodawanie zmiennej */
+		else{
+			query += "&" + name;
+			
+			if( typeof value !== 'undefined' ) query += "=" + value;
+		}
+		
+	} );
+	
+	return query;
+}
+
+/* sortowanie produktów */
+(function( cena ){
+	cena.change( function( e ){
+		if( $(this).val() !== '' ){
+			window.location.href = window.location.protocol + "//" + window.location.host + window.location.pathname + queryMod( {by:'cena', order:$(this).val().toLowerCase()} );
+		}
+		
+	} );
+	
+})
+(
+	$( '#price' )
+)

@@ -75,7 +75,7 @@
 					}, $found );
 					
 					echo "<!--";
-					echo PHP_EOL . $sql . PHP_EOL;
+					// echo PHP_EOL . $sql . PHP_EOL;
 					print_r( array_slice( $found, 0, 3 ) );
 					echo "-->";
 					

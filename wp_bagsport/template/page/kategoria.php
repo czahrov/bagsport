@@ -23,25 +23,7 @@
 						);
 					?>
 				</div>
-				<div class='filtr col-12'>
-					<div class='text'>
-						Sortuj według
-					</div>
-					<select id='price'>
-						<option value='' selected>Sortuj cenę</option>
-						<option value='ASC'>Rosnąco</option>
-						<option value='DESC'>Malejąco</option>
-						
-					</select>
-					<select id='subcategory'>
-						<option value='' selected>Dostępne kategorie</option>
-						<option>Kategoria1</option>
-						<option>Kategoria2</option>
-						<option>Kategoria3</option>
-						
-					</select>
-					
-				</div>
+				<?php get_template_part( 'template/segment/filtr' );?>
 				<?php
 					global $XM;
 					// var_dump( $XM );
