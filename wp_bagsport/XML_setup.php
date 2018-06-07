@@ -31,6 +31,14 @@ array(
 	'shop' => 'MACMA',
 	
 ) ); */
+/* $SHOP['inspirion'] = new INSPIRION( array(
+	'products' => 'https://inspirion.pl/sites/default/files/exports/products.xml',
+	
+),
+array(
+	'shop' => 'INSPIRION',
+	
+) ); */
 
 // $EASYGIFTS = new EASYGIFTS();
 // $MACMA = new MACMA();
