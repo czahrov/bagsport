@@ -3,7 +3,42 @@ class INSPIRION extends XMLAbstract{
 	
 	// filtrowanie kategorii
 	protected function _categoryFilter( &$cat_name, &$subcat_name, $item ){
-		$subcat_name = "";
+		if( in_array( $cat_name, array( 'breloki', 'narzędzia i hobby' ) ) ){
+			$cat_name = 'Narzędzia, latarki i breloki';
+		}
+		elseif( in_array( $cat_name, array( 'czapki', 'picolux', 'picotravel', 'rekreacja i piknik', 'ubrania' ) ) ){
+			$cat_name = 'Wakacje, sport i rekreacja';
+		}
+		elseif( in_array( $cat_name, array( 'dla dzieci', 'gry', 'picogame' ) ) ){
+			$cat_name = 'Dzieci i zabawa';
+		}
+		elseif( in_array( $cat_name, array( 'czas i pogoda', 'picotime' ) ) ){
+			$cat_name = 'Czas i pogoda';
+		}
+		elseif( in_array( $cat_name, array( 'do domu i kuchni', 'picohome' ) ) ){
+			$cat_name = 'Dom i ogród';
+		}
+		elseif( in_array( $cat_name, array( 'elektronika', 'picosound' ) ) ){
+			$cat_name = 'Elektronika';
+		}
+		elseif( in_array( $cat_name, array( 'kosmetyka' ) ) ){
+			$cat_name = 'Zdrowie i uroda';
+		}
+		elseif( in_array( $cat_name, array( 'parasole' ) ) ){
+			$cat_name = 'Parasole i peleryny';
+		}
+		elseif( in_array( $cat_name, array( 'picoactive' ) ) ){
+			$cat_name = 'Do picia';
+		}
+		elseif( in_array( $cat_name, array( 'picooffice', 'wszystko do biura' ) ) ){
+			$cat_name = 'Biuro i biznes';
+		}
+		elseif( in_array( $cat_name, array( 'picopen' ) ) ){
+			$cat_name = 'Materiały piśmiennicze';
+		}
+		elseif( in_array( $cat_name, array( 'torby i plecaki' ) ) ){
+			$cat_name = 'Torby i plecaki';
+		}
 		
 	}
 	
@@ -19,7 +54,7 @@ class INSPIRION extends XMLAbstract{
 			foreach( $XML->children() as $item ){
 				$code = (string)$item->sku;
 				$category = $this->_stdName( (string)$item->catalog );
-				$subcategory = '';
+				$subcategory = $this->_stdName( (string)$item->catalog_special );
 				
 				$this->_categoryFilter( $category, $subcategory, $item );
 				$this->_addCategory( $category, $subcategory );
@@ -56,7 +91,7 @@ class INSPIRION extends XMLAbstract{
 				$netto = $brutto / ( 1 + $this->_vat );
 				// $catalog = addslashes( (string)$item-> );
 				$cat = addslashes( (string)$item->catalog );
-				// $subcat = addslashes( (string)$item-> );
+				$subcat = addslashes( (string)$item->catalog_special );
 				$name = addslashes( (string)$item->product_name );
 				$dscr = addslashes( (string)$item->body );
 				$material = addslashes( (string)$item->material );
@@ -65,13 +100,12 @@ class INSPIRION extends XMLAbstract{
 				$weight = (float)$item->weight_gross;
 				$color = addslashes( (string)$item->kolor );
 				/* https://inspirion.pl/sites/default/files/imagecache/product_full/56-1103282.jpg */
-				$photo_base = "https://inspirion.pl/sites/default/files/imagecache/product_full/";
 				$photo = json_encode( array_map( function( $arg ){
-					return $photo_base . basename( $arg );
+					return "https://inspirion.pl/sites/default/files/imagecache/product_full/" . basename( $arg );
 					
 				}, explode( ", ", (string)$item->product_images ) ) );
 				$category = $this->_stdName( $cat );
-				// $subcategory = $this->_stdName( $subcat );
+				$subcategory = $this->_stdName( $subcat );
 				$new = 0;
 				$promotion = 0;
 				$sale = 0;
