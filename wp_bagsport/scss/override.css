@@ -208,6 +208,8 @@ h1.my-4 {
         flex-shrink: 0;
     -ms-flex-preferred-size: 150px;
         flex-basis: 150px; }
+    .hot-products .view .hot-products-content .hot-content {
+      line-height: 20px; }
 
 .most-popular h1 {
   position: relative;
