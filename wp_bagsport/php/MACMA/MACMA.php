@@ -176,7 +176,7 @@ class MACMA extends XMLAbstract{
 					'colors' => $color,
 					'photos' => $photo,
 					'new' => $new,
-					'promotion' => $promotions,
+					'promotion' => $promotion,
 					'sale' => $sale,
 					'data' => $dt,
 					'marking' => $marking,
@@ -249,7 +249,7 @@ class MACMA extends XMLAbstract{
 		}
 		
 		if( !empty( $this->_log ) ){
-			echo "<!--AXPOL ERROR:" . PHP_EOL;
+			echo "<!--MACMA ERROR:" . PHP_EOL;
 			print_r( $this->_log ) . PHP_EOL;
 			echo "-->";
 			

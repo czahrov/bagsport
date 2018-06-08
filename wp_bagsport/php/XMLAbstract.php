@@ -16,7 +16,13 @@ class XMLAbstract{
 		// po jakim czasie pobrać XML ponownie ( domyślnie 24h )
 		'lifetime' => 86400,
 		// dodatkowe dane autoryzacyjne
-		'context' => array(),
+		'context' => array(
+			'http' => array(
+				'timeout' => 60 * 10,
+				
+			),
+			
+		),
 		
 	);
 	protected $_vat = 0.23;
@@ -45,7 +51,6 @@ class XMLAbstract{
 			
 		}
 		
-		
 	}
 	
 	// kończy połączenie z bazą
@@ -56,7 +61,7 @@ class XMLAbstract{
 	
 	// funkcja standaryzująca zapis nazw kategorii ( małe litery )
 	protected function _stdName( $name ){
-		return addslashes( mb_strtolower( strip_tags( trim( (string)$name ) ) ) );
+		return addslashes( mb_strtolower( strip_tags( trim( str_replace( array( '&', '?' ), '', (string)$name ) ) ) ) );
 		
 	}
 	

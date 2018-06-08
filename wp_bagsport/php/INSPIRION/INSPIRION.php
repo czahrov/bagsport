@@ -146,7 +146,7 @@ class INSPIRION extends XMLAbstract{
 					'colors' => $color,
 					'photos' => $photo,
 					'new' => $new,
-					'promotion' => $promotions,
+					'promotion' => $promotion,
 					'sale' => $sale,
 					'data' => $dt,
 					'marking' => $marking,
@@ -208,7 +208,7 @@ class INSPIRION extends XMLAbstract{
 		}
 		
 		if( !empty( $this->_log ) ){
-			echo "<!--EASYGIFTS ERROR:" . PHP_EOL;
+			echo "<!--INSPIRION ERROR:" . PHP_EOL;
 			print_r( $this->_log ) . PHP_EOL;
 			echo "-->";
 			

@@ -13,15 +13,15 @@ array(
 	'shop' => 'AXPOL',
 	
 ) );
-/* $SHOP['easygifts'] = new EASYGIFTS( array(
+$SHOP['easygifts'] = new EASYGIFTS( array(
 	'products' => 'http://www.easygifts.com.pl/data/webapi/pl/xml/offer.xml',
 	'stock' => 'http://www.easygifts.com.pl/data/webapi/pl/xml/stocks.xml',
 	
 ),
 array(
 	'shop' => 'EASYGIFTS',
-) ); */
-/* $SHOP['macma'] = new MACMA( array(
+) );
+$SHOP['macma'] = new MACMA( array(
 	'products' => 'http://www.macma.pl/data/webapi/pl/xml/offer.xml',
 	'stock' => 'http://www.macma.pl/data/webapi/pl/xml/stocks.xml',
 	'prices' => 'http://www.macma.pl/data/webapi/pl/xml/prices.xml',
@@ -30,33 +30,30 @@ array(
 array(
 	'shop' => 'MACMA',
 	
-) ); */
-/* $SHOP['inspirion'] = new INSPIRION( array(
+) );
+$SHOP['inspirion'] = new INSPIRION( array(
 	'products' => 'https://inspirion.pl/sites/default/files/exports/products.xml',
 	
 ),
 array(
 	'shop' => 'INSPIRION',
 	
-) ); */
-
-// $EASYGIFTS = new EASYGIFTS();
-// $MACMA = new MACMA();
-// $ANDA = new ANDA();
-// $FALKROSS = new FALKROSS();
-/* $jaguar_auth = array(
-	'http' => array(
-		'method' => "GET",
-		'header' => implode( "\r\n", array(
-			'Accept-language: pl',
-			'Authorization: Token b877f60a12c850f74a169fa036265f852b38be79'
-		) ),
-	)
-); */
-// $JAGUARGIFT = new JAGUARGIFT( $jaguar_auth );
-// $ASGARD = new ASGARD();
-// $INSPIRION = new INSPIRION();
-// $PAR = new PAR();
+) );
+$SHOP['par'] = new PAR( array(
+	'products' => 'http://biuro@merkuriusz.pl:merkuriusz345@www.par.com.pl/api/products',
+	'stock' => 'http://biuro@merkuriusz.pl:merkuriusz345@www.par.com.pl/api/stocks',
+),
+array(
+	'shop' => 'PAR',
+	
+) );
+$SHOP['anda'] = new ANDA( array(
+	'products' => 'http://andapresent.hu/admin/system/anda_xml_export2.php?&orszag_id=6&nyelv_id=7&password=92ba3632c8c22ebd65fbce872b317875',
+),
+array(
+	'shop' => 'ANDA',
+	
+) );
 
 $XM = new XMLMan();
 foreach( $SHOP as $item ){

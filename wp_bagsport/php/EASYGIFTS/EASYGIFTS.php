@@ -174,7 +174,7 @@ class EASYGIFTS extends XMLAbstract{
 					'colors' => $color,
 					'photos' => $photo,
 					'new' => $new,
-					'promotion' => $promotions,
+					'promotion' => $promotion,
 					'sale' => $sale,
 					'data' => $dt,
 					'marking' => $marking,
