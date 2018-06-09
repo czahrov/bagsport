@@ -46,12 +46,15 @@
 							$parts = explode( " ", strip_tags( $item['kategoria'] ) );
 							printf(
 								'<h1 class="my-4">
-									<span>
+									<a href="%s">
+										<span>
+											%s
+											<div class="h1-line"></div>
+										</span>
 										%s
-										<div class="h1-line"></div>
-									</span>
-									%s
+									</a>
 								</h1>',
+								home_url( "kategoria/?nazwa={$item['kategoria']}" ),
 								array_shift( $parts ),
 								implode( " ", $parts )
 							);

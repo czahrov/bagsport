@@ -213,11 +213,17 @@ function printProducts( $categoryName = "Produkcja własna", $arg = array(), $in
 	
 	if( count( $produkty) > 0 ){
 		foreach( array_slice( $produkty, ($arg['page'] - 1) * $arg['per_page'], $arg['per_page'] ) as $item ){
+			if( DMODE ){
+				echo "<!--";
+				print_r( $item );
+				echo "-->";
+			}
 			printf(
-				'<div class="col-12 col-md-6 col-lg-4 mb-4 single-item">
+				'<div class="col-12 col-md-6 col-lg-4 mb-4 single-item %s">
 				   <div class="card h-100 d-flex">
 						  <a href="%s">
 								 <div class="card-img" style="background-image: url(%s);"></div>
+								 <div class="badge %s"></div>
 						  </a>
 						  <div class="card-body d-flex flex-column">
 								 <a href="%1$s"></a>
@@ -235,8 +241,10 @@ function printProducts( $categoryName = "Produkcja własna", $arg = array(), $in
 						  </div>
 				   </div>
 				</div>',
+				$item['new'] == 1?( "new" ):( $item['promotion'] == 1?( "promotion" ):( $item['sale'] == 1?( "sale" ):( "" ) ) ),
 				home_url( "produkt?id={$item['ID']}" ),
 				$item['galeria'][0],                // adres obrazka produktu
+				$item['new'] == 1?( "new" ):( $item['promotion'] == 1?( "promotion" ):( $item['sale'] == 1?( "sale" ):( "" ) ) ),
 				home_url( "zapytaj/?id={$item['ID']}" ),             // link do "wyślij zapytanie"
 				$item['nazwa'],              // nazwa produktu
 				(float)$item['brutto']              // cena produktu
@@ -365,6 +373,9 @@ function getProductData( $obj = null ){
 		'dostępność' => 'brak danych',
 		'kolor' => 'brak danych',
 		'wymiary' => 'brak danych',
+		'nowość' => 'brak danych',
+		'promocja' => 'brak danych',
+		'wyprzedaż' => 'brak danych',
 		
 	);
 	
@@ -380,6 +391,9 @@ function getProductData( $obj = null ){
 		$data['kolor'] = get_post_meta( $obj->ID, 'kolor', true );
 		$data['wymiary'] = get_post_meta( $obj->ID, 'rozmiar', true );
 		$data['galeria'] = extractGallery( get_post_meta( $obj->ID, 'galeria', true ) );
+		$data['nowość'] = get_post_meta( $obj->ID, 'nowość', true );
+		$data['promocja'] = get_post_meta( $obj->ID, 'promocja', true );
+		$data['wyprzedaż'] = get_post_meta( $obj->ID, 'wyprzedaż', true );
 		
 	}
 	/* obiekt pochodzi z bazy danych XML */
@@ -394,6 +408,9 @@ function getProductData( $obj = null ){
 		$data['kolor'] = $obj['colors'];
 		$data['wymiary'] = $obj['dimension'];
 		$data['galeria'] = explode( ",", preg_replace( "~(\[|\]|\")~", "", $obj['photos'] ) );
+		$data['nowość'] = $obj['new'];
+		$data['promocja'] = $obj['promotion'];
+		$data['wyprzedaż'] = $obj['sale'];
 		
 	}
 	

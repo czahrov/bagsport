@@ -461,6 +461,23 @@ body{
 	
 }
 
+.single-item{
+	
+	&.sale{
+		
+		.card-title{
+			
+			a{
+				@include fontKolor( rozowy );
+				
+			}
+			
+		}
+		
+	}
+	
+}
+
 
 #banner
 {
@@ -814,6 +831,16 @@ body{
 {
 	
 	.present{
+		
+		a{
+			
+			&:hover{
+				text-decoration: none;
+				@include fontKolor( rozowy );
+				
+			}
+			
+		}
 		
 		.arrow-pagination{
 			display: none;

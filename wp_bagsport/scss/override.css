@@ -295,6 +295,9 @@ body {
   background-origin: padding-box;
   background-clip: padding-box; }
 
+.single-item.sale .card-title a {
+  color: #e52b50; }
+
 #banner {
   width: 100%;
   height: 300px;
@@ -471,6 +474,9 @@ body {
   #wlasna .basic-content * {
     line-height: inherit; }
 
+#produkt .present a:hover {
+  text-decoration: none;
+  color: #e52b50; }
 #produkt .present .arrow-pagination {
   display: none; }
   #produkt .present .arrow-pagination > * {

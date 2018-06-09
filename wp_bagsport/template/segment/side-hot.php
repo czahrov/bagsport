@@ -9,7 +9,7 @@
 	<?php 
 		if( DMODE ){
 			echo "<!--";
-			// print_r( $items );
+			print_r( array_slice( $items, 0, 1 ) );
 			echo "-->";
 		}
 		
