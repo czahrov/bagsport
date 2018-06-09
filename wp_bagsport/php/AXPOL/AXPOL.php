@@ -74,7 +74,7 @@ class AXPOL extends XMLAbstract{
 				$category = $this->_stdName( (string)$item->MainCategoryPL );
 				$subcategory = $this->_stdName( (string)$item->SubCategoryPL );
 				
-				$this->_categoryFilter( $category, $subcategory, $item );
+				if( $this->_categoryFilter( $category, $subcategory, $item ) === false ) continue;
 				$this->_addCategory( $category, $subcategory );
 				
 				if( empty( $subcategory ) ){
@@ -136,6 +136,8 @@ class AXPOL extends XMLAbstract{
 				$new = (int)$item->New;
 				$promotion = (int)$item->Promotion;
 				$sale = (int)$item->Sale;
+				
+				if( in_array( $category, array( 'voyager wine club', 'wyprzedaż voyager wine club' ) ) or stripos( $dscr, 'wytrawne' ) !== false ) continue;
 				
 				$this->_categoryFilter( $category, $subcategory, $item );
 				$this->_addCategory( $category, $subcategory );
@@ -216,9 +218,6 @@ class AXPOL extends XMLAbstract{
 				}
 				
 				// echo "\r\n $sql \r\n";
-				
-				// $sql = "INSERT INTO `XML_product` ( `shop`, `code`, `short`, `cat_id`, `brutto`, `netto`, `catalog`, `title`, `description`, `materials`, `dimension`, `country`, `weight`, `colors`, `photos`, `new`, `promotion`, `sale`, `data` )
-				// VALUES ( '{$this->_atts[ 'shop' ]}', '{$code}', '{$short}', '{$cat_id}', '{$brutto}', '{$netto}', '{$catalog}', '{$name}', '{$dscr}', '{$material}', '{$dims}', '{$country}', '{$weight}', '{$color}', '{$photo}', '{$new}', '{$promotions}', '{$sale}', '{$dt}' )";
 				
 				if( mysqli_query( $this->_connect, $sql ) === false ) $this->_log[] = mysqli_error( $this->_connect );
 				
