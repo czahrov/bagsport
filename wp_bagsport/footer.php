@@ -46,6 +46,12 @@
 								<div class="h1-line red"></div>
 							</h1>
 							<?wp_nav_menu( array( 'theme_location' => 'informacje-menu', 'container_class' => 'menu-foot' ) ); ?>
+							<?php
+								$stacjonarny = getInfo('stacjonarny');
+							?>
+							<a class='' href='<?php echo str_replace( array( ' ', '-' ), '', $stacjonarny ) ?>'>
+								<?php echo $stacjonarny; ?>
+							</a>
 						</ul>
 					</div>
 				</div>
