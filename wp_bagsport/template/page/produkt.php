@@ -20,6 +20,7 @@
 		print_r( $item );
 		echo "-->";
 	?>
+	
 	<div class='container'>
 		<div class='row'>
 			<div id='side' class='col-lg-3'>
@@ -59,6 +60,9 @@
 								implode( " ", $parts )
 							);
 						?>
+						<?php if( empty( $item['ID'] ) ): ?>
+						Brak produktu
+						<?php else: ?>
 						<div class="single-product">
 							<div class="arrow-pagination">
 								<i class="arrow ion-ios-arrow-back"></i>
@@ -81,12 +85,13 @@
 							<!-- /.single-product-gallery -->
 							
 						</div>
-						
+						<?php endif; ?>
 					</div>
 					<?php get_template_part('template/segment/produkt-szybki'); ?>
 					<!-- /. -->
 				</div>
 				<!-- /.row -->
+				<?php if( !empty( $item['ID'] ) ): ?>
 				<div class="row">
 					<div class="col-lg-7 col-md-6 mb-4">
 						<h3 class="product-title">
@@ -146,6 +151,7 @@
 					</div>
 					
 				</div>
+				<?php endif; ?>
 				
 			</div>
 			
