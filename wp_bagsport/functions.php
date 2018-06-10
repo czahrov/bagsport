@@ -235,7 +235,7 @@ function printProducts( $categoryName = "Produkcja własna", $arg = array(), $in
 										<a href="%1$s">%s</a>
 								 </h4>
 								 <div class="price">
-										<h5>%.2f zł</h5>
+										<h5>%s</h5>
 								 </div>
 								 <a href="%1$s" class="button-show-item">Zobacz</a>
 						  </div>
@@ -247,7 +247,7 @@ function printProducts( $categoryName = "Produkcja własna", $arg = array(), $in
 				$item['new'] == 1?( "new" ):( $item['promotion'] == 1?( "promotion" ):( $item['sale'] == 1?( "sale" ):( "" ) ) ),
 				home_url( "zapytaj/?id={$item['ID']}" ),             // link do "wyślij zapytanie"
 				$item['nazwa'],              // nazwa produktu
-				(float)$item['brutto']              // cena produktu
+				(float)$item['brutto'] == 0?( "Wycena indywidualna" ):( (float)$item['brutto'] )
 				
 			);
 			

@@ -106,6 +106,7 @@
 						</h3>
 					</div>
 					<div class="col-lg-4 col-md-6 mb-4 product-price">
+						<?php if( $item['brutto'] > 0 ): ?>
 						<h1>
 							Cena brutto:
 							<span>
@@ -118,6 +119,14 @@
 								<?php echo $item['netto']; ?> zł
 							</span>
 						</h1>
+						<?php else: ?>
+						<h1>
+							Wycena indywidualna.<br>
+							<a href="<?php echo home_url( "zapytaj/id={$_GET['id']}" ); ?>">
+								Wyślij zapytanie aby dowiedzieć się więcej.
+							</a>
+						</h1>
+						<?php endif; ?>
 					</div>
 				</div>
 				<div class="col-lg-9 col-md-6 mb-4 product-content">
