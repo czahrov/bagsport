@@ -122,7 +122,7 @@
 						<?php else: ?>
 						<h1>
 							Wycena indywidualna.<br>
-							<a href="<?php echo home_url( "zapytaj/id={$_GET['id']}" ); ?>">
+							<a href="<?php echo home_url( "zapytaj/?id={$_GET['id']}" ); ?>">
 								Wyślij zapytanie aby dowiedzieć się więcej.
 							</a>
 						</h1>
