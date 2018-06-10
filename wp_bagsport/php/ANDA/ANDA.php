@@ -126,7 +126,7 @@ class ANDA extends XMLAbstract{
 				$material = "";
 				$dims = addslashes( $properties['ROZMIAR PRODUKTU'] );
 				// $country = addslashes( (string)$item-> );
-				$weight = sprintf( '%.3f lg', $properties['WAGA NETTO/KARTON'] / $properties['SZTUK/KARTON'] );
+				$weight = sprintf( '%.3f kg', $properties['WAGA NETTO/KARTON'] / $properties['SZTUK/KARTON'] );
 				$color = null;
 				$photo_a = array();
 				foreach( $item->images->image as $img ){
