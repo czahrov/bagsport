@@ -3,6 +3,7 @@ class ANDA extends XMLAbstract{
 	
 	// filtrowanie kategorii
 	protected function _categoryFilter( &$cat_name, &$subcat_name, $item ){
+		$subcat_name = $cat_name;
 		
 		if( in_array( $cat_name, array( 'akcesoria antystresowe', 'be creative print', 'krawaty i apaszki', 'linijki i zakładki', 'materiały biurowe', 'notatniki i spinacze', 'office  business', 'produkty szklane pod 3d', 'teczki i podkładki', 'uchwyty na długopisy', 'wizytowniki', 'zakreślacze' ) ) ){
 			$cat_name = 'Biuro i biznes';

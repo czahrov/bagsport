@@ -3,6 +3,8 @@ class INSPIRION extends XMLAbstract{
 	
 	// filtrowanie kategorii
 	protected function _categoryFilter( &$cat_name, &$subcat_name, $item ){
+		$subcat_name = $cat_name;
+		
 		if( in_array( $cat_name, array( 'breloki', 'narzędzia i hobby' ) ) ){
 			$cat_name = 'Narzędzia, latarki i breloki';
 		}

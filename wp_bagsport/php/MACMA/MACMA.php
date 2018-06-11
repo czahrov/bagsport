@@ -3,7 +3,7 @@ class MACMA extends XMLAbstract{
 	
 	// filtrowanie kategorii
 	protected function _categoryFilter( &$cat_name, &$subcat_name, $item ){
-		$subcat_name = "";
+		$subcat_name = $cat_name;
 		
 		if( in_array( $cat_name, array( 'artykuły biurowe', 'crisma', 'smile hand' ) ) ){
 			$cat_name = 'Biuro i biznes';
@@ -146,11 +146,9 @@ class MACMA extends XMLAbstract{
 				
 				if( empty( $subcategory ) ){
 					$cat_id = $this->getCategory( 'name', $category, 'ID' );
-					
 				}
 				else{
 					$cat_id = $this->getCategory( 'name', $subcategory, 'ID' );
-					
 				}
 				
 				/* aktualizacja czy wstawianie? */
@@ -223,28 +221,11 @@ class MACMA extends XMLAbstract{
 				
 				// echo "\r\n $sql \r\n";
 				
-				// $sql = "INSERT INTO `XML_product` ( `shop`, `code`, `short`, `cat_id`, `brutto`, `netto`, `catalog`, `title`, `description`, `materials`, `dimension`, `country`, `weight`, `colors`, `photos`, `new`, `promotion`, `sale`, `data` )
-				// VALUES ( '{$this->_atts[ 'shop' ]}', '{$code}', '{$short}', '{$cat_id}', '{$brutto}', '{$netto}', '{$catalog}', '{$name}', '{$dscr}', '{$material}', '{$dims}', '{$country}', '{$weight}', '{$color}', '{$photo}', '{$new}', '{$promotions}', '{$sale}', '{$dt}' )";
-				
 				if( mysqli_query( $this->_connect, $sql ) === false ) $this->_log[] = mysqli_error( $this->_connect );
 				
 				// echo "\r\n{$category} | {$subcategory}";
 				
 			}
-			
-			// wyciąganie stanu magazynowego z XML
-			/* $XML = simplexml_load_file( __DIR__ . "/DND/" . basename( $this->_atts[ 'stock' ] ) );
-			foreach( $XML->items->children() as $item ){
-				$kod = $item->code_full;
-				$num = (int)$item->quantity_24h;
-				
-				$sql = "UPDATE `XML_product` SET  `instock` = {$num}, data = '{$dt}' WHERE `code` = '{$kod}'";
-				if( mysqli_query( $this->_connect, $sql ) === false ){
-					$this->_log[] = mysqli_error( $this->_connect );
-					
-				}
-				
-			} */
 			
 		}
 		

@@ -3,6 +3,8 @@ class MIDOCEANBRANDS extends XMLAbstract{
 	
 	// filtrowanie kategorii
 	protected function _categoryFilter( &$cat_name, &$subcat_name, $item ){
+		$subcat_name = $cat_name;
+		
 		if( in_array( $cat_name, array( 'akcesoria', 'myszka', 'podkładka pod myszkę', 'usb i karty pamięci', 'zasilane energią słoneczną', 'ładowarka', 'przedłużacz', 'rozdzielacz', 'wodne' ) ) ){
 			$cat_name = 'Elektronika';
 			

@@ -365,5 +365,42 @@ GROUP BY cat.ID";
 		
 	}
 	
+	/* funkcja eksportująca powiązane dane z bazy ( kategoria - podkategoria - produkt ) */
+	public function getData( $stmt = "" ){
+		$sql = "SELECT
+		cat.ID as 'cat_ID',
+		cat.name as 'cat_name',
+		subcat.ID as 'subcat_ID',
+		subcat.name as 'subcat_name',
+		product.*
+		FROM XML_category as cat
+		JOIN XML_category as subcat
+		ON cat.ID = subcat.parent
+		JOIN XML_product as product
+		ON subcat.ID = product.cat_id
+		{$stmt}";
+		
+		$query = mysqli_query( $this->_connect, $sql );
+		$fetch = mysqli_fetch_all( $query, MYSQLI_ASSOC );
+		mysqli_free_result( $query );
+		return $fetch;
+	}
+	
+	/* funkcja generująca listę podkategorii danej kategorii */
+	public function subcatsList( $cat_name = "" ){
+		
+		$sql = "SELECT subcat.*
+		FROM `XML_category` as cat
+		JOIN XML_category as subcat
+		ON cat.ID = subcat.parent
+		WHERE cat.name = '{$cat_name}'";
+		
+		
+		$query = mysqli_query( $this->_connect, $sql );
+		$fetch = mysqli_fetch_all( $query, MYSQLI_ASSOC );
+		mysqli_free_result( $query );
+		
+		return $fetch;
+	}
 	
 }

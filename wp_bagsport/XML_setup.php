@@ -3,6 +3,14 @@ require_once __DIR__ . "/php/cfg.php";
 
 $SHOP  = array();
 
+$SHOP['midoceanbrands'] = new MIDOCEANBRANDS( array(
+	'products' => 'ftp://lucyna:80838286@transfer.midoceanbrands.com/prodinfo_PL.xml',
+	'stock' => 'ftp://lucyna:80838286@transfer.midoceanbrands.com/stock.xml',
+),
+array(
+	'shop' => 'MIDOCEANBRANDS',
+) );
+
 $SHOP['macma'] = new MACMA( array(
 	'products' => 'http://www.macma.pl/data/webapi/pl/xml/offer.xml',
 	'stock' => 'http://www.macma.pl/data/webapi/pl/xml/stocks.xml',
@@ -16,11 +24,9 @@ array(
 
 $SHOP['inspirion'] = new INSPIRION( array(
 	'products' => 'https://inspirion.pl/sites/default/files/exports/products.xml',
-	
 ),
 array(
 	'shop' => 'INSPIRION',
-	
 ) );
 
 $SHOP['anda'] = new ANDA( array(
@@ -28,14 +34,11 @@ $SHOP['anda'] = new ANDA( array(
 ),
 array(
 	'shop' => 'ANDA',
-	
 ) );
-
 
 $SHOP['easygifts'] = new EASYGIFTS( array(
 	'products' => 'http://www.easygifts.com.pl/data/webapi/pl/xml/offer.xml',
 	'stock' => 'http://www.easygifts.com.pl/data/webapi/pl/xml/stocks.xml',
-	
 ),
 array(
 	'shop' => 'EASYGIFTS',
@@ -45,11 +48,9 @@ $SHOP['axpol'] = new AXPOL( array(
 	'products' => 'ftp://userPL099:QwqChVFh@ftp.axpol.com.pl/axpol_product_data_PL.xml',
 	'stock' => 'ftp://userPL099:QwqChVFh@ftp.axpol.com.pl/axpol_stocklist_pl.xml',
 	'marking' => 'ftp://userPL099:QwqChVFh@ftp.axpol.com.pl/axpol_print_data_PL.xml',
-	
 ),
 array(
 	'shop' => 'AXPOL',
-	
 ) );
 
 $SHOP['par'] = new PAR( array(
@@ -58,17 +59,6 @@ $SHOP['par'] = new PAR( array(
 ),
 array(
 	'shop' => 'PAR',
-	
-) );
-
-$SHOP['midoceanbrands'] = new MIDOCEANBRANDS( array(
-	'products' => 'ftp://lucyna:80838286@transfer.midoceanbrands.com/prodinfo_PL.xml',
-	'stock' => 'ftp://lucyna:80838286@transfer.midoceanbrands.com/stock.xml',
-	
-),
-array(
-	'shop' => 'MIDOCEANBRANDS',
-	
 ) );
 
 $XM = new XMLMan();

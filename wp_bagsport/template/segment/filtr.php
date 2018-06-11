@@ -8,14 +8,20 @@
 		<option>Malejąco</option>
 		
 	</select>
-	<!--
 	<select id='subcategory'>
 		<option value='' selected>Dostępne kategorie</option>
-		<option>Kategoria1</option>
-		<option>Kategoria2</option>
-		<option>Kategoria3</option>
+		<?php
+			global $XM;
+			$subcats = $XM->subcatsList( $_GET['nazwa'] ); 
+			
+			foreach( $subcats as $sub ){
+				printf(
+					'<option>%s</option>',
+					$sub['name']
+				);
+			}
+		?>
 		
 	</select>
-	-->
 	
 </div>

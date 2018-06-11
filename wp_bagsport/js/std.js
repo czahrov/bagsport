@@ -143,7 +143,7 @@ function queryMod( args ){
 }
 
 /* sortowanie produktów */
-(function( cena ){
+(function( cena, podkategoria ){
 	cena.change( function( e ){
 		if( $(this).val() !== '' ){
 			window.location.href = window.location.protocol + "//" + window.location.host + window.location.pathname + queryMod( {by:'cena', order:$(this).val().toLowerCase()} );
@@ -151,7 +151,15 @@ function queryMod( args ){
 		
 	} );
 	
+	podkategoria.change( function( e ){
+		if( $(this).val() !== '' ){
+			window.location.href = window.location.protocol + "//" + window.location.host + window.location.pathname + queryMod( {podkategoria:$(this).val().toLowerCase()} );
+		}
+		
+	} );
+	
 })
 (
-	$( '#price' )
+	$( '#price' ),
+	$( '#subcategory' )
 )

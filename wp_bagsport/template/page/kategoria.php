@@ -1,5 +1,6 @@
 <?php
-	$nazwa = $_GET['nazwa'];
+	// $nazwa = $_GET['nazwa'];
+	$nazwa = isset( $_GET['podkategoria'] )?( $_GET['podkategoria'] ):( $_GET['nazwa'] );
 	
 ?>
 <div id='kategoria' class=''>
@@ -8,20 +9,20 @@
 			<?php get_template_part('template/segment/side', 'panel'); ?>
 			<div class='col-lg-9 d-flex flex-wrap'>
 				<div class="col-lg-12">
-					<?php
-						$parts = explode( " ", strip_tags( $nazwa ) );
-						printf(
-							'<h1 class="my-4">
-								<span>
-									%s
-									<div class="h1-line"></div>
-								</span>
+				<?php
+					$parts = explode( " ", strip_tags( $nazwa ) );
+					printf(
+						'<h1 class="my-4">
+							<span>
 								%s
-							</h1>',
-							array_shift( $parts ),
-							implode( " ", $parts )
-						);
-					?>
+								<div class="h1-line"></div>
+							</span>
+							%s
+						</h1>',
+						array_shift( $parts ),
+						implode( " ", $parts )
+					);
+				?>
 				</div>
 				<?php get_template_part( 'template/segment/filtr' );?>
 				<?php
@@ -63,8 +64,15 @@
 					}
 					
 					if( !empty( $nazwa ) ){
-						// $XM->getProducts( 'url', $nazwa );
-						printProducts( $nazwa, $atts );
+						// printProducts( $nazwa, $atts );
+						// print_r( $XM->getData( "WHERE cat.name = '{$nazwa}'" ) );
+						$sql = sprintf(
+							'WHERE cat.name = "%s" OR subcat.name = "%1$s" %s',
+							$nazwa,
+							!empty( $atts['orderby'] ) and !empty( $atts['order'] )?( "ORDER BY {$atts['orderby']} {$atts['order']}" ):( "" )
+							
+						);
+						printProducts( $nazwa, $atts, $XM->getData( $sql ) );
 						
 					}
 					

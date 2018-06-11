@@ -3,7 +3,7 @@ class PAR extends XMLAbstract{
 	
 	// filtrowanie kategorii
 	protected function _categoryFilter( &$cat_name, &$subcat_name, $item ){
-		// $subcat_name = $cat_name;
+		$subcat_name = $cat_name;
 		
 		if( in_array( $cat_name, array( 'akcesoria komputerowe i smartfonowe', 'etui na laptopa i smartfon', 'zegary i kalkulatory' ) ) ){
 			$cat_name = 'Elektronika';

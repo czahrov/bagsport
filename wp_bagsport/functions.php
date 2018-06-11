@@ -221,7 +221,9 @@ function printProducts( $categoryName = "Produkcja własna", $arg = array(), $in
 		$arg
 	);
 	
-	$produkty = is_array( $input )?( $input ):( getCategory( $categoryName, $arg ) );
+	$produkty = is_array( $input )?( array_map( function( $arg ){
+		return getProductData( $arg );
+	}, $input ) ):( getCategory( $categoryName, $arg ) );
 	
 	if( count( $produkty) > 0 ){
 		foreach( array_slice( $produkty, ($arg['page'] - 1) * $arg['per_page'], $arg['per_page'] ) as $item ){
@@ -259,7 +261,7 @@ function printProducts( $categoryName = "Produkcja własna", $arg = array(), $in
 				$item['new'] == 1?( "new" ):( $item['promotion'] == 1?( "promotion" ):( $item['sale'] == 1?( "sale" ):( "" ) ) ),
 				home_url( "zapytaj/?id={$item['ID']}" ),             // link do "wyślij zapytanie"
 				$item['nazwa'],              // nazwa produktu
-				(float)$item['brutto'] == 0?( "Wycena indywidualna" ):( (float)$item['brutto'] )
+				(float)$item['brutto'] == 0?( "Wycena indywidualna" ):( sprintf( '%.2f zł', (float)$item['brutto'] ) )
 				
 			);
 			

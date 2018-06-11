@@ -1,7 +1,7 @@
 <?php
 	$id = $_GET['id'];
 	
-	if( get_post( $id ) !== null ){
+	if( get_post( $id ) !== null and (string)get_post( $id )->ID === $id ){
 		$item = getProductData( get_post( $id ) );
 		
 	}
@@ -17,6 +17,8 @@
 <div id='produkt' class=''>
 	<?php
 		echo "<!--";
+		var_dump( (string)get_post( $id )->ID );
+		var_dump( $id );
 		print_r( $item );
 		echo "-->";
 	?>

@@ -3,7 +3,7 @@ class AXPOL extends XMLAbstract{
 	
 	// filtrowanie kategorii
 	protected function _categoryFilter( &$cat_name, &$subcat_name, $item ){
-		$subcat_name = "";
+		$subcat_name = $cat_name;
 		
 		if( in_array( $cat_name, array( 'biuro', 'teczki i notatniki', 'mauro conti', 'moleskine' ) ) ){
 			$cat_name = 'Biuro i biznes';

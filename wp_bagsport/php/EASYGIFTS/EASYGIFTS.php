@@ -3,7 +3,7 @@ class EASYGIFTS extends XMLAbstract{
 	
 	// filtrowanie kategorii
 	protected function _categoryFilter( &$cat_name, &$subcat_name, $item ){
-		$subcat_name = "";
+		$subcat_name = $cat_name;
 		
 		if( in_array( $cat_name, array( 'biuro i akcesoria biurowe', 'etui', 'cerruti 1881', 'christian lacroix', 'cacharel', 'nina ricci', 'ungaro', 'victorinox lifestyle - akcesoria podróżne' ) ) ){
 			$cat_name = 'Biuro i biznes';

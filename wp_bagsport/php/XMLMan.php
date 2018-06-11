@@ -88,5 +88,17 @@ class XMLMan{
 		$this->_proxy[0]->addVisit( $id );
 		
 	}
-
+	
+	/* pobieranie danych w alternatywny sposób */
+	public function getData( $stmt = "" ){
+		return $this->_proxy[0]->getData( $stmt );
+		
+	}
+	
+	/* funkcja generująca listę podkategorii dla danej kategorii */
+	public function subcatsList( $cat_name = "" ){
+		return $this->_proxy[0]->subcatsList( $cat_name );
+		
+	}
+	
 }
