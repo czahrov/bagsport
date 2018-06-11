@@ -67,6 +67,37 @@
 		<!-- Custom styles for this template -->
 		<link href="https://fonts.googleapis.com/css?family=Poppins:400,500,600,700" rel="stylesheet">
 		<link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">
+		
+		
+		<!-- Facebook Pixel Code -->
+		<script>
+		!function(f,b,e,v,n,t,s)
+		{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+		n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+		if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+		n.queue=[];t=b.createElement(e);t.async=!0;
+		t.src=v;s=b.getElementsByTagName(e)[0];
+		s.parentNode.insertBefore(t,s)}(window,document,'script',
+		'https://connect.facebook.net/en_US/fbevents.js');
+		fbq('init', '186305895406684'); 
+		fbq('track', 'PageView');
+		fbq('track', 'ViewContent');
+
+		<?php
+			if( is_search() ){
+				echo "fbq('track', 'Search');";
+			}
+			
+		?>
+		</script>
+		<noscript>
+		 <img height="1" width="1" 
+		src="https://www.facebook.com/tr?id=186305895406684&ev=PageView
+		&noscript=1"/>
+		</noscript>
+		<!-- End Facebook Pixel Code -->
+
+		
 	</head>
 	<?php wp_head(); ?>
 	<body>
