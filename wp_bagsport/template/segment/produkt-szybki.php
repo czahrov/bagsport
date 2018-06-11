@@ -34,12 +34,14 @@
 					<a href='https://www.facebook.com/sharer/sharer.php?u=<?php echo home_url( "produkt/?id={$_GET['id']}" ); ?>' target='_blank'>
 						<i class="ion-social-facebook"></i>            
 					</a>
+					<!--
 					<a href='https://twitter.com/intent/tweet?text=<?php echo home_url( "produkt/?id={$_GET['id']}" ); ?>' target='_blank'>
 						<i class="ion-social-twitter"></i>
 					</a>
 					<a href='https://plus.google.com/share?url=<?php echo home_url( "produkt/?id={$_GET['id']}" ); ?>' target='_blank'>
 						<i class="ion-social-googleplus"></i>
 					</a>
+					-->
 				</div>
 			</div>
 		</div>

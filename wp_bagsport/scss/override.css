@@ -298,6 +298,21 @@ body {
 .single-item.sale .card-title a {
   color: #e52b50; }
 
+img {
+  display: inline-block;
+  max-width: 100%;
+  height: auto; }
+  img.aligncenter {
+    display: block;
+    margin-left: auto;
+    margin-right: auto; }
+  img.alignleft {
+    display: block;
+    margin-right: auto; }
+  img.alignright {
+    display: block;
+    margin-left: auto; }
+
 #banner {
   width: 100%;
   height: 300px;
@@ -381,20 +396,6 @@ body {
   line-height: 34px; }
   #single .content * {
     line-height: inherit; }
-  #single .content img {
-    display: inline-block;
-    max-width: 100%;
-    height: auto; }
-    #single .content img.aligncenter {
-      display: block;
-      margin-left: auto;
-      margin-right: auto; }
-    #single .content img.alignleft {
-      display: block;
-      margin-right: auto; }
-    #single .content img.alignright {
-      display: block;
-      margin-left: auto; }
 #single .next a {
   padding: 10px 20px;
   text-align: right; }
@@ -635,5 +636,11 @@ body {
       background-color: #e8e8e8; }
   #zapytaj .details .img img {
     max-width: 100%; }
+
+#menu-menu-sklep li:not(.menu-item-663) a {
+  background-color: #f6f6f6;
+  color: #212529; }
+  #menu-menu-sklep li:not(.menu-item-663) a:hover {
+    background-color: #e52b50; }
 
 /*# sourceMappingURL=override.css.map */

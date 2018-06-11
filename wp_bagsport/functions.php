@@ -123,11 +123,14 @@ function printBreadcrumb(){
 	}
 	else{
 		
-		printf(
-			'<h3><a href="%s">Strona główna</a></h3>',
-			home_url()
+		if( !is_front_page() ){
+			printf(
+				'<h3><a href="%s">Strona główna</a></h3>',
+				home_url()
+				
+			);
 			
-		);
+		}
 		
 		do{
 			printf(

@@ -18,7 +18,7 @@ class XMLAbstract{
 		// dodatkowe dane autoryzacyjne
 		'context' => array(
 			'http' => array(
-				'timeout' => 60 * 10,
+				'timeout' => 600,
 				
 			),
 			

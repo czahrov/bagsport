@@ -478,6 +478,38 @@ body{
 	
 }
 
+img{
+	display: inline-block;
+	max-width: 100%;
+	height: auto;
+	
+	&.aligncenter{
+		display: block;
+		margin:{
+			left: auto;
+			right: auto;
+		};
+		
+	}
+	
+	&.alignleft{
+		display: block;
+		margin:{
+			right: auto;
+		};
+		
+	}
+	
+	&.alignright{
+		display: block;
+		margin:{
+			left: auto;
+		};
+		
+	}
+	
+}
+
 
 #banner
 {
@@ -632,38 +664,6 @@ body{
 	
 	.content{
 		@include stdContent();
-		
-		img{
-			display: inline-block;
-			max-width: 100%;
-			height: auto;
-			
-			&.aligncenter{
-				display: block;
-				margin:{
-					left: auto;
-					right: auto;
-				};
-				
-			}
-			
-			&.alignleft{
-				display: block;
-				margin:{
-					right: auto;
-				};
-				
-			}
-			
-			&.alignright{
-				display: block;
-				margin:{
-					left: auto;
-				};
-				
-			}
-			
-		}
 		
 	}
 	
@@ -1153,6 +1153,30 @@ body{
 			
 			img{
 				max-width: 100%;
+				
+			}
+			
+		}
+		
+	}
+	
+}
+
+#menu-menu-sklep
+{
+	
+	li{
+		
+		&:not(.menu-item-663){
+				
+			a{
+				background-color: #f6f6f6;
+				color: #212529;
+				
+				&:hover{
+					background-color: map-get( $paleta, rozowy );
+					
+				}
 				
 			}
 			

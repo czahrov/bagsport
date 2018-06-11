@@ -22,6 +22,18 @@
 						</a>
 					</div>
 					<div class='row'>
+						<div class='col-3'>Stacjonarny: </div>
+						<a class='' href="<?php
+							printf(
+								'tel:%s',
+								preg_replace( '~\D+~', '', getInfo('stacjonarny') )
+								
+							);
+						?>" >
+							<?php echo getInfo('stacjonarny'); ?>
+						</a>
+					</div>
+					<div class='row'>
 						<div class='col-3'>E-mail:</div>
 						<a class='' href="<?php
 							printf(
