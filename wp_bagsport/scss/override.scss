@@ -510,6 +510,25 @@ img{
 	
 }
 
+.breadcrumb{
+	
+	h3{
+		
+		&:not(:last-child){
+			
+			&::after{
+				margin-left: 8px;
+				content: '\f101';
+				font-family: 'Font Awesome 5 Free';
+				
+			}
+			
+		}
+		
+	}
+	
+}
+
 
 #banner
 {
