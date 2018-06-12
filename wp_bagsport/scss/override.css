@@ -323,6 +323,73 @@ img {
   content: '\f101';
   font-family: 'Font Awesome 5 Free'; }
 
+.customSelect {
+  position: relative;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin: 20px 10px; }
+  .customSelect .head {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    padding: 10px 20px;
+    min-height: 50px;
+    border: solid 1px #e8e8e8;
+    cursor: pointer;
+    line-height: 30px;
+    border-radius: 4px; }
+    .customSelect .head .icon {
+      margin-left: 40px; }
+  .customSelect .list {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 50; }
+    .customSelect .list .item {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      padding: 10px 20px;
+      min-height: 50px;
+      border: solid 1px #e8e8e8;
+      cursor: pointer;
+      line-height: 30px;
+      border-top: none;
+      background-color: #fff;
+      -webkit-transition-property: font, background, border;
+      transition-property: font, background, border;
+      -webkit-transition: .3s linear;
+      transition: .3s linear; }
+      .customSelect .list .item:last-child {
+        border-radius: 0 0 4px 4px; }
+      .customSelect .list .item:hover {
+        background-color: #58585a;
+        border-color: #58585a;
+        color: #fff; }
+  .customSelect:hover .head {
+    border-radius: 4px 4px 0 0; }
+  .customSelect:hover .list {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column; }
+
 #banner {
   width: 100%;
   height: 300px;

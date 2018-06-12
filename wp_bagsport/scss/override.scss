@@ -541,6 +541,80 @@ img{
 	
 }
 
+.customSelect{
+	position: relative;
+	display: inline-flex;
+	flex-direction: column;
+	margin: 20px 10px;
+	
+	@mixin stdItem(){
+		display: flex;
+		align-items: center;
+		padding: 10px 20px;
+		min-height: 50px;
+		border: solid 1px map-get( $paleta, szary-jasny );
+		cursor: pointer;
+		line-height: 30px;
+	}
+	
+	.head{
+		@include stdItem();
+		border-radius: 4px;
+		
+		.icon{
+			margin-left: 40px;
+			
+		}
+		
+	}
+	
+	.list{
+		display: none;
+		position: absolute;
+		top: 100%;
+		left: 0;
+		right: 0;
+		z-index: 50;
+		
+		.item{
+			@include stdItem();
+			border-top: none;
+			background-color: #fff;
+			transition-property: font, background, border;
+			transition: .3s linear;
+			
+			&:last-child{
+				border-radius: 0 0 4px 4px;
+				
+			}
+			
+			&:hover{
+				background-color: map-get( $paleta, szary );
+				border-color: map-get( $paleta, szary );
+				color: #fff;
+				
+			}
+			
+		}
+		
+	}
+	
+	&:hover{
+		
+		.head{
+			border-radius: 4px 4px 0 0;
+			
+		}
+		
+		.list{
+			display: flex;
+			flex-direction: column;
+			
+		}
+		
+	}
+	
+}
 
 #banner
 {

@@ -123,8 +123,14 @@ function queryMod( args ){
 	if( typeof args === 'undefined' ) return query;
 	
 	$.each( args, function( name, value ){
+		/* usuwanie zmiennej */
+		if( value === null ){
+			var search = new RegExp( name + "=[^&]+&?" );
+			query = query.replace( search, "" );
+			
+		}
 		/* zmienna już istnieje */
-		if( new RegExp( name + "=" ).test( query ) ){
+		else if( new RegExp( name + "=" ).test( query ) ){
 			var search = new RegExp( name + "=[^&]+" );
 			var replace = name + "=" + value;
 			query = query.replace( search, replace );
@@ -144,22 +150,32 @@ function queryMod( args ){
 
 /* sortowanie produktów */
 (function( cena, podkategoria ){
-	cena.change( function( e ){
-		if( $(this).val() !== '' ){
-			window.location.href = window.location.protocol + "//" + window.location.host + window.location.pathname + queryMod( {by:'cena', order:$(this).val().toLowerCase()} );
+	cena
+	.on( 'click', '.list .item', function( e ){
+		var val = $(this).text().trim();
+		if( val !== 'Brak' ){
+			window.location.href = window.location.protocol + "//" + window.location.host + window.location.pathname + queryMod( {by: 'cena', order: val.toLowerCase()} );
+		}
+		else{
+			window.location.href = window.location.protocol + "//" + window.location.host + window.location.pathname + queryMod( {by: null, order: null} );
 		}
 		
 	} );
 	
-	podkategoria.change( function( e ){
-		if( $(this).val() !== '' ){
-			window.location.href = window.location.protocol + "//" + window.location.host + window.location.pathname + queryMod( {podkategoria:$(this).val().toLowerCase()} );
+	podkategoria
+	.on( 'click', '.list .item', function( e ){
+		var val = $(this).text().trim();
+		if( val !== 'Brak' ){
+			window.location.href = window.location.protocol + "//" + window.location.host + window.location.pathname + queryMod( {podkategoria: val.toLowerCase()} );
+		}
+		else{
+			window.location.href = window.location.protocol + "//" + window.location.host + window.location.pathname + queryMod( {podkategoria: null} );
 		}
 		
 	} );
 	
 })
 (
-	$( '#price' ),
-	$( '#subcategory' )
+	$( '.customSelect.price' ),
+	$( '.customSelect.subcategory' )
 )
