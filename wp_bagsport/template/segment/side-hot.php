@@ -1,6 +1,6 @@
 <?php
 	global $XM;
-	$items = $XM->getProducts( 'custom', "WHERE prod.promotion = 1 OR prod.sale = 1" );
+	$items = $XM->getProducts( 'custom', "WHERE prod.promotion = 1 AND prod.shop = 'EASYGIFTS'" );
 	shuffle( $items );
 	$items = array_slice( $items, 0, 20 );
 	
@@ -34,6 +34,7 @@
 			$title = $item['title'];
 			$price = $item['brutto'] . "zł";
 			$code = $item['code'];
+			$before = $item['price_before'];
 		?>
 		<div class="hot-products-content d-flex align-items-center">
 			<a class='hitbox' href='<?php echo home_url( "produkt/?id={$code}" ); ?>'></a>
@@ -43,7 +44,12 @@
 			</div>
 			<div class="hot-content">
 				<h4><?php echo $title; ?></h4>
-				<h5><?php echo $price; ?></h5>
+				<h5>
+				<?php
+					if( $before > 0 ) printf( '<span>%.2f zł</span>', $before );
+					echo $price;
+				?>
+				</h5>
 			</div>
 		</div>
 		<!-- /.hot single -->  

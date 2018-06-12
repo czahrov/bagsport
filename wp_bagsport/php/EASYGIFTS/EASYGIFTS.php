@@ -128,8 +128,8 @@ class EASYGIFTS extends XMLAbstract{
 				$category = $this->_stdName( (string)$item->categories->category[0]->name );
 				// $subcategory = $this->_stdName( (string)$item-> );
 				$new = (int)$item->attributes->new;
-				$promotion = (float)$item->baseinfo->price_sellout > 0?( 1 ):( 0 );
-				$sale = (float)$item->baseinfo->price_promotion > 0?( 1 ):( 0 );
+				$sale = (float)$item->baseinfo->price_sellout > 0?( 1 ):( 0 );
+				$promotion = (float)$item->baseinfo->price_promotion > 0?( 1 ):( 0 );
 				$marking_size = (string)$item->marking_size;
 				$marking = "{$marking_size}<br>>";
 				$marking_a = array();
@@ -164,6 +164,7 @@ class EASYGIFTS extends XMLAbstract{
 					'cat_id' => $cat_id,
 					'brutto' => $brutto,
 					'netto' => $netto,
+					'price_before' => !empty( $price_promo ) ?( (float)str_replace( ",", ".", $price ) ):( 0 ),
 					// 'catalog' => $catalog,
 					'title' => $name,
 					'description' => $dscr,

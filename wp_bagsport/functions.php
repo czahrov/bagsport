@@ -52,7 +52,7 @@ add_theme_support('post-thumbnails');
 /* CRON */
 // add_action( string $tag, callable $function_to_add, int $priority = 10, int $accepted_args = 1 )
 add_action( 'XMLupdate', function(){
-	require_once __DIR__ . "/php/update.php";
+	require __DIR__ . "/php/update.php";
 	
 } );
 
@@ -249,7 +249,10 @@ function printProducts( $categoryName = "Produkcja własna", $arg = array(), $in
 										<a href="%1$s">%s</a>
 								 </h4>
 								 <div class="price">
-										<h5>%s</h5>
+										<h5>
+											%s
+											%s
+										</h5>
 								 </div>
 								 <a href="%1$s" class="button-show-item">Zobacz</a>
 						  </div>
@@ -261,6 +264,7 @@ function printProducts( $categoryName = "Produkcja własna", $arg = array(), $in
 				$item['new'] == 1?( "new" ):( $item['promotion'] == 1?( "promotion" ):( $item['sale'] == 1?( "sale" ):( "" ) ) ),
 				home_url( "zapytaj/?id={$item['ID']}" ),             // link do "wyślij zapytanie"
 				$item['nazwa'],              // nazwa produktu
+				$item['cena przed'] > 0?( sprintf( '<span>%.2f zł</span>', $item['cena przed'] ) ):( "" ),
 				(float)$item['brutto'] == 0?( "Wycena indywidualna" ):( sprintf( '%.2f zł', (float)$item['brutto'] ) )
 				
 			);
@@ -408,6 +412,7 @@ function getProductData( $obj = null ){
 		$data['nowość'] = get_post_meta( $obj->ID, 'nowość', true );
 		$data['promocja'] = get_post_meta( $obj->ID, 'promocja', true );
 		$data['wyprzedaż'] = get_post_meta( $obj->ID, 'wyprzedaż', true );
+		$data['cena przed'] = get_post_meta( $obj->ID, 'cena przed', true );
 		
 	}
 	/* obiekt pochodzi z bazy danych XML */
@@ -416,6 +421,7 @@ function getProductData( $obj = null ){
 		$data['nazwa'] = $obj['title'];
 		$data['kategoria'] = $obj['cat_name'];
 		$data['opis'] = $obj['description'];
+		$data['cena przed'] = $obj['price_before'];
 		$data['brutto'] = $obj['brutto'];
 		$data['netto'] = $obj['netto'];
 		$data['dostępność'] = $obj['instock'];

@@ -297,6 +297,11 @@ body {
 
 .single-item.sale .card-title a {
   color: #e52b50; }
+.single-item .price span {
+  margin-right: 10px;
+  font-weight: 400;
+  color: #848484;
+  text-decoration: line-through; }
 
 img {
   display: inline-block;

@@ -8,7 +8,7 @@
 		$arg['galeria'] = explode( ",", str_replace( array( "[", "]", '"' ), "", $arg['photos'] ) );
 		return $arg;
 		
-	}, $XM->getProducts( 'custom', "WHERE prod.promotion = 1 OR prod.sale = 1" ) );
+	}, $XM->getProducts( 'custom', "WHERE prod.promotion = 1 AND shop = 'EASYGIFTS'" ) );
 ?>
 <div id='wlasna' class=''>
 	<div class="container">
