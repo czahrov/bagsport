@@ -393,7 +393,8 @@ GROUP BY cat.ID";
 		FROM `XML_category` as cat
 		JOIN XML_category as subcat
 		ON cat.ID = subcat.parent
-		WHERE cat.name = '{$cat_name}'";
+		WHERE cat.name = '{$cat_name}'
+		ORDER BY subcat.name ASC";
 		
 		
 		$query = mysqli_query( $this->_connect, $sql );
