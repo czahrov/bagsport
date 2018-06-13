@@ -57,6 +57,12 @@
 				global $XM;
 				$subcats = $XM->subcatsList( $_GET['nazwa'] ); 
 				
+				if( DMODE ){
+					echo "<!--";
+					print_r( $subcats );
+					echo "-->";
+				}
+				
 				foreach( $subcats as $sub ){
 					printf(
 						'<div class="item">
