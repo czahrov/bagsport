@@ -121,6 +121,33 @@ function printBreadcrumb(){
 		);
 		
 	}
+	elseif( strpos( $_SERVER['REQUEST_URI'], 'blog/' ) !== false ){
+		printf(
+			'<h3>
+				<a href="%s">Strona główna</a>
+			</h3>
+			<h3>
+					<a href="%s">Blog</a>
+			</h3>',
+			home_url(),
+			home_url( "category/blog" )
+		   
+		);
+		
+	}
+	elseif( is_single() ){
+		printf(
+			'<h3><a href="%s">Strona główna</a></h3>
+			<h3><a href="%s">Blog</a></h3>
+			<h3><a href="%s">%s</a></h3>',
+			home_url(),
+			home_url( 'category/blog' ),
+			get_the_permalink( get_post()->ID ),
+			get_post()->post_title
+			
+		);
+		
+	}
 	else{
 		
 		if( !is_front_page() ){
