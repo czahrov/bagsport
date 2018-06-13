@@ -14,7 +14,24 @@
 		</div>
 		<div class='row'>
 			<?php
-				$next = get_next_post();
+				$posts = get_posts( array(
+					'category_name' => 'blog',
+					'numberposts' => -1,
+					
+				) );
+				$ids = array();
+				foreach( $posts as $item ){
+					$ids[] = $item->ID;
+				}
+				
+				if( DMODE ){
+					echo "<!--";
+					// print_r( $posts );
+					echo "-->";
+					
+				}
+				
+				$next = $posts[ array_search( get_post()->ID, $ids ) + 1 ];
 				if( $next instanceof WP_POST ):
 			?>
 			<div class='next col-12 d-flex justify-content-end'>
