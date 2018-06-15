@@ -126,7 +126,7 @@ class MACMA extends XMLAbstract{
 						
 					}
 					else{
-						$photo_a[] = "/wp_bagsport/wp-content/themes/wp_bagsport/php/MACMA/IMG/{$id}/" . basename( $remote );
+						$photo_a[] = "/wp-content/themes/wp_bagsport/php/MACMA/IMG/{$id}/" . basename( $remote );
 						
 					}
 					

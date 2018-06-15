@@ -13,8 +13,8 @@ class XMLAbstract{
 	protected $_atts = array(
 		// nazwa sklepu
 		'shop' => '',
-		// po jakim czasie pobrać XML ponownie ( domyślnie 24h )
-		'lifetime' => 86400,
+		// po jakim czasie pobrać XML ponownie ( w sekundach )
+		'lifetime' => 0,
 		// dodatkowe dane autoryzacyjne
 		'context' => array(
 			'http' => array(

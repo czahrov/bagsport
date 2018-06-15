@@ -118,6 +118,12 @@ Wiadomość wygenerowana automatycznie na stronie %s',
 						<div class='field'>
 							<textarea name='wiadomość' placeholder="Treść wiadomości*" required></textarea>
 						</div>
+						<div class='field zgoda d-flex'>
+							<input id='input_zgoda' type="checkbox" name='zgoda' required>
+							<label for='input_zgoda'>
+								„Oświadczam, iż ukończyłam/em 16 rok życia i zgadzam się na przetwarzanie moich danych osobowych przez (dane administratora danych osobowych – tj. przedsiębiorcy prowadzącego sklep/stronę), w celu obsługi zapytania użytkownika. Podanie danych jest dobrowolne. Podstawą przetwarzania danych jest moja zgoda. Mam prawo wycofania zgody w dowolnym momencie. Dane osobowe będą przetwarzane do czasu obsługi zapytania. Mam prawo żądania od administratora dostępu do moich danych osobowych, ich sprostowania, usunięcia lub ograniczenia przetwarzania, a także prawo wniesienia skargi do organu nadzorczego. Strona stosuje profilowanie użytkowników m.in. za pośrednictwem plików cookies, w tym analitycznych, o czym więcej w Polityce Prywatności.”
+							</label>
+						</div>
 						<div class='field'>
 							<input type='submit' value='Wyślij zapytanie'>
 						</div>
@@ -151,6 +157,15 @@ Wiadomość wygenerowana automatycznie na stronie %s',
 							</div>
 							<div class=''>
 								<?php echo $item['brutto']; ?>
+							</div>
+							
+						</div>
+						<div class='line'>
+							<div class=''>
+								Cena netto zł
+							</div>
+							<div class=''>
+								<?php echo $item['netto']; ?>
 							</div>
 							
 						</div>

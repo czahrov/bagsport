@@ -473,12 +473,17 @@ img {
   line-height: 34px; }
   #single .content * {
     line-height: inherit; }
-#single .next a {
-  padding: 10px 20px;
-  text-align: right; }
-  #single .next a:hover {
+#single .post_nav a {
+  padding: 10px 20px; }
+  #single .post_nav a:hover {
     color: #e52b50;
     text-decoration: none; }
+  @media (max-width: 767px) {
+    #single .post_nav a {
+      text-align: center; } }
+@media (min-width: 768px) {
+  #single .post_nav.next a {
+    text-align: right; } }
 
 #partnerzy {
   overflow: hidden; }
@@ -688,6 +693,8 @@ img {
   width: 100%; }
   #zapytaj #ask .field {
     margin-top: 20px; }
+    #zapytaj #ask .field.zgoda label {
+      padding-left: 10px; }
   #zapytaj #ask textarea {
     height: 200px;
     resize: none; }

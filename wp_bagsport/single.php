@@ -32,12 +32,32 @@
 				}
 				
 				$next = $posts[ array_search( get_post()->ID, $ids ) + 1 ];
+				$prev = $posts[ array_search( get_post()->ID, $ids ) - 1 ];
+			?>
+			<?php
+				if( $prev instanceof WP_POST ):
+			?>
+			<div class='post_nav prev col-12 col-md d-flex justify-content-start'>
+				<a href='<?php the_permalink( $prev ); ?>'>
+					<div class='stdHeader'>
+						Poprzedni wpis:<br>
+						<?php echo $prev->post_title; ?>
+					</div>
+					<div class=''>
+						Zainteresowany? Czytaj dalej!
+					</div>
+				</a>
+				
+			</div>
+			<?php endif; ?>
+			<?php
 				if( $next instanceof WP_POST ):
 			?>
-			<div class='next col-12 d-flex justify-content-end'>
+			<div class='post_nav next col-12 col-md d-flex justify-content-end'>
 				<a href='<?php the_permalink( $next ); ?>'>
 					<div class='stdHeader'>
-						Kolejny wpis: <?php echo $next->post_title; ?>
+						Kolejny wpis:<br>
+						<?php echo $next->post_title; ?>
 					</div>
 					<div class=''>
 						Zainteresowany? Czytaj dalej!

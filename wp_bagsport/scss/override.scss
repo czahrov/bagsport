@@ -772,15 +772,32 @@ img{
 		
 	}
 	
-	.next{
+	.post_nav{
 			
 		a{
 			padding: 10px 20px;
-			text-align: right;
 			
 			&:hover{
 				color: map-get( $paleta, rozowy );
 				text-decoration: none;
+				
+			}
+			
+			@media( max-width: 767px ){
+				text-align: center;
+				
+			}
+			
+		}
+		
+		&.next{
+			
+			a{
+				
+				@media( min-width: 768px ){
+					text-align: right;
+					
+				}
 				
 			}
 			
@@ -1219,6 +1236,15 @@ img{
 		
 		.field{
 			margin-top: 20px;
+			
+			&.zgoda{
+				
+				label{
+					padding-left: 10px;
+					
+				}
+				
+			}
 			
 		}
 		

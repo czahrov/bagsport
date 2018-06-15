@@ -1,14 +1,12 @@
 <?php
 	session_start();
-	if( ( !isset( $_SESSION['sprytne'] ) or $_SESSION['sprytne'] !== 'bardzo' ) and !isset( $_GET['sprytne'] ) and !isset( $_COOKIE['sprytne'] ) ){
+	/* if( ( !isset( $_SESSION['sprytne'] ) or $_SESSION['sprytne'] !== 'bardzo' ) and !isset( $_GET['sprytne'] ) and !isset( $_COOKIE['sprytne'] ) ){
 		include( 'wbudowie.php' );
-		exit;
-		
+		exit;	
 	}
 	else{
 		$_SESSION['sprytne'] = 'bardzo';
-		
-	}
+	} */
 	
 	define( 'DMODE', true );
 	$infix = DMODE?(''):('.min');
