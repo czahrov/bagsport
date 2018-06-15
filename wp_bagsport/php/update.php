@@ -1,6 +1,6 @@
 <?php
-require __DIR__ . "/autoloader.php";
-require __DIR__ . "/../XML_setup.php";
+require_once __DIR__ . "/autoloader.php";
+require_once __DIR__ . "/../XML_setup.php";
 
 printf(
 	'%1$s--- UPDATE ---%1$s',
@@ -8,6 +8,8 @@ printf(
 );
 
 global $SHOP;
+reset( $SHOP );
+var_dump( current ($SHOP ) );
 current( $SHOP )->clearCats();
 
 foreach( $SHOP as $name => $single ){

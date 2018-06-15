@@ -56,7 +56,8 @@
 				}
 				else{
 					global $XM;
-					OGTags( $XM->getProducts( 'single', $id )[0] );
+					$produkty = $XM->getProducts( 'single', $id );
+					OGTags( $produkty[0] );
 					
 				}
 				
@@ -66,7 +67,9 @@
 		<title><?php wp_title(''); ?><?php if (!(is_404()) && (is_single()) || (is_page()) || (is_archive())) { ?> &raquo; <?php } ?><?php bloginfo('name'); ?></title>
 		<!-- Custom styles for this template -->
 		<link href="https://fonts.googleapis.com/css?family=Poppins:400,500,600,700" rel="stylesheet">
+		<!--
 		<link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">
+		-->
 		
 		
 		<!-- Facebook Pixel Code -->
@@ -103,7 +106,7 @@
 	<body>
 		<!-- Sub navigation -->
 		<div class="container d-flex justify-content-between d-flex flex-wrap ">
-			<a class="navbar-brand" href="http://poligon.scepter.pl/SzymonJ/wp_bagsport/"></a>
+			<a class="navbar-brand" href="<?php echo home_url(); ?>"></a>
 			<div class="contact-top d-flex flex-wrap flex-column flex-md-row">
 				<div class="icon-phone d-flex flex-wrap">
 					<i class="top-icons ion-ios-telephone-outline"></i>

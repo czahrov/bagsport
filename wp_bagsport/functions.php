@@ -101,7 +101,8 @@ function printBreadcrumb(){
 		}
 		else{
 			global $XM;
-			$produkt = getProductData( $XM->getProducts( 'single', $id )[0] );
+			$produkty = $XM->getProducts( 'single', $id );
+			$produkt = getProductData( $produkty[0] );
 		}
 		
 		printf(
@@ -285,10 +286,10 @@ function printProducts( $categoryName = "Produkcja własna", $arg = array(), $in
 						  </div>
 				   </div>
 				</div>',
-				$item['new'] == 1?( "new" ):( $item['promotion'] == 1?( "promotion" ):( $item['sale'] == 1?( "sale" ):( "" ) ) ),
+				@$item['new'] == 1?( "new" ):( @$item['promotion'] == 1?( "promotion" ):( @$item['sale'] == 1?( "sale" ):( "" ) ) ),
 				home_url( "produkt?id={$item['ID']}" ),
 				$item['galeria'][0],                // adres obrazka produktu
-				$item['new'] == 1?( "new" ):( $item['promotion'] == 1?( "promotion" ):( $item['sale'] == 1?( "sale" ):( "" ) ) ),
+				@$item['new'] == 1?( "new" ):( @$item['promotion'] == 1?( "promotion" ):( @$item['sale'] == 1?( "sale" ):( "" ) ) ),
 				home_url( "zapytaj/?id={$item['ID']}" ),             // link do "wyślij zapytanie"
 				$item['nazwa'],              // nazwa produktu
 				$item['cena przed'] > 0?( sprintf( '<span>%.2f zł</span>', $item['cena przed'] ) ):( "" ),

@@ -154,7 +154,8 @@ class EASYGIFTS extends XMLAbstract{
 				/* aktualizacja czy wstawianie? */
 				$sql = "SELECT COUNT(*) as num FROM `XML_product` WHERE code = '{$code}'";
 				$query = mysqli_query( $this->_connect, $sql );
-				$num = mysqli_fetch_assoc( $query )['num'];
+				$fetch = mysqli_fetch_assoc( $query );
+				$num = $fetch['num'];
 				mysqli_free_result( $query );
 				
 				$insert = array(

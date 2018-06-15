@@ -74,7 +74,8 @@ class MIDOCEANBRANDS extends XMLAbstract{
 			// parsowanie danych z XML
 			foreach( $XML->children() as $item ){
 				$code = (string)$item->attributes( 'no' );
-				$category = (string)( array_slice( $item->folders, 0, -1 )[0] );
+				$folder = array_slice( $item->folders, 0, -1 );
+				$category = (string)$folder[0];
 				$subcategory = "";
 				
 				$this->_categoryFilter( $category, $subcategory, $item );
@@ -117,9 +118,10 @@ class MIDOCEANBRANDS extends XMLAbstract{
 					(string)$item->CATEGORY_LEVEL_3,
 					(string)$item->CATEGORY_LEVEL_4,
 				);
-				$cat = array_slice( array_map( function( $arg ){
+				$cats = array_slice( array_map( function( $arg ){
 					if( !empty( $arg ) ) return $arg;
-				}, $t_cat ), -1 )[0];
+				}, $t_cat ), -1 );
+				$cat = $cats[0];
 				$category = $this->_stdName( $cat );
 				$subcat = "";
 				$subcategory = $this->_stdName( $subcat );
@@ -152,7 +154,8 @@ class MIDOCEANBRANDS extends XMLAbstract{
 				/* aktualizacja czy wstawianie? */
 				$sql = "SELECT COUNT(*) as num FROM `XML_product` WHERE code = '{$code}'";
 				$query = mysqli_query( $this->_connect, $sql );
-				$num = mysqli_fetch_assoc( $query )['num'];
+				$fetch = mysqli_fetch_assoc( $query );
+				$num = $fetch['num'];
 				mysqli_free_result( $query );
 				
 				$insert = array(
