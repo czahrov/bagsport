@@ -86,6 +86,8 @@ class AXPOL extends XMLAbstract{
 					
 				}
 				
+				mysqli_ping( $this->_connect );
+				
 				$sql = "UPDATE `XML_product` SET cat_id = '{$cat_id}', data = '{$dt}' WHERE code = '{$code}'";
 				if( mysqli_query( $this->_connect, $sql ) === false ) $this->_log[] = mysqli_error( $this->_connect );
 				
@@ -150,6 +152,8 @@ class AXPOL extends XMLAbstract{
 					$cat_id = $this->getCategory( 'name', $subcategory, 'ID' );
 					
 				}
+				
+				mysqli_ping( $this->_connect );
 				
 				/* aktualizacja czy wstawianie? */
 				$sql = "SELECT COUNT(*) as num FROM `XML_product` WHERE code = '{$code}'";

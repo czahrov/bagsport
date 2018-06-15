@@ -70,6 +70,8 @@ class INSPIRION extends XMLAbstract{
 					
 				}
 				
+				mysqli_ping( $this->_connect );
+				
 				$sql = "UPDATE `XML_product` SET cat_id = '{$cat_id}', data = '{$dt}' WHERE code = '{$code}'";
 				if( mysqli_query( $this->_connect, $sql ) === false )
 				{
@@ -124,6 +126,8 @@ class INSPIRION extends XMLAbstract{
 					$cat_id = $this->getCategory( 'name', $subcategory, 'ID' );
 					
 				}
+				
+				mysqli_ping( $this->_connect );
 				
 				/* aktualizacja czy wstawianie? */
 				$sql = "SELECT COUNT(*) as num FROM `XML_product` WHERE code = '{$code}'";
@@ -192,11 +196,6 @@ class INSPIRION extends XMLAbstract{
 					
 					
 				}
-				
-				// echo "\r\n $sql \r\n";
-				
-				// $sql = "INSERT INTO `XML_product` ( `shop`, `code`, `short`, `cat_id`, `brutto`, `netto`, `catalog`, `title`, `description`, `materials`, `dimension`, `country`, `weight`, `colors`, `photos`, `new`, `promotion`, `sale`, `data` )
-				// VALUES ( '{$this->_atts[ 'shop' ]}', '{$code}', '{$short}', '{$cat_id}', '{$brutto}', '{$netto}', '{$catalog}', '{$name}', '{$dscr}', '{$material}', '{$dims}', '{$country}', '{$weight}', '{$color}', '{$photo}', '{$new}', '{$promotions}', '{$sale}', '{$dt}' )";
 				
 				if( mysqli_query( $this->_connect, $sql ) === false ){
 					$this->_log[] = $sql;
