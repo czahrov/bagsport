@@ -466,25 +466,54 @@ function getProductData( $obj = null ){
 }
 
 /* funkcja generująca og tagi do social mediów */
-function OGTags( $obj ){
-	$data = getProductData( $obj );
-	
-	printf(
-'<meta property="og:title" content="%s" />
-<meta property="og:type" content="%s" />
-<meta property="og:url" content="%s" />
-<meta property="og:site_name" content="%s" />
-<meta property="og:image" content="%s" />
-<meta property="og:description" content="%s" />',
-	$data['nazwa'],
-	'product',
-	home_url( "produkt/?id={$data['ID']}" ),
-	get_bloginfo( 'name' ),
-	$data['galeria'][0],
-	implode( " ", array_slice( explode( " ", strip_tags( $data['opis'] ) ) , 0, 50 ) )
-	
-	);
-	
+function OGTags( $obj = null ){
+	/* generowanie tagów dla standardowej strony */
+	if( $obj === null ){
+		$post = get_post();
+		
+		$img = get_the_post_thumbnail_url( $post->ID, 'full' );
+		if( $img === false ) $img = wp_get_attachment_image_url( getInfo('site_img'), 'full' );
+		
+		
+		printf(
+		'<meta property="og:title" content="%s" />
+		<meta property="og:type" content="%s" />
+		<meta property="og:url" content="%s" />
+		<meta property="og:site_name" content="%s" />
+		<meta property="og:image" content="%s" />
+		<meta property="og:description" content="%s" />',
+		$post->post_title,
+		'article',
+		get_the_permalink( $post->ID ),
+		get_bloginfo('name'),
+		$img,
+		strip_tags( $post->post_content )
+		
+		);
+		
+		
+	}
+	/* generowanie tagów dla strony produktu */
+	else{
+		$data = getProductData( $obj );
+		
+		printf(
+		'<meta property="og:title" content="%s" />
+		<meta property="og:type" content="%s" />
+		<meta property="og:url" content="%s" />
+		<meta property="og:site_name" content="%s" />
+		<meta property="og:image" content="%s" />
+		<meta property="og:description" content="%s" />',
+		$data['nazwa'],
+		'product',
+		home_url( "produkt/?id={$data['ID']}" ),
+		get_bloginfo( 'name' ),
+		$data['galeria'][0],
+		implode( " ", array_slice( explode( " ", strip_tags( $data['opis'] ) ) , 0, 50 ) )
+		
+		);
+		
+	}
 }
 
 /* pobieranie informacji o stronie ( ze specjalnej strony ) */
@@ -496,6 +525,7 @@ function getInfo( $name = null ){
 		stacjonarny
 		adres_firmy
 		godziny_otwarcia
+		site_img
 	*/
 	static $meta = null;
 	

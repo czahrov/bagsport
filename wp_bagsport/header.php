@@ -61,6 +61,10 @@
 				}
 				
 			}
+			else{
+				OGTags();
+				
+			}
 			
 		?>
 		<title><?php wp_title(''); ?><?php if (!(is_404()) && (is_single()) || (is_page()) || (is_archive())) { ?> &raquo; <?php } ?><?php bloginfo('name'); ?></title>
