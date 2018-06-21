@@ -91,7 +91,10 @@
 						$temp_w[] = " ( " . implode( " OR ", $temp_f ) . " ) ";
 					}
 					$sql .= implode( " AND ", $temp_w );
-					$sql .= "ORDER BY {$atts['orderby']} {$atts['order']}";
+					if( !empty( $atts['orderby'] ) and !empty( $atts['order'] ) ){
+						$sql .= "ORDER BY {$atts['orderby']} {$atts['order']}";
+						
+					}
 					
 					$found = $XM->getProducts( 'custom', $sql );
 					
