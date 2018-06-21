@@ -16,11 +16,14 @@
 ?>
 <div id='produkt' class=''>
 	<?php
-		echo "<!--";
-		var_dump( (string)get_post( $id )->ID );
-		var_dump( $id );
-		print_r( $item );
-		echo "-->";
+		if( DMODE ){
+			echo "<!--";
+			var_dump( (string)get_post( $id )->ID );
+			var_dump( $id );
+			print_r( $item );
+			echo "-->";
+		}
+			
 	?>
 	
 	<div class='container'>
@@ -108,6 +111,14 @@
 						</h3>
 					</div>
 					<div class="col-lg-4 col-md-6 mb-4 product-price">
+						<?php if( $item['cena przed'] > 0 ): ?>
+						<h1>
+							Cena przed obniżką:
+							<span>
+								<?php echo $item['cena przed']; ?> zł
+							</span>
+						</h1>
+						<?php endif; ?>
 						<?php if( $item['brutto'] > 0 ): ?>
 						<h1>
 							Cena brutto:
