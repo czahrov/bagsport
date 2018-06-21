@@ -24,6 +24,7 @@
 						);
 					?>
 				</div>
+				<?php get_template_part( 'template/segment/filtr' ); ?>
 				<?php
 					global $XM;
 					/*
@@ -43,6 +44,33 @@
 					*/
 					// var_dump( $XM );
 					// $found = $XM->getProducts( 'custom', "WHERE prod.code LIKE '%{$search}%' OR prod.title LIKE '%{$search}%' OR prod.description LIKE '%{$search}%'" );
+					
+					$atts = array();
+					$order = $_GET['order'];
+					$orderby = $_GET['by'];
+					if( !empty( $orderby ) ){
+						switch( $orderby ){
+							case 'cena':
+								$atts['orderby'] = 'brutto';
+							break;
+							
+						}
+						
+						if( !empty( $order ) ){
+							switch( $order ){
+								case 'rosnąco':
+									$atts['order'] = 'ASC';
+								break;
+								case 'malejąco':
+									$atts['order'] = 'DESC';
+								break;
+								
+							}
+							
+						}
+						
+					}
+					
 					$sql = "WHERE ";
 					$words = explode( " ", $search );
 					$fields = array( 'code', 'title', 'description', 'materials', 'colors' );
@@ -63,6 +91,7 @@
 						$temp_w[] = " ( " . implode( " OR ", $temp_f ) . " ) ";
 					}
 					$sql .= implode( " AND ", $temp_w );
+					$sql .= "ORDER BY {$atts['orderby']} {$atts['order']}";
 					
 					$found = $XM->getProducts( 'custom', $sql );
 					
@@ -74,10 +103,13 @@
 						
 					}, $found );
 					
-					echo "<!--";
-					// echo PHP_EOL . $sql . PHP_EOL;
-					print_r( array_slice( $found, 0, 3 ) );
-					echo "-->";
+					if( DMODE ){
+						echo "<!--";
+						// echo PHP_EOL . $sql . PHP_EOL;
+						print_r( array_slice( $found, 0, 3 ) );
+						echo "-->";
+						
+					}
 					
 					printProducts( "", array(), $found );
 					
