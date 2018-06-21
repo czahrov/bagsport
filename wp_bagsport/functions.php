@@ -325,10 +325,26 @@ function printPagin( $items, $arg = array() ){
 		echo "<div class='pagination-products col-12 d-flex flex-wrap justify-content-center'>";
 		$ret = array();
 		$pages = array_chunk( $items, $arg['per_page'] );
+		parse_str( $_SERVER['QUERY_STRING'], $parsed );
+		
+		if( $current > 0 ){
+			$query_start = http_build_query( array_merge( $parsed, array( 'strona' => null ) ) );
+			echo "<a href='?{$query_start}'><i class='icon start fas fa-angle-double-left'></i></a>";
+		}
+		
+		if( $current > 0 ){
+			$query_prev = http_build_query( array_merge( $parsed, array( 'strona' => $current ) ) );
+			echo "<a href='?{$query_prev}'><i class='icon prev fas fa-angle-left'></i></i></a>";
+		}
 		
 		foreach( $pages as $num => $page ){
-			parse_str( $_SERVER['QUERY_STRING'], $parsed );
-			$parsed['strona'] = $num + 1;
+			if( $num > 0 ){
+				$parsed['strona'] = $num + 1;
+			}
+			else{
+				$parsed['strona'] = null;
+			}
+				
 			$httpQuery = http_build_query( $parsed );
 			
 			$ret[] = sprintf(
@@ -342,20 +358,25 @@ function printPagin( $items, $arg = array() ){
 		}
 		
 		/* [0][1][2]...[x-2][x-1][x][x+1][x+2]...[z-2][z-1][z] */
-		$end = 3;
 		$mid = 2;
 		
-		if( $current + $mid + 1 < count( $ret ) - $end ){
-			array_splice( $ret, $current + $mid + 1, -$end, array( "<a>...</a>" ) );
-			
-		}
+		$range_start = max( 0, $current - $mid );
+		$range_end = min( count( $pages ), $current + $mid + 1 );
+		$range_size = $range_end - $range_start;
 		
-		if( $current - $mid > $end ){
-			array_splice( $ret, $end, $current - $mid - $end, array( "<a>...</a>" ) );
-			
-		}
+		$ret = array_splice( $ret, $range_start, $range_size );
 		
 		echo implode( "", $ret );
+		
+		if( $current < count( $pages ) - 1 ){
+			$query_next = http_build_query( array_merge( $parsed, array( 'strona' => $current + 2 ) ) );
+			echo "<a href='?{$query_next}'><i class='icon next fas fa-angle-right'></i></i></a>";
+		}
+			
+		if( $current < count( $pages ) - 1 ){
+			$query_end = http_build_query( array_merge( $parsed, array( 'strona' => count( $pages ) ) ) );
+			echo "<a href='?{$query_end}'><i class='icon end fas fa-angle-double-right'></i></a>";
+		}
 		
 		echo"</div>";
 	}
