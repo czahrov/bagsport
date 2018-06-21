@@ -59,6 +59,14 @@ class MACMA extends XMLAbstract{
 			
 		}
 		
+		/* generowanie tablicy ze stanem magazynowym */
+		$XML = simplexml_load_file( __DIR__ . "/DND/" . basename( $this->_sources['stock'] ) );
+		$stock_a = array();
+		foreach( $XML->children() as $product ){
+			$stock_a[ (string)$product->code_full ] = (int)$product->quantity_24h;
+			
+		}
+		
 		// wczytywanie pliku XML z produktami
 		$XML = simplexml_load_file( __DIR__ . "/DND/" . basename( $this->_sources[ 'products' ] ) );
 		$dt = date( 'Y-m-d H:i:s' );
@@ -183,6 +191,7 @@ class MACMA extends XMLAbstract{
 					'sale' => $sale,
 					'data' => $dt,
 					'marking' => $marking,
+					'instock' => $stock_a[ $code ],
 					
 				);
 				
