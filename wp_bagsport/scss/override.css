@@ -318,10 +318,15 @@ img {
     display: block;
     margin-left: auto; }
 
-.breadcrumb h3:not(:last-child)::after {
-  margin-left: 8px;
-  content: '\f101';
-  font-family: 'Font Awesome 5 Free'; }
+.breadcrumb h3 {
+  width: 100%; }
+  .breadcrumb h3:not(:last-child)::after {
+    margin-left: 8px;
+    content: '\f101';
+    font-family: 'Font Awesome 5 Free'; }
+  @media (min-width: 768px) {
+    .breadcrumb h3 {
+      width: initial; } }
 
 .customSelect {
   position: relative;

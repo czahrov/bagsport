@@ -76,7 +76,7 @@ function printBreadcrumb(){
 	$end = false;
 	$current = get_post();
    
-	echo "<header class='d-flex align-items-center'>";
+	echo "<header class='d-flex align-items-center flex-wrap'>";
 	echo "<p class='link-bread'>Przeglądasz teraz: </p>";
 	
 	if( strpos( $_SERVER['REQUEST_URI'], 'kategoria/' ) !== false ){

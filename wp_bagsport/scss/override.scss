@@ -525,6 +525,7 @@ img{
 .breadcrumb{
 	
 	h3{
+		width: 100%;
 		
 		&:not(:last-child){
 			
@@ -534,6 +535,11 @@ img{
 				font-family: 'Font Awesome 5 Free';
 				
 			}
+			
+		}
+		
+		@media(min-width: 768px){
+			width: initial;
 			
 		}
 		
