@@ -9,7 +9,7 @@
 	}, $XM->getProducts( 'custom', "WHERE prod.new = 1" ) );
 	
 ?>
-<div id='polecane' class=''>
+<div id='polecane' class='d-none d-lg-block'>
 	<div class="col-lg-12">
 		<h1 class="my-4">
 			<span>
