@@ -54,8 +54,8 @@ array(
 ) );
 
 $SHOP['par'] = new PAR( array(
-	'products' => 'http://biuro@merkuriusz.pl:merkuriusz345@www.par.com.pl/api/products',
-	'stock' => 'http://biuro@merkuriusz.pl:merkuriusz345@www.par.com.pl/api/stocks',
+	'products' => 'http://biuro@bagsport.pl:24816vvv@www.par.com.pl/api/products',
+	'stock' => 'http://biuro@bagsport.pl:24816vvv@www.par.com.pl/api/stocks',
 ),
 array(
 	'shop' => 'PAR',
