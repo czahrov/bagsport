@@ -10,6 +10,18 @@
 						Dane kontaktowe
 					</h2>
 					<div class='row'>
+						<div class='col-3'>Adres firmy: </div>
+						<a class='' href="<?php
+							printf(
+								'https://maps.google.com/?q=%s',
+								getInfo('adres_firmy')
+								
+							);
+						?>" target='_blank'>
+							<?php echo getInfo('adres_firmy'); ?>
+						</a>
+					</div>
+					<div class='row'>
 						<div class='col-3'>Telefon: </div>
 						<a class='' href="<?php
 							printf(
