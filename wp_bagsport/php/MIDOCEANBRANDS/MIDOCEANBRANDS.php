@@ -88,8 +88,7 @@ class MIDOCEANBRANDS extends XMLAbstract{
 					$cat_id = $this->getCategory( 'name', $subcategory, 'ID' );
 				}
 				
-				mysqli_ping( $this->_connect );
-				
+				mysqli_ping( $this->_connect );				
 				$sql = "UPDATE `XML_product` SET cat_id = '{$cat_id}', data = '{$dt}' WHERE code = '{$code}'";
 				if( mysqli_query( $this->_connect, $sql ) === false ){
 					$this->_log[] = $sql;
@@ -153,9 +152,8 @@ class MIDOCEANBRANDS extends XMLAbstract{
 					$cat_id = $this->getCategory( 'name', $subcategory, 'ID' );
 				}
 				
-				mysqli_ping( $this->_connect );
-				
 				/* aktualizacja czy wstawianie? */
+				mysqli_ping( $this->_connect );
 				$sql = "SELECT COUNT(*) as num FROM `XML_product` WHERE code = '{$code}'";
 				$query = mysqli_query( $this->_connect, $sql );
 				$fetch = mysqli_fetch_assoc( $query );
@@ -229,7 +227,7 @@ class MIDOCEANBRANDS extends XMLAbstract{
 				}
 				
 				// echo "\r\n $sql \r\n";
-				
+				mysqli_ping( $this->_connect );
 				if( mysqli_query( $this->_connect, $sql ) === false ){
 					$this->_log[] = $sql;
 					$this->_log[] = mysqli_error( $this->_connect );

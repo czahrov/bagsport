@@ -155,6 +155,7 @@ class ANDA extends XMLAbstract{
 				
 				/* aktualizacja czy wstawianie? */
 				$sql = "SELECT COUNT(*) as num FROM `XML_product` WHERE code = '{$code}'";
+				mysqli_ping( $this->_connect );
 				$query = mysqli_query( $this->_connect, $sql );
 				$fetch = mysqli_fetch_assoc( $query );
 				$num = $fetch['num'];
@@ -225,7 +226,7 @@ class ANDA extends XMLAbstract{
 				}
 				
 				// echo "\r\n $sql \r\n";
-				
+				mysqli_ping( $this->_connect );
 				if( mysqli_query( $this->_connect, $sql ) === false ){
 					$this->_log[] = $sql;
 					$this->_log[] = mysqli_error( $this->_connect );

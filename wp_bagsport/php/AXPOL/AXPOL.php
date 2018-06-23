@@ -86,8 +86,7 @@ class AXPOL extends XMLAbstract{
 					
 				}
 				
-				mysqli_ping( $this->_connect );
-				
+				mysqli_ping( $this->_connect );				
 				$sql = "UPDATE `XML_product` SET cat_id = '{$cat_id}', data = '{$dt}' WHERE code = '{$code}'";
 				if( mysqli_query( $this->_connect, $sql ) === false ) $this->_log[] = mysqli_error( $this->_connect );
 				
@@ -153,9 +152,8 @@ class AXPOL extends XMLAbstract{
 					
 				}
 				
-				mysqli_ping( $this->_connect );
-				
 				/* aktualizacja czy wstawianie? */
+				mysqli_ping( $this->_connect );
 				$sql = "SELECT COUNT(*) as num FROM `XML_product` WHERE code = '{$code}'";
 				$query = mysqli_query( $this->_connect, $sql );
 				$fetch = mysqli_fetch_assoc( $query );
@@ -223,7 +221,7 @@ class AXPOL extends XMLAbstract{
 				}
 				
 				// echo "\r\n $sql \r\n";
-				
+				mysqli_ping( $this->_connect );
 				if( mysqli_query( $this->_connect, $sql ) === false ) $this->_log[] = mysqli_error( $this->_connect );
 				
 				// echo "\r\n{$category} | {$subcategory}";
@@ -236,6 +234,7 @@ class AXPOL extends XMLAbstract{
 				$kod = $item->Kod;
 				$num = (int)$item->{'na_magazynie_dostepne_teraz'} + (int)$item->{'na_zamowienie_w_ciagu_7-10_dni'};
 				
+				mysqli_ping( $this->_connect );
 				$sql = "UPDATE `XML_product` SET  `instock` = {$num}, data = '{$dt}' WHERE `code` = '{$kod}'";
 				if( mysqli_query( $this->_connect, $sql ) === false ){
 					$this->_log[] = mysqli_error( $this->_connect );
@@ -299,6 +298,7 @@ class AXPOL extends XMLAbstract{
 					
 				}
 				
+				mysqli_ping( $this->_connect );
 				$sql = "UPDATE `XML_product` SET  `marking` = '{$mark_s}', data = '{$dt}' WHERE `code` = '{$kod}'";
 				if( mysqli_query( $this->_connect, $sql ) === false ){
 					$this->_log[] = mysqli_error( $this->_connect );

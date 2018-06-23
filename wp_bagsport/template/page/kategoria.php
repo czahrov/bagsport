@@ -69,9 +69,15 @@
 						$sql = sprintf(
 							'WHERE cat.name = "%s" OR subcat.name = "%1$s" %s',
 							$nazwa,
-							!empty( $atts['orderby'] ) and !empty( $atts['order'] )?( "ORDER BY {$atts['orderby']} {$atts['order']}" ):( "" )
+							( !empty( $atts['orderby'] ) and !empty( $atts['order'] ) )?( "ORDER BY {$atts['orderby']} {$atts['order']}" ):( "" )
 							
 						);
+						
+						if( DMODE ){
+							echo "<!-- {$sql} -->";
+							
+						}
+						
 						printProducts( $nazwa, $atts, $XM->getData( $sql ) );
 						
 					}

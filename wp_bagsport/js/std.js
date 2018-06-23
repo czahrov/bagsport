@@ -120,6 +120,7 @@
 /* funkcja modyfikująca zapytanie URL */
 function queryMod( args ){
 	var query = window.location.search;
+	if( !/^\?/.test( query ) ) query = "?" + query;
 	if( typeof args === 'undefined' ) return query;
 	
 	$.each( args, function( name, value ){
