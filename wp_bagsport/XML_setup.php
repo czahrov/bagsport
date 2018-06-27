@@ -3,6 +3,13 @@ require_once __DIR__ . "/php/cfg.php";
 
 $SHOP  = array();
 
+$SHOP['asgard'] = new ASGARD( array(
+	'products' => 'http://www.asgard.pl/www/xml/oferta.xml',
+),
+array(
+	'shop' => 'ASGARD',
+) );
+
 $SHOP['midoceanbrands'] = new MIDOCEANBRANDS( array(
 	'products' => 'ftp://lucyna:80838286@transfer.midoceanbrands.com/prodinfo_PL.xml',
 	'stock' => 'ftp://lucyna:80838286@transfer.midoceanbrands.com/stock.xml',
@@ -61,17 +68,10 @@ array(
 	'shop' => 'PAR',
 ) );
 
+
 $XM = new XMLMan();
 foreach( $SHOP as $item ){
 	$XM->addSupport( $item );
 	
 }
 
-/* if( isset( $_GET[ 'renew' ] ) ){
-	if( isset( $_GET[ 'axpol' ] ) ) $AXPOL->renew();
-	
-}
-elseif( isset( $_GET[ 'rehash' ] ) ){
-	$XM->rehash();
-	
-} */
