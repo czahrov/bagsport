@@ -10,52 +10,60 @@
 						Dane kontaktowe
 					</h2>
 					<div class='row'>
-						<div class='col-3'>Adres firmy: </div>
-						<a class='' href="<?php
-							printf(
-								'https://maps.google.com/?q=%s',
-								getInfo('adres_firmy')
-								
-							);
-						?>" target='_blank'>
-							<?php echo getInfo('adres_firmy'); ?>
-						</a>
+						<div class='col-12 col-lg-3'>Adres firmy: </div>
+						<div class='col'>
+							<a class='' href="<?php
+								printf(
+									'https://maps.google.com/?q=%s',
+									getInfo('adres_firmy')
+									
+								);
+							?>" target='_blank'>
+								<?php echo getInfo('adres_firmy'); ?>
+							</a>
+						</div>
 					</div>
 					<div class='row'>
-						<div class='col-3'>Telefon: </div>
-						<a class='' href="<?php
-							printf(
-								'tel:%s',
-								preg_replace( '~\D+~', '', getInfo('infolinia') )
-								
-							);
-						?>" >
-							<?php echo getInfo('infolinia'); ?>
-						</a>
+						<div class='col-12 col-lg-3'>Telefon: </div>
+						<div class='col'>
+							<a class='' href="<?php
+								printf(
+									'tel:%s',
+									preg_replace( '~\D+~', '', getInfo('infolinia') )
+									
+								);
+							?>" >
+								<?php echo getInfo('infolinia'); ?>
+							</a>
+						</div>
 					</div>
 					<div class='row'>
-						<div class='col-3'>Stacjonarny: </div>
-						<a class='' href="<?php
-							printf(
-								'tel:%s',
-								preg_replace( '~\D+~', '', getInfo('stacjonarny') )
-								
-							);
-						?>" >
-							<?php echo getInfo('stacjonarny'); ?>
-						</a>
+						<div class='col-12 col-lg-3'>Stacjonarny: </div>
+						<div class='col'>
+							<a class='' href="<?php
+								printf(
+									'tel:%s',
+									preg_replace( '~\D+~', '', getInfo('stacjonarny') )
+									
+								);
+							?>" >
+								<?php echo getInfo('stacjonarny'); ?>
+							</a>
+						</div>
 					</div>
 					<div class='row'>
-						<div class='col-3'>E-mail:</div>
-						<a class='' href="<?php
-							printf(
-								'mailto:%s',
-								getInfo('kontakt_e-mail')
-								
-							);
-						?>" >
-							<?php echo getInfo('kontakt_e-mail'); ?>
-						</a>
+						<div class='col-12 col-lg-3'>E-mail:</div>
+						<div class='col'>
+							<a class='' href="<?php
+								printf(
+									'mailto:%s',
+									getInfo('kontakt_e-mail')
+									
+								);
+							?>" >
+								<?php echo getInfo('kontakt_e-mail'); ?>
+							</a>
+						</div>
 					</div>
 					
 				</div>
