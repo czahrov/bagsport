@@ -104,8 +104,8 @@ class AXPOL extends XMLAbstract{
 				preg_match_all( $pattern, $code, $match );
 				// $short = $match[1];
 				$short = $match[1][0];
-				$brutto = (float)str_replace( ",", ".", $item->CatalogPricePLN );
-				$netto = $brutto / ( 1 + $this->_vat );
+				$netto = (float)str_replace( ",", ".", $item->CatalogPricePLN );
+				$brutto = $netto * ( 1 + $this->_vat );
 				$catalog = addslashes( (string)$item->Catalog );
 				$cat = addslashes( (string)$item->MainCategoryPL );
 				$subcat = addslashes( (string)$item->SubCategoryPL );

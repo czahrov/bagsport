@@ -268,13 +268,13 @@ function printProducts( $categoryName = "Produkcja własna", $arg = array(), $in
 								 <div class="badge %s"></div>
 						  </a>
 						  <div class="card-body d-flex flex-column">
-								 <a href="%1$s"></a>
+								 <a href="%2$s"></a>
 								 <div class="hover-element-shop">
-										<a href="%1$s"></a>
+										<a href="%2$s"></a>
 										<a href="%s">wyślij zapytanie</a>
 								</div>
 								 <h4 class="card-title grow ">
-										<a href="%1$s">%s</a>
+										<a href="%2$s">%s</a>
 								 </h4>
 								 <div class="price">
 										<h5>
@@ -282,7 +282,7 @@ function printProducts( $categoryName = "Produkcja własna", $arg = array(), $in
 											%s
 										</h5>
 								 </div>
-								 <a href="%1$s" class="button-show-item">Zobacz</a>
+								 <a href="%2$s" class="button-show-item">Zobacz</a>
 						  </div>
 				   </div>
 				</div>',
