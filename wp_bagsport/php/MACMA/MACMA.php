@@ -13,10 +13,6 @@ class MACMA extends XMLAbstract{
 			$cat_name = 'Narzędzia, latarki i breloki';
 
 		}
-		elseif( in_array( $cat_name, array( 'długopisy i zestawy piśmienne', 'mark twain' ) ) ){
-			$cat_name = 'Materiały piśmiennicze';
-
-		}
 		elseif( in_array( $cat_name, array( 'dom i wyposażenie wnętrz' ) ) ){
 			$cat_name = 'Dom i ogród';
 
@@ -44,6 +40,17 @@ class MACMA extends XMLAbstract{
 		elseif( in_array( $cat_name, array( 'torby, worki, plecaki' ) ) ){
 			$cat_name = 'Torby i plecaki';
 
+		}
+		elseif( 
+				stripos( (string)$item->baseinfo->name, 'długo' ) !== false or
+				stripos( (string)$item->baseinfo->name, 'ołów' ) !== false or
+				stripos( (string)$item->baseinfo->name, 'piór' ) !== false or
+				stripos( (string)$item->baseinfo->name, 'flamas' ) !== false
+			){
+				$cat_name = 'Materiały piśmiennicze';
+		}
+		else{
+			$cat_name = 'Inne';
 		}
 
 	}

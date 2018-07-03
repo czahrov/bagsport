@@ -21,10 +21,6 @@ class PAR extends XMLAbstract{
 			$cat_name = 'Wakacje, sport i rekreacja';
 
 		}
-		elseif( in_array( $cat_name, array( 'długopisy aluminiowe', 'długopisy eco', 'długopisy metalowe', 'długopisy plastikowe', 'ołówki', 'pióra wieczne i kulkowe', 'zestawy piśmiennicze' ) ) ){
-			$cat_name = 'Materiały piśmiennicze';
-
-		}
 		elseif( in_array( $cat_name, array( 'do kuchni', 'do łazienki', 'ozdoby domowe', 'zestawy do wina' ) ) ){
 			$cat_name = 'Dom i ogród';
 
@@ -45,7 +41,18 @@ class PAR extends XMLAbstract{
 			$cat_name = 'Torby i plecaki';
 
 		}
-
+		elseif( 
+				stripos( (string)$item->nazwa, 'długo' ) !== false or
+				stripos( (string)$item->nazwa, 'ołów' ) !== false or
+				stripos( (string)$item->nazwa, 'piór' ) !== false or
+				stripos( (string)$item->nazwa, 'flamas' ) !== false
+			){
+				$cat_name = 'Materiały piśmiennicze';
+		}
+		else{
+			$cat_name = 'Inne';
+		}
+		
 	}
 
 	// wczytywanie XML, parsowanie danych XML, zapis do bazy danych

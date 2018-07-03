@@ -29,10 +29,6 @@ class EASYGIFTS extends XMLAbstract{
 			$cat_name = 'Elektronika';
 
 		}
-		elseif( in_array( $cat_name, array( 'materiały piśmiennicze', 'długopisy z grawerem za 10 groszy!', 'infinitebook & smart cube' ) ) ){
-			$cat_name = 'Materiały piśmiennicze';
-
-		}
 		elseif( in_array( $cat_name, array( 'breloki akrylowe', 'narzędzia', 'pinsy', 'victorinox delemont collection' ) ) ){
 			$cat_name = 'Narzędzia, latarki i breloki';
 
@@ -56,6 +52,17 @@ class EASYGIFTS extends XMLAbstract{
 		elseif( in_array( $cat_name, array( 'katalog świąteczny', 'katalog świąteczny 2015' ) ) ){
 			$cat_name = 'Świąteczne';
 
+		}
+		elseif( 
+				stripos( (string)$item->baseinfo->name, 'długo' ) !== false or
+				stripos( (string)$item->baseinfo->name, 'ołów' ) !== false or
+				stripos( (string)$item->baseinfo->name, 'piór' ) !== false or
+				stripos( (string)$item->baseinfo->name, 'flamas' ) !== false
+			){
+				$cat_name = 'Materiały piśmiennicze';
+		}
+		else{
+			$cat_name = 'Inne';
 		}
 
 	}

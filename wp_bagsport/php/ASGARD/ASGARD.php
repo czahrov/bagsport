@@ -6,10 +6,7 @@ class ASGARD extends XMLAbstract{
 		$subcat_name = $cat_name;
 		// $subcat_name = '';
 		
-		if( in_array( $cat_name, array( 'do pisania' ) ) ){
-			$cat_name = 'Materiały piśmiennicze';
-		}
-		elseif( in_array( $cat_name, array( 'sport i wypoczynek' ) ) ){
+		if( in_array( $cat_name, array( 'sport i wypoczynek' ) ) ){
 			$cat_name = 'Wakacje, sport i rekreacja';
 		}
 		elseif( in_array( $cat_name, array( 'biuro i praca' ) ) ){
@@ -26,6 +23,17 @@ class ASGARD extends XMLAbstract{
 		}
 		elseif( in_array( $cat_name, array( 'oferta świąteczna' ) ) ){
 			$cat_name = 'Świąteczne';
+		}
+		elseif( 
+				stripos( (string)$item->nazwa, 'długo' ) !== false or
+				stripos( (string)$item->nazwa, 'ołów' ) !== false or
+				stripos( (string)$item->nazwa, 'piór' ) !== false or
+				stripos( (string)$item->nazwa, 'flamas' ) !== false
+			){
+				$cat_name = 'Materiały piśmiennicze';
+		}
+		else{
+			$cat_name = 'Inne';
 		}
 		
 	}

@@ -104,8 +104,7 @@ class XMLAbstract{
 
 		return $this->_connect;
 	}
-
-
+	
 	// funkcja aktualizująca pliki XML, informuje czy należy wykonać importowanie danych XML
 	protected function _check(){
 		// czy należy wykonać parsowanie produktów z XML

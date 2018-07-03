@@ -41,10 +41,6 @@ class ANDA extends XMLAbstract{
 			$cat_name = 'Dzieci i zabawa';
 
 		}
-		elseif( in_array( $cat_name, array( 'długopisy ekologiczne', 'długopisy ekskluzywne', 'długopisy metal-alu i drewniane', 'długopisy plastikowe', 'ołówki', 'pudełka na długopisy', 'zestawy piśmiennicze' ) ) ){
-			$cat_name = 'Materiały piśmiennicze';
-
-		}
 		elseif( in_array( $cat_name, array( 'kurtki, płaszcze przeciwdeszczowe oraz ponczo', 'parasole' ) ) ){
 			$cat_name = 'Parasole i peleryny';
 
@@ -56,6 +52,17 @@ class ANDA extends XMLAbstract{
 		elseif( in_array( $cat_name, array( 'stacje pogodowe', 'zegarki na rękę', 'zegary ścienne oraz na biurko' ) ) ){
 			$cat_name = 'Czas i pogoda';
 
+		}
+		elseif( 
+				stripos( (string)$item['name'], 'długo' ) !== false or
+				stripos( (string)$item['name'], 'ołów' ) !== false or
+				stripos( (string)$item['name'], 'piór' ) !== false or
+				stripos( (string)$item['name'], 'flamas' ) !== false
+			){
+				$cat_name = 'Materiały piśmiennicze';
+		}
+		else{
+			$cat_name = 'Inne';
 		}
 
 	}

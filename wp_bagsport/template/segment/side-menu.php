@@ -22,6 +22,7 @@
 				'Wakacje, sport i rekreacja',
 				'Zdrowie i uroda',
 				'Świąteczne',
+				'Inne',
 				
 			);
 			sort( $kategorie );

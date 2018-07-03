@@ -21,10 +21,6 @@ class MIDOCEANBRANDS extends XMLAbstract{
 			$cat_name = 'Czas i pogoda';
 
 		}
-		elseif( in_array( $cat_name, array( 'drewniany', 'drewno', 'kolorowe', 'material z recyklingu', 'plastk', 'pudełko', 'zabawne', 'zestaw', 'zestaw biurowy / zestaw do pisania' ) ) ){
-			$cat_name = 'Materiały piśmiennicze';
-
-		}
 		elseif( in_array( $cat_name, array( 'fartuchy i rękawice kuchenne', 'karafka do wina', 'kawiarka', 'koktajl', 'korkociąg / otwieracz', 'krzesła', 'lodówki na wino', 'magnesy na lodówkę', 'minutniki', 'młynki', 'noże', 'otwieracz do butelek', 'ozdoby stołowe', 'podkładki pod szklanki', 'ręczniki', 'rozpylacz', 'sól i pieprz', 'sztućce', 'świece', 'termometr', 'zestaw do wina', 'zestaw pierwszej pomocy' ) ) ){
 			$cat_name = 'Dom i ogród';
 
@@ -52,6 +48,17 @@ class MIDOCEANBRANDS extends XMLAbstract{
 		elseif( in_array( $cat_name, array( 'regularny', 'składany' ) ) ){
 			$cat_name = 'Parasole i peleryny';
 
+		}
+		elseif( 
+				stripos( (string)$item->SHORT_DESCRIPTION, 'długo' ) !== false or
+				stripos( (string)$item->SHORT_DESCRIPTION, 'ołów' ) !== false or
+				stripos( (string)$item->SHORT_DESCRIPTION, 'piór' ) !== false or
+				stripos( (string)$item->SHORT_DESCRIPTION, 'flamas' ) !== false
+			){
+				$cat_name = 'Materiały piśmiennicze';
+		}
+		else{
+			$cat_name = 'Inne';
 		}
 
 	}

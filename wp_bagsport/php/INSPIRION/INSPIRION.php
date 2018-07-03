@@ -35,11 +35,19 @@ class INSPIRION extends XMLAbstract{
 		elseif( in_array( $cat_name, array( 'picooffice', 'wszystko do biura' ) ) ){
 			$cat_name = 'Biuro i biznes';
 		}
-		elseif( in_array( $cat_name, array( 'picopen' ) ) ){
-			$cat_name = 'Materiały piśmiennicze';
-		}
 		elseif( in_array( $cat_name, array( 'torby i plecaki' ) ) ){
 			$cat_name = 'Torby i plecaki';
+		}
+		elseif( 
+				stripos( (string)$item->product_name, 'długo' ) !== false or
+				stripos( (string)$item->product_name, 'ołów' ) !== false or
+				stripos( (string)$item->product_name, 'piór' ) !== false or
+				stripos( (string)$item->product_name, 'flamas' ) !== false
+			){
+				$cat_name = 'Materiały piśmiennicze';
+		}
+		else{
+			$cat_name = 'Inne';
 		}
 
 	}

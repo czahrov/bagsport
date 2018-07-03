@@ -17,10 +17,6 @@ class AXPOL extends XMLAbstract{
 			$cat_name = 'Dom i ogród';
 
 		}
-		elseif( in_array( $cat_name, array( 'do pisania', 'przybory piśmienne' ) ) ){
-			$cat_name = 'Materiały piśmiennicze';
-
-		}
 		elseif( in_array( $cat_name, array( 'parasole' ) ) ){
 			$cat_name = 'Parasole i peleryny';
 
@@ -56,6 +52,17 @@ class AXPOL extends XMLAbstract{
 		elseif( in_array( $cat_name, array( 'zdrowie i bezpieczeństwo' ) ) ){
 			$cat_name = 'Zdrowie i uroda';
 
+		}
+		elseif( 
+				stripos( (string)$item->TitlePL, 'długo' ) !== false or
+				stripos( (string)$item->TitlePL, 'ołów' ) !== false or
+				stripos( (string)$item->TitlePL, 'piór' ) !== false or
+				stripos( (string)$item->TitlePL, 'flamas' ) !== false
+			){
+				$cat_name = 'Materiały piśmiennicze';
+		}
+		else{
+			$cat_name = 'Inne';
 		}
 
 	}
