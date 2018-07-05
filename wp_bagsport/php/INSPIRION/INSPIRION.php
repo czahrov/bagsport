@@ -89,16 +89,13 @@ class INSPIRION extends XMLAbstract{
 
 		}
 		else{
-			// czyszczenie tabeli produktów przed importem danych
-			// $this->_clear();
-
 			// parsowanie danych z XML
 			foreach( $XML->children() as $item ){
 				$code = (string)$item->sku;
 				$short = (string)$item->sku;
 				$price = (string)$item->catalog_price;
-				$brutto = (float)str_replace( ",", ".", $price );
-				$netto = $brutto / ( 1 + $this->_vat );
+				$netto = (float)str_replace( ",", ".", $price );
+				$brutto = $netto * ( 1 + $this->_vat );
 				// $catalog = addslashes( (string)$item-> );
 				$cat = addslashes( (string)$item->catalog );
 				$subcat = addslashes( (string)$item->catalog_special );
@@ -213,6 +210,9 @@ class INSPIRION extends XMLAbstract{
 			}
 
 		}
+		
+		// czyszczenie nieaktualnych produktów
+		// $this->_clear();
 
 		if( !empty( $this->_log ) ){
 			echo "<!--INSPIRION ERROR:" . PHP_EOL;

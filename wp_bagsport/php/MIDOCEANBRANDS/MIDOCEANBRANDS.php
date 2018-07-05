@@ -13,10 +13,6 @@ class MIDOCEANBRANDS extends XMLAbstract{
 			$cat_name = 'Wakacje, sport i rekreacja';
 
 		}
-		elseif( in_array( $cat_name, array( 'bawełna', 'bawełna organiczna', 'juta', 'materiał pet', 'nie tkany', 'papier', 'polyester', 'inny materiał' ) ) ){
-			$cat_name = 'Torby i plecaki';
-
-		}
 		elseif( in_array( $cat_name, array( 'biurko', 'budzik podróżny', 'energia wodna', 'ściana' ) ) ){
 			$cat_name = 'Czas i pogoda';
 
@@ -105,11 +101,6 @@ class MIDOCEANBRANDS extends XMLAbstract{
 
 		}
 		else{
-			// czyszczenie tabeli produktów przed importem danych
-			// $this->_clear();
-
-			// var_dump( $XML);
-
 			// parsowanie danych z XML
 			foreach( $XML->PRODUCTS->PRODUCT as $item ){
 
@@ -246,6 +237,9 @@ class MIDOCEANBRANDS extends XMLAbstract{
 			}
 
 		}
+		
+		// czyszczenie nieaktualnych produktów
+		// $this->_clear();
 
 		if( !empty( $this->_log ) ){
 			echo "<!--ANDA ERROR:" . PHP_EOL;

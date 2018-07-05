@@ -97,9 +97,6 @@ class PAR extends XMLAbstract{
 
 		}
 		else{
-			// czyszczenie tabeli produktów przed importem danych
-			// $this->_clear();
-
 			// parsowanie danych z XML
 			foreach( $XML->children() as $item ){
 				$code = (string)$item->kod;
@@ -234,6 +231,9 @@ class PAR extends XMLAbstract{
 			}
 
 		}
+		
+		// czyszczenie nieaktualnych produktów
+		// $this->_clear();
 
 		if( !empty( $this->_log ) ){
 			echo "<!--PAR ERROR:" . PHP_EOL;

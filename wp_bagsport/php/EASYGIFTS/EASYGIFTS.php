@@ -21,10 +21,6 @@ class EASYGIFTS extends XMLAbstract{
 			$cat_name = 'Dom i ogród';
 
 		}
-		/* elseif( in_array( $cat_name, array( '' ) ) ){
-			$cat_name = 'Dzieci i zabawa';
-
-		} */
 		elseif( in_array( $cat_name, array( 'czas i elektronika', 'dyski', 'elektronika markowa', 'pendrive\'y', 'power banki', 'mobile', 'selfie sticki', 'silicon power' ) ) ){
 			$cat_name = 'Elektronika';
 
@@ -33,10 +29,6 @@ class EASYGIFTS extends XMLAbstract{
 			$cat_name = 'Narzędzia, latarki i breloki';
 
 		}
-		/* elseif( in_array( $cat_name, array( '' ) ) ){
-			$cat_name = 'Parasole i peleryny';
-
-		} */
 		elseif( in_array( $cat_name, array( 'torby', 'torby by jassz', 'tucano', 'victorinox altmont - plecaki i torby', 'wenger - bagaże biznesowe i akcesoria podróżne' ) ) ){
 			$cat_name = 'Torby i plecaki';
 
@@ -104,9 +96,6 @@ class EASYGIFTS extends XMLAbstract{
 
 		}
 		else{
-			// czyszczenie tabeli produktów przed importem danych
-			// $this->_clear();
-
 			// parsowanie danych z XML
 			foreach( $XML->children() as $item ){
 				$code = (string)$item->baseinfo->code_full;
@@ -114,8 +103,8 @@ class EASYGIFTS extends XMLAbstract{
 				$price = $item->baseinfo->price;
 				$price_promo = $item->baseinfo->price_promotion;
 				$price_sellout = $item->baseinfo->price_sellout;
-				$brutto = (float)str_replace( ",", ".", empty( $price_sellout )?( empty( $price_promo )?( $price ):( $price_promo ) ):( $price_sellout ) );
-				$netto = $brutto / ( 1 + $this->_vat );
+				$netto = (float)str_replace( ",", ".", empty( $price_sellout )?( empty( $price_promo )?( $price ):( $price_promo ) ):( $price_sellout ) );
+				$brutto = $netto * ( 1 + $this->_vat );
 				// $catalog = addslashes( (string)$item-> );
 				$cat = addslashes( (string)$item->categories->category[0]->name );
 				// $subcat = addslashes( (string)$item->SubCategoryPL );
@@ -254,6 +243,9 @@ class EASYGIFTS extends XMLAbstract{
 			}
 
 		}
+		
+		// czyszczenie nieaktualnych produktów
+		// $this->_clear();
 
 		if( !empty( $this->_log ) ){
 			echo "<!--EASYGIFTS ERROR:" . PHP_EOL;

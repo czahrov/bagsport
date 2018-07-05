@@ -100,9 +100,6 @@ class AXPOL extends XMLAbstract{
 
 		}
 		else{
-			// czyszczenie tabeli produktów przed importem danych
-			// $this->_clear();
-
 			// parsowanie danych z XML
 			foreach( $XML->children() as $item ){
 				$code = (string)$item->CodeERP;
@@ -250,7 +247,6 @@ class AXPOL extends XMLAbstract{
 
 			// wyciąganie znakowania z XML
 			$XML = simplexml_load_file( __DIR__ . "/DND/" . basename( $this->_sources[ 'marking' ] ) );
-
 			foreach( $XML->children() as $item ){
 				$kod = $item->CodeERP;
 				$marking_a = array();
@@ -319,8 +315,11 @@ class AXPOL extends XMLAbstract{
 
 
 			}
-
+			
 		}
+		
+		// czyszczenie nieaktualnych produktów
+		// $this->_clear();
 
 		if( !empty( $this->_log ) ){
 			echo "<!--AXPOL ERROR:" . PHP_EOL;

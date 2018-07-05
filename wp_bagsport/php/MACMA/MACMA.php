@@ -104,9 +104,6 @@ class MACMA extends XMLAbstract{
 
 		}
 		else{
-			// czyszczenie tabeli produktów przed importem danych
-			// $this->_clear();
-
 			// parsowanie danych z XML
 			foreach( $XML->children() as $item ){
 				$id = (int)$item->baseinfo->id;
@@ -118,7 +115,7 @@ class MACMA extends XMLAbstract{
 
 				// $catalog = addslashes( (string)$item->Catalog );
 				$cat = addslashes( (string)$item->categories->category[0]->name );
-				$subcat = addslashes( (string)$item->categories->category[0]->subcategory[0]->name );
+				$subcat = addslashes( (string)$item->categories->category[0]->subcategories->subcategory[0]->name );
 				$category = $this->_stdName( $cat );
 				$subcategory = $this->_stdName( $subcat );
 				$name = addslashes( (string)$item->baseinfo->name );
@@ -246,6 +243,9 @@ class MACMA extends XMLAbstract{
 			}
 
 		}
+		
+		// czyszczenie nieaktualnych produktów
+		// $this->_clear();
 
 		if( !empty( $this->_log ) ){
 			echo "<!--MACMA ERROR:" . PHP_EOL;
