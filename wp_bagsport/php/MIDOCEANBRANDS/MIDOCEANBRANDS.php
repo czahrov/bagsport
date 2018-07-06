@@ -62,6 +62,48 @@ class MIDOCEANBRANDS extends XMLAbstract{
 	// wczytywanie XML, parsowanie danych XML, zapis do bazy danych
 	// rehash - określa czy wykonać jedynie przypisanie kategorii dla produktów
 	protected function _import( $rehash = false ){
+		/* generowanie tablicy z cenami */
+		$price_a = array();
+		$customer = '80838286';
+		$login = '4134581';
+		$pswd = '80838286';
+		$post = sprintf(
+			'<?xml version="1.0" encoding="utf-8"?>
+			<PRICELIST_REQUEST>
+				<CUSTOMER_NUMBER>%s</CUSTOMER_NUMBER>
+				<LOGIN>%s</LOGIN>
+				<PASSWORD>%s</PASSWORD>
+				<TIMESTAMP>%s</TIMESTAMP>
+			</PRICELIST_REQUEST>',
+			$customer,
+			$login,
+			$pswd,
+			date('YmdHis')
+
+		);
+		$url = "http://b2b.midoceanbrands.com/invoke/b2b.main/get_pricelist_xml";
+		$context = stream_context_create( array(
+			'http' => array(
+				'header' => 'Content-type: text/xml;charset=UTF-8',
+				'method' => 'POST',
+				'content' => $post,
+			),
+
+		) );
+		
+		if( ( $content = file_get_contents( $url, false, $context ) ) !== false ){
+			file_put_contents( __DIR__ . "/DND/PriceList.xml", $content );
+		}
+		else{
+			$content = file_get_contents( __DIR__ . "/DND/PriceList.xml" );
+		}
+		
+		$XML = simplexml_load_string( $content );
+		foreach( $XML->PRODUCTS->PRODUCT as $item ){
+			$price_a[ (string)$item->PRODUCT_NUMBER ] = (string)$item->PRICE;
+			
+		}
+		
 		/* stany magazynowe */
 		$stock_a = array();
 		$XML = simplexml_load_file( __DIR__ . "/DND/" . basename( $this->_sources[ 'stock' ] ) );
@@ -106,9 +148,9 @@ class MIDOCEANBRANDS extends XMLAbstract{
 
 				$code = (string)$item->PRODUCT_NUMBER;
 				$short = (string)$item->PRODUCT_BASE_NUMBER;
-				$price = 0;
-				$brutto = (float)str_replace( ",", ".", $price );
-				$netto = $brutto / ( 1 + $this->_vat );
+				$price = $price_a[ $code ];
+				$netto = (float)str_replace( ",", ".", $price );
+				$brutto = $netto * ( 1 + $this->_vat );
 				// $catalog = addslashes( (string)$item-> );
 				$t_cat = array(
 					(string)$item->CATEGORY_LEVEL_1,
