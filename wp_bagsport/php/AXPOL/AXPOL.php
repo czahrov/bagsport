@@ -4,7 +4,8 @@ class AXPOL extends XMLAbstract{
 	// filtrowanie kategorii
 	protected function _categoryFilter( &$cat_name, &$subcat_name, $item ){
 		$subcat_name = $cat_name;
-
+		
+		
 		if( in_array( $cat_name, array( 'biuro', 'teczki i notatniki', 'mauro conti', 'moleskine' ) ) ){
 			$cat_name = 'Biuro i biznes';
 
@@ -64,7 +65,7 @@ class AXPOL extends XMLAbstract{
 		else{
 			$cat_name = 'Inne';
 		}
-
+		
 	}
 
 	// wczytywanie XML, parsowanie danych XML, zapis do bazy danych
@@ -108,7 +109,7 @@ class AXPOL extends XMLAbstract{
 				preg_match_all( $pattern, $code, $match );
 				// $short = $match[1];
 				$short = $match[1][0];
-				$netto = (float)str_replace( ",", ".", $item->CatalogPricePLN );
+				$netto = (float)str_replace( ",", ".", $item->CatalogPricePLN ) * 1.43;
 				$brutto = $netto * ( 1 + $this->_vat );
 				$catalog = addslashes( (string)$item->Catalog );
 				$cat = addslashes( (string)$item->MainCategoryPL );

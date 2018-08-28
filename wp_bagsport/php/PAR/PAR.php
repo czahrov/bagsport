@@ -102,7 +102,7 @@ class PAR extends XMLAbstract{
 				$code = (string)$item->kod;
 				$short = (string)$item->kod;
 				$price = (string)$item->cena_pln;
-				$netto = (float)str_replace( ",", ".", $price );
+				$netto = (float)str_replace( ",", ".", $price ) * 1.43;
 				$brutto = $netto * ( 1 + $this->_vat );
 				// $catalog = addslashes( (string)$item-> );
 				$cat = addslashes( (string)$item->kategorie->kategoria[0] );

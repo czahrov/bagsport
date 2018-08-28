@@ -197,6 +197,7 @@ h1.my-4 {
       position: static;
       bottom: initial;
       right: initial; }
+
 .hot-products .view {
   position: relative;
   overflow: hidden;
@@ -223,6 +224,7 @@ h1.my-4 {
       position: static;
       bottom: initial;
       right: initial; }
+
 .most-popular .items {
   overflow: hidden; }
 
@@ -297,6 +299,7 @@ body {
 
 .single-item.sale .card-title a {
   color: #e52b50; }
+
 .single-item .price span {
   margin-right: 10px;
   font-weight: 400;
@@ -442,6 +445,7 @@ img {
 
 #blog .hash {
   line-height: 80px; }
+
 #blog .item {
   padding: 20px 0;
   border-style: solid;
@@ -471,6 +475,7 @@ img {
 #single .title {
   width: 100%;
   text-align: center; }
+
 #single .content {
   font-size: 15px;
   font-family: "Poppins", "Times New Roman", serif;
@@ -478,6 +483,7 @@ img {
   line-height: 34px; }
   #single .content * {
     line-height: inherit; }
+
 #single .post_nav a {
   padding: 10px 20px; }
   #single .post_nav a:hover {
@@ -486,6 +492,7 @@ img {
   @media (max-width: 767px) {
     #single .post_nav a {
       text-align: center; } }
+
 @media (min-width: 768px) {
   #single .post_nav.next a {
     text-align: right; } }
@@ -536,8 +543,8 @@ img {
     #quick .panel.contact > .icon {
       border-radius: 30% 0 0 0; }
     #quick .panel:not(:hover) {
-      -webkit-transform: translate(0, calc( 100% - 40px ));
-              transform: translate(0, calc( 100% - 40px )); }
+      -webkit-transform: translate(0, calc( 100% - 40px));
+              transform: translate(0, calc( 100% - 40px)); }
   @media (min-width: 1200px) {
     #quick {
       height: initial;
@@ -548,12 +555,13 @@ img {
       #quick .panel.contact > .icon {
         border-radius: 0 0 30% 0; }
       #quick .panel:not(:hover) {
-        -webkit-transform: translate(calc( -100% + 40px ), 0%);
-                transform: translate(calc( -100% + 40px ), 0%); } }
+        -webkit-transform: translate(calc( -100% + 40px), 0%);
+                transform: translate(calc( -100% + 40px), 0%); } }
 
 #wlasna .title {
   width: 100%;
   text-align: center; }
+
 #wlasna .basic-content {
   font-size: 15px;
   font-family: "Poppins", "Times New Roman", serif;
@@ -565,14 +573,17 @@ img {
 #produkt .present a:hover {
   text-decoration: none;
   color: #e52b50; }
+
 #produkt .present .arrow-pagination {
   display: none; }
   #produkt .present .arrow-pagination > * {
     background-color: #fff; }
+
 #produkt .present .product-single-gallery .view {
   overflow: hidden; }
   #produkt .present .product-single-gallery .view .item .single-gallery:hover {
     border-color: #e52b50; }
+
 #produkt .present .popup {
   position: fixed;
   top: 0;
@@ -635,7 +646,7 @@ img {
   width: 100%; }
   #search input {
     padding: 5px 10px;
-    width: calc( 100% - 60px );
+    width: calc( 100% - 60px);
     background-color: #e8e8e8;
     color: #58585a;
     border: none;
@@ -694,6 +705,7 @@ img {
     background-color: #14b830; }
   #zapytaj .mail_status.fail {
     background-color: #b81414; }
+
 #zapytaj #ask {
   width: 100%; }
   #zapytaj #ask .field {
@@ -703,6 +715,7 @@ img {
   #zapytaj #ask textarea {
     height: 200px;
     resize: none; }
+
 #zapytaj .details {
   font-size: 15px;
   font-family: "Poppins", "Times New Roman", serif;

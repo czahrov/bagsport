@@ -103,6 +103,24 @@
 		</noscript>
 		<!-- End Facebook Pixel Code -->
 
+		<!-- RODO --> 
+
+		<script src="https://swiadectwa.legalniewsieci.pl/themes/default/assets/js-v2/initwidget.min.js"></script>
+
+        <script>
+
+            var params  = {
+
+                'id': "LWS-84da5340d6511fa84374eb3e92eb3bc6",
+
+                'type' : "1"
+
+            };
+
+            initWidget(params);
+
+        </script>
+
 		
 	</head>
 	<?php wp_head(); ?>

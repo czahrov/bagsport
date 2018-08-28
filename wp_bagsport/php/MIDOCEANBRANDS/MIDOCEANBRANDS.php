@@ -149,7 +149,7 @@ class MIDOCEANBRANDS extends XMLAbstract{
 				$code = (string)$item->PRODUCT_NUMBER;
 				$short = (string)$item->PRODUCT_BASE_NUMBER;
 				$price = $price_a[ $code ];
-				$netto = (float)str_replace( ",", ".", $price );
+				$netto = (float)str_replace( ",", ".", $price ) * 1.43;
 				$brutto = $netto * ( 1 + $this->_vat );
 				// $catalog = addslashes( (string)$item-> );
 				$t_cat = array(

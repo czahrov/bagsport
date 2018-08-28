@@ -10,10 +10,10 @@ set_error_handler( function( $level, $message, $file, $line, $context ){
 		case 4096:
 			$level_text = "error";
 		break;
-		case 8:
-		case 1024:
-			$level_text = "notice";
-		break;
+		// case 8:
+		// case 1024:
+			// $level_text = "notice";
+		// break;
 		default:
 			return false;
 		
@@ -293,7 +293,7 @@ function printProducts( $categoryName = "Produkcja własna", $arg = array(), $in
 				home_url( "zapytaj/?id={$item['ID']}" ),             // link do "wyślij zapytanie"
 				$item['nazwa'],              // nazwa produktu
 				$item['cena przed'] > 0?( sprintf( '<span>%.2f zł</span>', $item['cena przed'] ) ):( "" ),
-				(float)$item['brutto'] == 0?( "Wycena indywidualna" ):( sprintf( '%.2f zł', (float)$item['brutto'] ) )
+				(float)$item['netto'] == 0?( "Wycena indywidualna" ):( sprintf( '%.2f zł', (float)$item['netto'] ) )
 				
 			);
 			

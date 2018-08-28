@@ -14,7 +14,7 @@ class XMLAbstract{
 		// nazwa sklepu
 		'shop' => '',
 		// po jakim czasie pobrać XML ponownie ( w sekundach )
-		'lifetime' => 0,
+		'lifetime' => 60 * 60 * 4,
 		// dodatkowe dane autoryzacyjne
 		'context' => array(
 			'http' => array(
@@ -143,9 +143,10 @@ class XMLAbstract{
 		return $doImport;
 	}
 
-	// funkcja czyszcząca wpisy z danego sklepu
-	protected function _clear(){
-		$sql = "DELETE FROM `XML_product` WHERE `shop` = '{$this->_atts[ 'shop' ]}'";
+	// funkcja czyszcząca nieaktualne wpisy z danego sklepu po aktualizacji
+	protected function _clear( $data = null ){
+		$dt = $data===null?( date("Y-m-d H:i:s") ):( $data );
+		$sql = "DELETE FROM XML_product WHERE shop = '{$this->_atts[ 'shop' ]}' AND data < '{$dt}'";
 		echo "\r\n $sql \r\n";
 		if( mysqli_query( $this->_connect, $sql ) === false ){
 			$this->_log[] = mysqli_error( $this->_connect );

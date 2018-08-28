@@ -29,3 +29,9 @@ foreach( $SHOP as $name => $single ){
 	
 }
 
+printf(
+	'%1$s--- [%2$s] ---%1$s',
+	PHP_EOL,
+	date("Y-m-d H:i:s")
+);
+

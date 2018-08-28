@@ -38,7 +38,7 @@
 				</h1>
 				<div class="hot-products-content d-flex">
 					<div class="hot-products-img">
-						<div class="hot-img" style="background-image: url('http://poligon.scepter.pl/SzymonJ/wp_bagsport/wp-content/themes/wp_bagsport/img/korkociag.jpg');">
+						<div class="hot-img" style="background-image: url('wp-content/themes/wp_bagsport/img/korkociag.jpg');">
 						</div>
 					</div>
 					<div class="hot-content">
@@ -49,7 +49,7 @@
 				<!-- /.hot single -->  
 				<div class="hot-products-content d-flex">
 					<div class="hot-products-img">
-						<div class="hot-img" style="background-image: url('http://poligon.scepter.pl/SzymonJ/wp_bagsport/wp-content/themes/wp_bagsport/img/cooler.jpg');"></div>
+						<div class="hot-img" style="background-image: url('wp-content/themes/wp_bagsport/img/cooler.jpg');"></div>
 					</div>
 					<div class="hot-content">
 						<h4> Cooler do wina</h4>
@@ -59,7 +59,7 @@
 				<!-- /.hot single -->  
 				<div class="hot-products-content d-flex">
 					<div class="hot-products-img">
-						<div class="hot-img" style="background-image: url('http://poligon.scepter.pl/SzymonJ/wp_bagsport/wp-content/themes/wp_bagsport/img/dl.jpg');"></div>
+						<div class="hot-img" style="background-image: url('wp-content/themes/wp_bagsport/img/dl.jpg');"></div>
 					</div>
 					<div class="hot-content">
 						<h4> Długopis w drewnianym etui</h4>
@@ -69,7 +69,7 @@
 				<!-- /.hot single -->  
 				<div class="hot-products-content d-flex">
 					<div class="hot-products-img">
-						<div class="hot-img" style="background-image: url('http://poligon.scepter.pl/SzymonJ/wp_bagsport/wp-content/themes/wp_bagsport/img/parag.jpg');"></div>
+						<div class="hot-img" style="background-image: url('wp-content/themes/wp_bagsport/img/parag.jpg');"></div>
 					</div>
 					<div class="hot-content">
 						<h4> Wodoodporny parasol, rączka C</h4>
@@ -139,7 +139,7 @@
 				<div class="col-lg-4 col-md-6 mb-4 single-item">
 					<div class="card h-100 d-flex">
 						<a href="produkt-single.html">
-							<div class="card-img" style="background-image: url('http://poligon.scepter.pl/SzymonJ/wp_bagsport/wp-content/themes/wp_bagsport/img/20.jpg');">
+							<div class="card-img" style="background-image: url('wp-content/themes/wp_bagsport/img/20.jpg');">
 							</div>
 							<div class="card-body d-flex flex-column">
 								<div class="hover-element-shop">
@@ -159,7 +159,7 @@
 				<div class="col-lg-4 col-md-6 mb-4 single-item">
 					<div class="card h-100 d-flex">
 						<a href="#"></a>
-						<div class="card-img" style="background-image: url('http://poligon.scepter.pl/SzymonJ/wp_bagsport/wp-content/themes/wp_bagsport/img/18.jpg');">
+						<div class="card-img" style="background-image: url('wp-content/themes/wp_bagsport/img/18.jpg');">
 							<div class="icon">
 								<span class="fa fa-search-plus"></span>
 							</div>
@@ -182,7 +182,7 @@
 				<div class="col-lg-4 col-md-6 mb-4 single-item">
 					<div class="card h-100 d-flex">
 						<a href="#"></a>
-						<div class="card-img" style="background-image: url('http://poligon.scepter.pl/SzymonJ/wp_bagsport/wp-content/themes/wp_bagsport/img/11.jpg');">
+						<div class="card-img" style="background-image: url('wp-content/themes/wp_bagsport/img/11.jpg');">
 							<div class="icon">
 								<span class="fa fa-search-plus"></span>
 							</div>
@@ -205,7 +205,7 @@
 				<div class="col-lg-4 col-md-6 mb-4 single-item">
 					<div class="card h-100 d-flex">
 						<a href="#"></a>
-						<div class="card-img" style="background-image: url('http://poligon.scepter.pl/SzymonJ/wp_bagsport/wp-content/themes/wp_bagsport/img/12.jpg');">
+						<div class="card-img" style="background-image: url('wp-content/themes/wp_bagsport/img/12.jpg');">
 							<div class="icon">
 								<span class="fa fa-search-plus"></span>
 							</div>
@@ -228,7 +228,7 @@
 				<div class="col-lg-4 col-md-6 mb-4 single-item">
 					<div class="card h-100 d-flex">
 						<a href="#"></a>
-						<div class="card-img" style="background-image: url('http://poligon.scepter.pl/SzymonJ/wp_bagsport/wp-content/themes/wp_bagsport/img/13.jpg');">
+						<div class="card-img" style="background-image: url('wp-content/themes/wp_bagsport/img/13.jpg');">
 							<div class="icon">
 								<span class="fa fa-search-plus"></span>
 							</div>
@@ -251,7 +251,7 @@
 				<div class="col-lg-4 col-md-6 mb-4 single-item">
 					<div class="card h-100 d-flex">
 						<a href="#"></a>
-						<div class="card-img" style="background-image: url('http://poligon.scepter.pl/SzymonJ/wp_bagsport/wp-content/themes/wp_bagsport/img/3.jpg');">
+						<div class="card-img" style="background-image: url('wp-content/themes/wp_bagsport/img/3.jpg');">
 							<div class="icon">
 								<span class="fa fa-search-plus"></span>
 							</div>
@@ -274,7 +274,7 @@
 				<div class="col-lg-4 col-md-6 mb-4 single-item">
 					<div class="card h-100 d-flex">
 						<a href="#"></a>
-						<div class="card-img" style="background-image: url('http://poligon.scepter.pl/SzymonJ/wp_bagsport/wp-content/themes/wp_bagsport/img/15.jpg');">
+						<div class="card-img" style="background-image: url('wp-content/themes/wp_bagsport/img/15.jpg');">
 							<div class="icon">
 								<span class="fa fa-search-plus"></span>
 							</div>
@@ -297,7 +297,7 @@
 				<div class="col-lg-4 col-md-6 mb-4 single-item">
 					<div class="card h-100 d-flex">
 						<a href="#"></a>
-						<div class="card-img" style="background-image: url('http://poligon.scepter.pl/SzymonJ/wp_bagsport/wp-content/themes/wp_bagsport/img/14.jpg');">
+						<div class="card-img" style="background-image: url('wp-content/themes/wp_bagsport/img/14.jpg');">
 							<div class="icon">
 								<span class="fa fa-search-plus"></span>
 							</div>
@@ -320,7 +320,7 @@
 				<div class="col-lg-4 col-md-6 mb-4 single-item">
 					<div class="card h-100 d-flex">
 						<a href="#"></a>
-						<div class="card-img" style="background-image: url('http://poligon.scepter.pl/SzymonJ/wp_bagsport/wp-content/themes/wp_bagsport/img/16.jpg');">
+						<div class="card-img" style="background-image: url('wp-content/themes/wp_bagsport/img/16.jpg');">
 							<div class="icon">
 								<span class="fa fa-search-plus"></span>
 							</div>
@@ -343,7 +343,7 @@
 				<div class="col-lg-4 col-md-6 mb-4 single-item">
 					<div class="card h-100 d-flex">
 						<a href="#"></a>
-						<div class="card-img" style="background-image: url('http://poligon.scepter.pl/SzymonJ/wp_bagsport/wp-content/themes/wp_bagsport/img/13.jpg');">
+						<div class="card-img" style="background-image: url('wp-content/themes/wp_bagsport/img/13.jpg');">
 							<div class="icon">
 								<span class="fa fa-search-plus"></span>
 							</div>
@@ -366,7 +366,7 @@
 				<div class="col-lg-4 col-md-6 mb-4 single-item">
 					<div class="card h-100 d-flex">
 						<a href="#"></a>
-						<div class="card-img" style="background-image: url('http://poligon.scepter.pl/SzymonJ/wp_bagsport/wp-content/themes/wp_bagsport/img/3.jpg');">
+						<div class="card-img" style="background-image: url('wp-content/themes/wp_bagsport/img/3.jpg');">
 							<div class="icon">
 								<span class="fa fa-search-plus"></span>
 							</div>
@@ -389,7 +389,7 @@
 				<div class="col-lg-4 col-md-6 mb-4 single-item">
 					<div class="card h-100 d-flex">
 						<a href="#"></a>
-						<div class="card-img" style="background-image: url('http://poligon.scepter.pl/SzymonJ/wp_bagsport/wp-content/themes/wp_bagsport/img/15.jpg');">
+						<div class="card-img" style="background-image: url('wp-content/themes/wp_bagsport/img/15.jpg');">
 							<div class="icon">
 								<span class="fa fa-search-plus"></span>
 							</div>

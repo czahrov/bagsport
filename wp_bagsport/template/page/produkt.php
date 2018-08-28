@@ -121,12 +121,6 @@
 						<?php endif; ?>
 						<?php if( $item['brutto'] > 0 ): ?>
 						<h1>
-							Cena brutto:
-							<span>
-								<?php echo $item['brutto']; ?> zł
-							</span>
-						</h1>
-						<h1>
 							Cena netto:
 							<span>
 								<?php echo $item['netto']; ?> zł
@@ -140,6 +134,8 @@
 							</a>
 						</h1>
 						<?php endif; ?>
+						
+						
 					</div>
 				</div>
 				<div class="col-lg-9 col-md-6 mb-4 product-content">

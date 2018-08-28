@@ -1,4 +1,6 @@
 *.min.*
+*.log
+test.php
 img/
 DND/
 webfonts/

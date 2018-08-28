@@ -80,7 +80,7 @@ class ASGARD extends XMLAbstract{
 				$code = (string)$item->indeks;
 				$short = $code;
 				$price = (string)$item->cena_netto_katalogowa;
-				$netto = (float)str_replace( ",", ".", $price );
+				$netto = (float)str_replace( ",", ".", $price ) * 1.43;
 				$brutto = $netto * ( 1 + $this->_vat );
 				// $catalog = addslashes( (string)$item-> );
 				$cat = addslashes( (string)$item->kategoria );

@@ -54,6 +54,7 @@ class EASYGIFTS extends XMLAbstract{
 				$cat_name = 'Materiały piśmiennicze';
 		}
 		else{
+			$sucat_name = $cat_name;
 			$cat_name = 'Inne';
 		}
 
@@ -103,7 +104,7 @@ class EASYGIFTS extends XMLAbstract{
 				$price = $item->baseinfo->price;
 				$price_promo = $item->baseinfo->price_promotion;
 				$price_sellout = $item->baseinfo->price_sellout;
-				$netto = (float)str_replace( ",", ".", empty( $price_sellout )?( empty( $price_promo )?( $price ):( $price_promo ) ):( $price_sellout ) );
+				$netto = (float)str_replace( ",", ".", empty( $price_sellout )?( empty( $price_promo )?( $price ):( $price_promo ) ):( $price_sellout ) ) * 1.43;
 				$brutto = $netto * ( 1 + $this->_vat );
 				// $catalog = addslashes( (string)$item-> );
 				$cat = addslashes( (string)$item->categories->category[0]->name );

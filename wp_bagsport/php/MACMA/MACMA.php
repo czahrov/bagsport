@@ -110,7 +110,7 @@ class MACMA extends XMLAbstract{
 				$code = (string)$item->baseinfo->code_full;
 				$short = (string)$item->baseinfo->code_short;
 
-				$netto = $price_a[ $code ];
+				$netto = (float)$price_a[ $code ] * 1.43;
 				$brutto = $netto * ( 1 + $this->_vat );
 
 				// $catalog = addslashes( (string)$item->Catalog );

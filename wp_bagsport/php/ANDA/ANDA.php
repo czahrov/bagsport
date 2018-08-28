@@ -125,7 +125,7 @@ class ANDA extends XMLAbstract{
 					$code = (string)$item->itemNumber;
 					$short = $code;
 					$price = $price_a[ $code ];
-					$netto = (float)str_replace( ",", ".", $price );
+					$netto = (float)str_replace( ",", ".", $price ) * 1.5;
 					$brutto = $netto * ( 1 + $this->_vat );
 					// $catalog = addslashes( (string)$item-> );
 					$cat = addslashes( (string)$item->categories->category[0]->name );
