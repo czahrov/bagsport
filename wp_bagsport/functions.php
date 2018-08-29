@@ -34,16 +34,19 @@ set_error_handler( function( $level, $message, $file, $line, $context ){
 	);
 	
 	$dst = sprintf(
-		'%s/log/%s/%s.log',
+		'%s/%s.log',
 		__DIR__,
-		date( 'Y-m-d' ),
 		$level_text
 		
 	);
 	
-	if( !file_exists( dirname( $dst ) ) ) mkdir( dirname( $dst ), 0755, true );
+	// if( !file_exists( dirname( $dst ) ) ) mkdir( dirname( $dst ), 0755, true );
 	
-	error_log( $msg, 3, $dst );
+	// error_log( $msg, 3, $dst );
+	if( ( $file = fopen( $dst, 'w' ) ) !== false ){
+		fwrite( $file, $msg );
+		fclose( $file );
+	}
 	
 } );
 

@@ -111,7 +111,7 @@
 						</h3>
 					</div>
 					<div class="col-lg-4 col-md-6 mb-4 product-price">
-						<?php if( $item['cena przed'] > 0 ): ?>
+						<?php if( $item['cena przed'] > 0 and $item['cena przed'] > $item['netto'] ): ?>
 						<h1>
 							Cena przed obniżką:
 							<span>
@@ -134,11 +134,31 @@
 							</a>
 						</h1>
 						<?php endif; ?>
-						
+						<div class='fc-rozowy fs-base'>
+							UWAGA!
+						</div>
+						<ul>
+							<li>
+								Cena nie zawiera kosztów znakowania.
+							</li>
+							<li>
+								Znakowany towar nie podlega zwrotowi.
+							</li>
+							<li>
+								Informacje znajdujące się na stronach internetowych sklepu nie stanowią oferty w rozumieniu przepisów prawa.
+							</li>
+							<li>
+								Klient składając zamówienie, składa ofertę kupna określonego produktu na warunkach podanych w jego opisie
+							</li>
+							<li>
+								Ostateczny koszt zamówienia zostanie potwierdzony przy zamówieniu
+							</li>
+							
+						</ul>
 						
 					</div>
 				</div>
-				<div class="col-lg-9 col-md-6 mb-4 product-content">
+				<div class="col-lg-7 col-md-6 mb-4 product-content">
 					<div class="row">
 						<div class="d-flex flex-column">
 							<h1>O produkcie</h1>

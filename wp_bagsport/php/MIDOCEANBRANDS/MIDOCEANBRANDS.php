@@ -1,6 +1,11 @@
 <?php
 class MIDOCEANBRANDS extends XMLAbstract{
-
+	private $_marża = 0.47;
+	
+	private function _priceMod( $price ){
+		return (float)$price * ( 1 + $this->_narzut );
+	}
+	
 	// filtrowanie kategorii
 	protected function _categoryFilter( &$cat_name, &$subcat_name, $item ){
 		$subcat_name = $cat_name;
@@ -149,7 +154,7 @@ class MIDOCEANBRANDS extends XMLAbstract{
 				$code = (string)$item->PRODUCT_NUMBER;
 				$short = (string)$item->PRODUCT_BASE_NUMBER;
 				$price = $price_a[ $code ];
-				$netto = (float)str_replace( ",", ".", $price ) * 1.43;
+				$netto = $this->_priceMod( (float)str_replace( ",", ".", $price ) );
 				$brutto = $netto * ( 1 + $this->_vat );
 				// $catalog = addslashes( (string)$item-> );
 				$t_cat = array(

@@ -603,6 +603,17 @@ img {
   #produkt .present .popup:not(.open) {
     display: none !important; }
 
+@media (min-width: 768px) {
+  #produkt #side + div {
+    min-height: 1400px; }
+    #produkt #side + div .product-price {
+      position: relative; }
+      #produkt #side + div .product-price ul {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0; } }
+
 #side {
   -webkit-box-ordinal-group: 2;
       -ms-flex-order: 1;

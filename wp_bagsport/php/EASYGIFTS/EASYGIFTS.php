@@ -64,7 +64,6 @@ class EASYGIFTS extends XMLAbstract{
 	// rehash - określa czy wykonać jedynie przypisanie kategorii dla produktów
 	protected function _import( $rehash = false ){
 		// wczytywanie pliku XML z produktami
-		$XML = simplexml_load_file( __DIR__ . "/DND/" . basename( $this->_sources[ 'products' ] ) );
 		$dt = date( 'Y-m-d H:i:s' );
 
 		if( $rehash === true ){
@@ -97,14 +96,25 @@ class EASYGIFTS extends XMLAbstract{
 
 		}
 		else{
+			// wyciąganie stanu magazynowego z XML
+			$stock_a = array();
+			$XML = simplexml_load_file( __DIR__ . "/DND/" . basename( $this->_sources[ 'stock' ] ) );
+			foreach( $XML->children() as $item ){
+				$kod = (string)$item->code_full;
+				$num = (int)$item->quantity_24h;
+
+				$stock_a[ $kod ] = $num;
+			}
+			
 			// parsowanie danych z XML
+			$XML = simplexml_load_file( __DIR__ . "/DND/" . basename( $this->_sources[ 'products' ] ) );
 			foreach( $XML->children() as $item ){
 				$code = (string)$item->baseinfo->code_full;
 				$short = (string)$item->baseinfo->code_short;
-				$price = $item->baseinfo->price;
-				$price_promo = $item->baseinfo->price_promotion;
-				$price_sellout = $item->baseinfo->price_sellout;
-				$netto = (float)str_replace( ",", ".", empty( $price_sellout )?( empty( $price_promo )?( $price ):( $price_promo ) ):( $price_sellout ) ) * 1.43;
+				$price = (float)str_replace( ',', '.', (string)$item->baseinfo->price );
+				$price_promo = (float)str_replace( ',', '.', (string)$item->baseinfo->price_promotion );
+				$price_sellout = (float)str_replace( ',', '.', (string)$item->baseinfo->price_sellout );
+				$netto = ($price_promo > 0 and $price_promo < $price)?( $price_promo ):( ( $price_sellout > 0 and $price_sellout < $price )?( $price_sellout ):( $price ) );
 				$brutto = $netto * ( 1 + $this->_vat );
 				// $catalog = addslashes( (string)$item-> );
 				$cat = addslashes( (string)$item->categories->category[0]->name );
@@ -125,8 +135,8 @@ class EASYGIFTS extends XMLAbstract{
 				$category = $this->_stdName( (string)$item->categories->category[0]->name );
 				// $subcategory = $this->_stdName( (string)$item-> );
 				$new = (int)$item->attributes->new;
-				$sale = (float)$item->baseinfo->price_sellout > 0?( 1 ):( 0 );
-				$promotion = (float)$item->baseinfo->price_promotion > 0?( 1 ):( 0 );
+				$sale = ( (float)$item->baseinfo->price_sellout > 0 and $price_sellout > 0 )?( 1 ):( 0 );
+				$promotion = ( (float)$item->baseinfo->price_promotion > 0 and $price_promo > 0 )?( 1 ):( 0 );
 				$marking_size = (string)$item->marking_size;
 				$marking = "{$marking_size}<br>>";
 				$marking_a = array();
@@ -163,7 +173,7 @@ class EASYGIFTS extends XMLAbstract{
 					'cat_id' => $cat_id,
 					'brutto' => $brutto,
 					'netto' => $netto,
-					'price_before' => !empty( $price_promo ) ?( (float)str_replace( ",", ".", $price ) ):( 0 ),
+					'price_before' => ($price_promo > 0 or $price_sellout > 0)?( $price ):( 0 ),
 					// 'catalog' => $catalog,
 					'title' => $name,
 					'description' => $dscr,
@@ -178,6 +188,7 @@ class EASYGIFTS extends XMLAbstract{
 					'sale' => $sale,
 					'data' => $dt,
 					'marking' => $marking,
+					'instock' => $stock_a[ $code ],
 				);
 
 				$t_fields = array();
@@ -227,22 +238,7 @@ class EASYGIFTS extends XMLAbstract{
 				// echo "\r\n{$category} | {$subcategory}";
 
 			}
-
-			// wyciąganie stanu magazynowego z XML
-			$XML = simplexml_load_file( __DIR__ . "/DND/" . basename( $this->_sources[ 'stock' ] ) );
-			foreach( $XML->children() as $item ){
-				$kod = (string)$item->code_full;
-				$num = (int)$item->quantity_24h;
-
-				$sql = "UPDATE `XML_product` SET  `instock` = {$num}, data = '{$dt}' WHERE `code` = '{$kod}'";
-				if( mysqli_query( $this->_dbConnect(), $sql ) === false ){
-					$this->_log[] = $sql;
-					$this->_log[] = mysqli_error( $this->_dbConnect() );
-
-				}
-
-			}
-
+			
 		}
 		
 		// czyszczenie nieaktualnych produktów

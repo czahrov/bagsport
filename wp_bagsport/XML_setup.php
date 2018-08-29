@@ -10,6 +10,14 @@ array(
 	'shop' => 'ASGARD',
 ) );
 
+$SHOP['par'] = new PAR( array(
+	'products' => 'http://biuro@bagsport.pl:24816vvv@www.par.com.pl/api/products',
+	'stock' => 'http://biuro@bagsport.pl:24816vvv@www.par.com.pl/api/stocks',
+),
+array(
+	'shop' => 'PAR',
+) );
+
 $SHOP['midoceanbrands'] = new MIDOCEANBRANDS( array(
 	'products' => 'ftp://lucyna:80838286@transfer.midoceanbrands.com/prodinfo_PL.xml',
 	'stock' => 'ftp://lucyna:80838286@transfer.midoceanbrands.com/stock.xml',
@@ -21,12 +29,10 @@ array(
 $SHOP['macma'] = new MACMA( array(
 	'products' => 'http://www.macma.pl/data/webapi/pl/xml/offer.xml',
 	'stock' => 'http://www.macma.pl/data/webapi/pl/xml/stocks.xml',
-	'prices' => 'http://www.macma.pl/data/webapi/pl/xml/prices.xml',
-	
+	'prices' => 'http://www.macma.pl/data/webapi/pl/xml/prices.xml',	
 ),
 array(
 	'shop' => 'MACMA',
-	
 ) );
 
 $SHOP['inspirion'] = new INSPIRION( array(
@@ -36,9 +42,7 @@ array(
 	'shop' => 'INSPIRION',
 ) );
 
-$SHOP['anda'] = new ANDA( array(
-	// 'products' => 'http://andapresent.hu/admin/system/anda_xml_export2.php?&orszag_id=6&nyelv_id=7&password=92ba3632c8c22ebd65fbce872b317875',
-),
+$SHOP['anda'] = new ANDA( array(),
 array(
 	'shop' => 'ANDA',
 ) );
@@ -58,14 +62,6 @@ $SHOP['axpol'] = new AXPOL( array(
 ),
 array(
 	'shop' => 'AXPOL',
-) );
-
-$SHOP['par'] = new PAR( array(
-	'products' => 'http://biuro@bagsport.pl:24816vvv@www.par.com.pl/api/products',
-	'stock' => 'http://biuro@bagsport.pl:24816vvv@www.par.com.pl/api/stocks',
-),
-array(
-	'shop' => 'PAR',
 ) );
 
 

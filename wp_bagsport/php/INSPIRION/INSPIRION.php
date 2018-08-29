@@ -94,7 +94,7 @@ class INSPIRION extends XMLAbstract{
 				$code = (string)$item->sku;
 				$short = (string)$item->sku;
 				$price = (string)$item->catalog_price;
-				$netto = (float)str_replace( ",", ".", $price ) * 1.43;
+				$netto = (float)str_replace( ",", ".", $price );
 				$brutto = $netto * ( 1 + $this->_vat );
 				// $catalog = addslashes( (string)$item-> );
 				$cat = addslashes( (string)$item->catalog );

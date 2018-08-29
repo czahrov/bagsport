@@ -1,4 +1,6 @@
 <?php
+$time = 60 * 30;
+set_time_limit( $time );
 require_once __DIR__ . "/autoloader.php";
 require_once __DIR__ . "/../XML_setup.php";
 

@@ -1,6 +1,11 @@
 <?php
 class ANDA extends XMLAbstract{
-
+	private $_narzut = 1.50;
+	
+	private function _priceMod( $price ){
+		return (float)$price * ( 1 + $this->_narzut );
+	}
+	
 	// filtrowanie kategorii
 	protected function _categoryFilter( &$cat_name, &$subcat_name, $item ){
 		$subcat_name = $cat_name;
@@ -125,7 +130,7 @@ class ANDA extends XMLAbstract{
 					$code = (string)$item->itemNumber;
 					$short = $code;
 					$price = $price_a[ $code ];
-					$netto = (float)str_replace( ",", ".", $price ) * 1.5;
+					$netto = $this->_priceMod( (float)str_replace( ",", ".", $price ) );
 					$brutto = $netto * ( 1 + $this->_vat );
 					// $catalog = addslashes( (string)$item-> );
 					$cat = addslashes( (string)$item->categories->category[0]->name );
@@ -255,7 +260,6 @@ class ANDA extends XMLAbstract{
 		// czyszczenie nieaktualnych produktów
 		// $this->_clear();
 		
-
 		if( !empty( $this->_log ) ){
 			echo "<!--ANDA ERROR:" . PHP_EOL;
 			print_r( $this->_log ) . PHP_EOL;

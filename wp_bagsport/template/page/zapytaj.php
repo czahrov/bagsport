@@ -169,6 +169,27 @@ Wiadomość wygenerowana automatycznie na stronie %s',
 							</div>
 							
 						</div>
+						<div class='fc-rozowy fs-base'>
+							UWAGA!
+						</div>
+						<ul>
+							<li>
+								Cena nie zawiera kosztów znakowania.
+							</li>
+							<li>
+								Znakowany towar nie podlega zwrotowi.
+							</li>
+							<li>
+								Informacje znajdujące się na stronach internetowych sklepu nie stanowią oferty w rozumieniu przepisów prawa.
+							</li>
+							<li>
+								Klient składając zamówienie, składa ofertę kupna określonego produktu na warunkach podanych w jego opisie
+							</li>
+							<li>
+								Ostateczny koszt zamówienia zostanie potwierdzony przy zamówieniu
+							</li>
+							
+						</ul>
 						
 					</div>
 					

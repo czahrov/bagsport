@@ -1037,6 +1037,28 @@ img{
 		
 	}
 	
+	#side + div
+	{
+		
+		@media( min-width: 768px ){
+			min-height: 1400px;
+			
+			.product-price{
+				position: relative;
+				
+				ul{
+					position: absolute;
+					top: 100%;
+					left: 0;
+					right: 0;
+				}
+				
+			}
+			
+		}
+		
+	}
+	
 }
 
 #side

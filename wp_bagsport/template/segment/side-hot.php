@@ -1,6 +1,6 @@
 <?php
 	global $XM;
-	$items = $XM->getProducts( 'custom', "WHERE prod.promotion = 1 AND prod.shop = 'EASYGIFTS'" );
+	$items = $XM->getProducts( 'custom', "WHERE prod.promotion = 1 AND prod.price_before > prod.netto AND prod.shop = 'EASYGIFTS'" );
 	shuffle( $items );
 	$items = array_slice( $items, 0, 20 );
 	
@@ -32,7 +32,7 @@
 			preg_match( "(http[^\"]+)", $item['photos'], $match );
 			$img = $match[0];
 			$title = $item['title'];
-			$price = $item['brutto'] . "zł";
+			$price = $item['netto'] . "zł";
 			$code = $item['code'];
 			$before = $item['price_before'];
 		?>

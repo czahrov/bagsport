@@ -72,7 +72,6 @@ class AXPOL extends XMLAbstract{
 	// rehash - określa czy wykonać jedynie przypisanie kategorii dla produktów
 	protected function _import( $rehash = false ){
 		// wczytywanie pliku XML z produktami
-		$XML = simplexml_load_file( __DIR__ . "/DND/" . basename( $this->_sources[ 'products' ] ) );
 		$dt = date( 'Y-m-d H:i:s' );
 
 		if( $rehash === true ){
@@ -101,7 +100,77 @@ class AXPOL extends XMLAbstract{
 
 		}
 		else{
+			// wyciąganie stanu magazynowego z XML
+			$instock_a = array();
+			$XML = simplexml_load_file( __DIR__ . "/DND/" . basename( $this->_sources[ 'stock' ] ) );
+			foreach( $XML->items->children() as $item ){
+				$kod = (string)$item->Kod;
+				$num = (int)$item->{'na_magazynie_dostepne_teraz'};
+
+				$instock_a[ $kod ] = $num;
+			}
+
+			// wyciąganie znakowania z XML
+			$mark_a = array();
+			$XML = simplexml_load_file( __DIR__ . "/DND/" . basename( $this->_sources[ 'marking' ] ) );
+			foreach( $XML->children() as $item ){
+				$kod = (string)$item->CodeERP;
+				$marking_a = array();
+				
+				for( $position = 1; $position <= 6; $position++ ){
+					$print_position = (string)$item->{"Position_{$position}_PrintPosition"};
+					if( empty( $print_position ) ) continue;
+					$print_size = (string)$item->{"Position_{$position}_PrintSize"};
+					if( empty( $print_size ) ) continue;
+
+					for( $tech = 1; $tech <= 5; $tech++ ){
+						$print_tech = (string)$item->{"Position_{$position}_PrintTech_{$tech}"};
+						if( empty( $print_tech ) ) continue;
+
+						$marking_a = array_merge_recursive(
+							$marking_a,
+							array(
+								"$print_position" => array(
+									"$print_size" => $print_tech,
+
+								),
+							)
+
+						);
+
+					}
+
+					$marking = json_encode( $marking_a );
+
+				}
+				
+				$mark_s = "";
+				foreach( $marking_a as $place => $sizes ){
+					$mark_s .= "{$place}<br>";
+					foreach( $sizes as $size => $technics ){
+						$mark_s .= ">{$size} mm<br>>>";
+
+						if( is_array( $technics ) ){
+							$mark_s .=  implode( ", ", $technics );
+
+						}
+						else{
+							$mark_s .= $technics;
+
+						}
+
+						$mark_s .= "<br>";
+
+					}
+
+				}
+				
+				$mark_a[ $kod ] = $mark_s;
+				
+			}
+			
 			// parsowanie danych z XML
+			$XML = simplexml_load_file( __DIR__ . "/DND/" . basename( $this->_sources[ 'products' ] ) );
 			foreach( $XML->children() as $item ){
 				$code = (string)$item->CodeERP;
 				// $pattern = "~^([^\.\-]+)~";
@@ -109,7 +178,7 @@ class AXPOL extends XMLAbstract{
 				preg_match_all( $pattern, $code, $match );
 				// $short = $match[1];
 				$short = $match[1][0];
-				$netto = (float)str_replace( ",", ".", $item->CatalogPricePLN ) * 1.43;
+				$netto = (float)str_replace( ",", ".", $item->CatalogPricePLN );
 				$brutto = $netto * ( 1 + $this->_vat );
 				$catalog = addslashes( (string)$item->Catalog );
 				$cat = addslashes( (string)$item->MainCategoryPL );
@@ -184,6 +253,8 @@ class AXPOL extends XMLAbstract{
 					'promotion' => $promotions,
 					'sale' => $sale,
 					'data' => $dt,
+					'instock' => $instock_a[ $code ],
+					'marking' => $mark_a[ $code ],
 				);
 
 				$t_fields = array();
@@ -232,90 +303,6 @@ class AXPOL extends XMLAbstract{
 
 			}
 
-			// wyciąganie stanu magazynowego z XML
-			$XML = simplexml_load_file( __DIR__ . "/DND/" . basename( $this->_sources[ 'stock' ] ) );
-			foreach( $XML->items->children() as $item ){
-				$kod = $item->Kod;
-				$num = (int)$item->{'na_magazynie_dostepne_teraz'} + (int)$item->{'na_zamowienie_w_ciagu_7-10_dni'};
-
-				$sql = "UPDATE `XML_product` SET  `instock` = {$num}, data = '{$dt}' WHERE `code` = '{$kod}'";
-				if( mysqli_query( $this->_dbConnect(), $sql ) === false ){
-					$this->_log[] = mysqli_error( $this->_dbConnect() );
-
-				}
-
-			}
-
-			// wyciąganie znakowania z XML
-			$XML = simplexml_load_file( __DIR__ . "/DND/" . basename( $this->_sources[ 'marking' ] ) );
-			foreach( $XML->children() as $item ){
-				$kod = $item->CodeERP;
-				$marking_a = array();
-
-				for( $position = 1; $position <= 6; $position++ ){
-					$print_position = (string)$item->{"Position_{$position}_PrintPosition"};
-					if( empty( $print_position ) ) continue;
-					$print_size = (string)$item->{"Position_{$position}_PrintSize"};
-					if( empty( $print_size ) ) continue;
-
-					for( $tech = 1; $tech <= 5; $tech++ ){
-						$print_tech = (string)$item->{"Position_{$position}_PrintTech_{$tech}"};
-						if( empty( $print_tech ) ) continue;
-
-						$marking_a = array_merge_recursive(
-							$marking_a,
-							array(
-								"$print_position" => array(
-									"$print_size" => $print_tech,
-
-								),
-							)
-
-						);
-
-					}
-
-					$marking = json_encode( $marking_a );
-
-				}
-
-				$mark_s = "";
-				foreach( $marking_a as $place => $sizes ){
-					$mark_s .= "{$place}<br>";
-					foreach( $sizes as $size => $technics ){
-						$mark_s .= ">{$size} mm<br>>>";
-
-						if( is_array( $technics ) ){
-							$mark_s .=  implode( ", ", $technics );
-
-						}
-						else{
-							$mark_s .= $technics;
-
-						}
-
-						$mark_s .= "<br>";
-
-					}
-
-				}
-
-				$sql = "UPDATE `XML_product` SET  `marking` = '{$mark_s}', data = '{$dt}' WHERE `code` = '{$kod}'";
-				if( mysqli_query( $this->_dbConnect(), $sql ) === false ){
-					$this->_log[] = mysqli_error( $this->_dbConnect() );
-
-				}
-
-				/* array(1) {
-					["item barrel"]=>
-					array(1) {
-					["6x25"]=>
-						string(2) "T1"
-					}
-				} */
-
-
-			}
 			
 		}
 		
