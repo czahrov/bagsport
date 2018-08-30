@@ -115,7 +115,7 @@ class XMLAbstract{
 			if( empty( $source ) ) continue;
 			$filepath = $this->_getURL( "DND/" . basename( $source ) );
 
-			if( !file_exists( $filepath ) or time() - filemtime( $filepath ) >= $this->_atts[ 'lifetime' ] ){
+			if( !file_exists( $filepath ) or filesize( $filepath ) < pow( 2, 10 ) or time() - filemtime( $filepath ) >= $this->_atts[ 'lifetime' ] ){
 				// XML nie istnieje, albo jest przestarzały -  pobieranie
 				mkdir( dirname( $filepath ), 0755, true );
 				if( copy( $source, $filepath, stream_context_create( $this->_atts[ 'context' ] ) ) ){

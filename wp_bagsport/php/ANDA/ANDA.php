@@ -56,24 +56,37 @@ class ANDA extends XMLAbstract{
 	// wczytywanie XML, parsowanie danych XML, zapis do bazy danych
 	// rehash - określa czy wykonać jedynie przypisanie kategorii dla produktów
 	protected function _import( $rehash = false ){
-		$url_products = "https://xml.andapresent.com/export/products/pl/KKS4H3KL7CNWXP3B98ZY7SLQ8MCFNIPX37WMPAT9PCYWL458TRUCV6IG6NUDKWLP";
-		$url_prices = "https://xml.andapresent.com/export/prices/KKS4H3KL7CNWXP3B98ZY7SLQ8MCFNIPX37WMPAT9PCYWL458TRUCV6IG6NUDKWLP";
-		$url_stocks = "https://xml.andapresent.com/export/inventories/KKS4H3KL7CNWXP3B98ZY7SLQ8MCFNIPX37WMPAT9PCYWL458TRUCV6IG6NUDKWLP";
+		// aktualizacja plików źródłowych
+		$srcs = array(
+			'newAnda' => 'https://xml.andapresent.com/export/products/pl/KKS4H3KL7CNWXP3B98ZY7SLQ8MCFNIPX37WMPAT9PCYWL458TRUCV6IG6NUDKWLP',
+			'newAndaPrices' => 'https://xml.andapresent.com/export/prices/KKS4H3KL7CNWXP3B98ZY7SLQ8MCFNIPX37WMPAT9PCYWL458TRUCV6IG6NUDKWLP',
+			'newAndaInventory' => 'https://xml.andapresent.com/export/inventories/KKS4H3KL7CNWXP3B98ZY7SLQ8MCFNIPX37WMPAT9PCYWL458TRUCV6IG6NUDKWLP',
+		);
+		foreach( $srcs as $name => $URI ){
+			$path = __DIR__ . "/DND/{$name}.xml";
+			if( !file_exists( $path ) or ( time() - filemtime( $path ) > $this->_atts['lifetime'] ) or filesize( $path ) < pow( 2, 10 ) ){
+				if( copy( $URI, $path . ".tmp" ) ){
+					rename( $path . ".tmp", $path );
+					// unlink( $path . ".tmp" );
+				}
+			}
+			
+		}
 		
 		/* tworzenie tablicy z cenami */
-		$content = file_exists( __DIR__ . "/DND/newAndaPrices.xml" )?( file_get_contents( __DIR__ . "/DND/newAndaPrices.xml" ) ):( file_get_contents( $url_prices ) );
+		$content = file_get_contents( __DIR__ . "/DND/newAndaPrices.xml" );
 		$price_a = array();
 		if( $content !== false ){
 			$XML = simplexml_load_string( $content );
 			foreach( $XML->price as $item ){
-				$price_a[ (string)$item->itemNumber ] = (string)$item->amount;
+				$price_a[ (string)$item->itemNumber ][ (string)$item->type ] = (float)str_replace( ",", ".", $item->amount );
 				
 			}
 			
 		}
 		
 		/* tworzenie tablicy ze stanem magazynowym */
-		$content = file_exists( __DIR__ . "/DND/newAndaInventory.xml" )?( file_get_contents( __DIR__ . "/DND/newAndaInventory.xml" ) ):( file_get_contents( $url_stocks ) );
+		$content = file_get_contents( __DIR__ . "/DND/newAndaInventory.xml" );
 		$stock_a = array();
 		if( $content !== false ){
 			$XML = simplexml_load_string( $content );
@@ -85,7 +98,7 @@ class ANDA extends XMLAbstract{
 		}
 		
 		/* wczytywanie produktów z XML */
-		$content = file_exists( __DIR__ . "/DND/newAnda.xml" )?( file_get_contents( __DIR__ . "/DND/newAnda.xml" ) ):( file_get_contents( $url_products ) );
+		$content = file_get_contents( __DIR__ . "/DND/newAnda.xml" );
 		if( $content !== false ){
 			$XML = simplexml_load_string( $content );
 			$dt = date( 'Y-m-d H:i:s' );
@@ -129,7 +142,7 @@ class ANDA extends XMLAbstract{
 					
 					$code = (string)$item->itemNumber;
 					$short = $code;
-					$price = $price_a[ $code ];
+					$price = $price_a[ $code ]['discountPrice'];
 					$netto = $this->_priceMod( (float)str_replace( ",", ".", $price ) );
 					$brutto = $netto * ( 1 + $this->_vat );
 					// $catalog = addslashes( (string)$item-> );
