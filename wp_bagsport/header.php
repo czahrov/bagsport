@@ -16,7 +16,7 @@
 	wp_enqueue_style( "FA", get_stylesheet_directory_uri() . "/css/fontawesome-all{$infix}.css", array(), $buster );
 	wp_enqueue_style( "ionicons", "http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css", array(), false );
 	wp_enqueue_style( "style", get_stylesheet_directory_uri() . "/style{$infix}.css", array(), $buster );
-	wp_enqueue_style( "override", get_stylesheet_directory_uri() . "/scss/override{$infix}.css", array(), $buster );
+	wp_enqueue_style( "override", get_stylesheet_directory_uri() . "/css/override{$infix}.css", array(), $buster );
 	
 	wp_enqueue_script( "js-slim", get_stylesheet_directory_uri() . "/js/jquery.slim.js", array(), false, true );	
 	wp_enqueue_script( "bootstrap-bundle", get_stylesheet_directory_uri() . "/js/bootstrap.bundle.js", array(), false, true );

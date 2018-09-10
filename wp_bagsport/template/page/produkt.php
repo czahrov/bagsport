@@ -137,7 +137,7 @@
 						<div class='fc-rozowy fs-base'>
 							UWAGA!
 						</div>
-						<ul>
+						<ul class='uwaga'>
 							<li>
 								Cena nie zawiera kosztów znakowania.
 							</li>

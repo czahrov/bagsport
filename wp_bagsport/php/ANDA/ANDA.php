@@ -79,6 +79,7 @@ class ANDA extends XMLAbstract{
 		if( $content !== false ){
 			$XML = simplexml_load_string( $content );
 			foreach( $XML->price as $item ){
+				/*  listPrice / discountPrice */
 				$price_a[ (string)$item->itemNumber ][ (string)$item->type ] = (float)str_replace( ",", ".", $item->amount );
 				
 			}
@@ -142,8 +143,8 @@ class ANDA extends XMLAbstract{
 					
 					$code = (string)$item->itemNumber;
 					$short = $code;
-					$price = $price_a[ $code ]['discountPrice'];
-					$netto = $this->_priceMod( (float)str_replace( ",", ".", $price ) );
+					$price = $price_a[ $code ]['listPrice'];
+					$netto = (float)str_replace( ",", ".", $price );
 					$brutto = $netto * ( 1 + $this->_vat );
 					// $catalog = addslashes( (string)$item-> );
 					$cat = addslashes( (string)$item->categories->category[0]->name );

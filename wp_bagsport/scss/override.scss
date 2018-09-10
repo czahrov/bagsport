@@ -1040,20 +1040,24 @@ img{
 	#side + div
 	{
 		
-		@media( min-width: 768px ){
-			min-height: 1400px;
+		.product-price{
 			
-			.product-price{
-				position: relative;
-				
-				ul{
+			ul.uwaga{
+				@media( min-width: 768px ){
 					position: absolute;
 					top: 100%;
 					left: 0;
 					right: 0;
+					
 				}
 				
 			}
+			
+		}
+		
+		@media( min-width: 768px ){
+			position: relative;
+			min-height: 1400px;
 			
 		}
 		
@@ -1340,6 +1344,17 @@ img{
 			}
 			
 		}
+		
+	}
+	
+}
+
+ul.uwaga{
+	
+	li{
+		line-height: 20px !important;
+		padding-bottom: 10px;
+		font-size: 12px;
 		
 	}
 	

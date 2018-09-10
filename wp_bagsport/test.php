@@ -4,12 +4,12 @@
 if( !isset( $_COOKIE['sprytne'] ) ){
 	header("Location: " . home_url() );
 	exit;
-	
 }
 
-// print_r( $_SERVER );
-$url = "http://www.macma.pl/data/shopproducts/12046/083342000.jpg";
-$url = "https://inspirion.pl/sites/default/files/exports/products.xml";
-$file = fopen( $url );
-var_dump( $file );
-if( $file !== false ) fclose( $file );
+$stat = stat( __DIR__ . "/php/ANDA/DND/anda_xml_export2.xml" );
+print( $stat );
+print_r( array(
+	'atime' => date( 'd-m-Y H:i:s', $stat['atime'] ),
+	'ctime' => date( 'd-m-Y H:i:s', $stat['ctime'] ),
+	'mtime' => date( 'd-m-Y H:i:s', $stat['mtime'] ),
+) );
