@@ -1,6 +1,7 @@
 <?php
 class MIDOCEANBRANDS extends XMLAbstract{
-	private $_narzut = 0.8868;
+	// 0.8867582275200829230370562321845
+	private $_narzut = 0.886758;
 	
 	private function _priceMod( $price ){
 		return (float)$price * ( 1 + $this->_narzut );

@@ -163,7 +163,7 @@
 						<div class="d-flex flex-column">
 							<h1>O produkcie</h1>
 							<p class='fc-rozowy'>
-								<?php echo $item['opis']; ?>
+								<?php echo strip_tags( $item['opis'] ); ?>
 							</p>
 							<h1>Dostępność w magazynie:
 								<span>

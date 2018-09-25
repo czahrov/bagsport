@@ -103,7 +103,7 @@ class AXPOL extends XMLAbstract{
 			// wyciąganie stanu magazynowego z XML
 			$instock_a = array();
 			$XML = simplexml_load_file( __DIR__ . "/DND/" . basename( $this->_sources[ 'stock' ] ) );
-			foreach( $XML->items->children() as $item ){
+			foreach( $XML->items->Produkt as $item ){
 				$kod = (string)$item->Kod;
 				$num = (int)$item->{'na_magazynie_dostepne_teraz'};
 
@@ -112,63 +112,65 @@ class AXPOL extends XMLAbstract{
 
 			// wyciąganie znakowania z XML
 			$mark_a = array();
-			$XML = simplexml_load_file( __DIR__ . "/DND/" . basename( $this->_sources[ 'marking' ] ) );
-			foreach( $XML->children() as $item ){
-				$kod = (string)$item->CodeERP;
-				$marking_a = array();
-				
-				for( $position = 1; $position <= 6; $position++ ){
-					$print_position = (string)$item->{"Position_{$position}_PrintPosition"};
-					if( empty( $print_position ) ) continue;
-					$print_size = (string)$item->{"Position_{$position}_PrintSize"};
-					if( empty( $print_size ) ) continue;
+			if( $XML = simplexml_load_file( __DIR__ . "/DND/" . basename( $this->_sources[ 'marking' ] ) ) ){
+				foreach( $XML->children() as $item ){
+					$kod = (string)$item->CodeERP;
+					$marking_a = array();
+					
+					for( $position = 1; $position <= 6; $position++ ){
+						$print_position = (string)$item->{"Position_{$position}_PrintPosition"};
+						if( empty( $print_position ) ) continue;
+						$print_size = (string)$item->{"Position_{$position}_PrintSize"};
+						if( empty( $print_size ) ) continue;
 
-					for( $tech = 1; $tech <= 5; $tech++ ){
-						$print_tech = (string)$item->{"Position_{$position}_PrintTech_{$tech}"};
-						if( empty( $print_tech ) ) continue;
+						for( $tech = 1; $tech <= 5; $tech++ ){
+							$print_tech = (string)$item->{"Position_{$position}_PrintTech_{$tech}"};
+							if( empty( $print_tech ) ) continue;
 
-						$marking_a = array_merge_recursive(
-							$marking_a,
-							array(
-								"$print_position" => array(
-									"$print_size" => $print_tech,
+							$marking_a = array_merge_recursive(
+								$marking_a,
+								array(
+									"$print_position" => array(
+										"$print_size" => $print_tech,
 
-								),
-							)
+									),
+								)
 
-						);
-
-					}
-
-					$marking = json_encode( $marking_a );
-
-				}
-				
-				$mark_s = "";
-				foreach( $marking_a as $place => $sizes ){
-					$mark_s .= "{$place}<br>";
-					foreach( $sizes as $size => $technics ){
-						$mark_s .= ">{$size} mm<br>>>";
-
-						if( is_array( $technics ) ){
-							$mark_s .=  implode( ", ", $technics );
-
-						}
-						else{
-							$mark_s .= $technics;
+							);
 
 						}
 
-						$mark_s .= "<br>";
+						$marking = json_encode( $marking_a );
 
 					}
+					
+					$mark_s = "";
+					foreach( $marking_a as $place => $sizes ){
+						$mark_s .= "{$place}<br>";
+						foreach( $sizes as $size => $technics ){
+							$mark_s .= ">{$size} mm<br>>>";
 
+							if( is_array( $technics ) ){
+								$mark_s .=  implode( ", ", $technics );
+
+							}
+							else{
+								$mark_s .= $technics;
+
+							}
+
+							$mark_s .= "<br>";
+
+						}
+
+					}
+					
+					$mark_a[ $kod ] = $mark_s;
+					
 				}
 				
-				$mark_a[ $kod ] = $mark_s;
 				
 			}
-			
 			// parsowanie danych z XML
 			$XML = simplexml_load_file( __DIR__ . "/DND/" . basename( $this->_sources[ 'products' ] ) );
 			foreach( $XML->children() as $item ){

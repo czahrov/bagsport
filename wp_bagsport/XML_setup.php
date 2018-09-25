@@ -4,7 +4,11 @@ require_once __DIR__ . "/php/cfg.php";
 $SHOP  = array();
 
 $SHOP['asgard'] = new ASGARD( array(
-	'products' => 'http://www.asgard.pl/www/xml/oferta.xml',
+	'products' => 'https://www.asgard.gifts/www/xml/product_details_pl.xml',
+	'prices' => 'https://www.asgard.gifts/www/xml/no_discount_prices.xml',
+	'stock' => 'https://www.asgard.gifts/www/xml/stock_data.xml',
+	'images' => 'https://www.asgard.gifts/www/xml/product_images.xml',
+	'colors' => 'https://www.asgard.gifts/www/xml/colour_list.xml',
 ),
 array(
 	'shop' => 'ASGARD',

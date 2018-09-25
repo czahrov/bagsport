@@ -107,7 +107,10 @@ class EASYGIFTS extends XMLAbstract{
 			}
 			
 			// parsowanie danych z XML
-			$XML = simplexml_load_file( __DIR__ . "/DND/" . basename( $this->_sources[ 'products' ] ) );
+			$xml_read = file_get_contents( __DIR__ . "/DND/" . basename( $this->_sources[ 'products' ] ) );
+			$xml_read = str_replace( '&', '&amp;', $xml_read );
+			// $XML = simplexml_load_file( __DIR__ . "/DND/" . basename( $this->_sources[ 'products' ] ) );
+			$XML = simplexml_load_string( $xml_read );
 			foreach( $XML->children() as $item ){
 				$code = (string)$item->baseinfo->code_full;
 				$short = (string)$item->baseinfo->code_short;

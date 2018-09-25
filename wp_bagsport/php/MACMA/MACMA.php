@@ -70,7 +70,7 @@ class MACMA extends XMLAbstract{
 		$XML = simplexml_load_file( __DIR__ . "/DND/" . basename( $this->_sources['stock'] ) );
 		$stock_a = array();
 		foreach( $XML->children() as $product ){
-			$stock_a[ (string)$product->code_full ] = (int)$product->quantity_24h;
+			$stock_a[ (string)$product->code_full ] = (int)$product->quantity_24h + (int)$product->quantity_37days;
 
 		}
 

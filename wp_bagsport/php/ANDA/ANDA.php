@@ -92,7 +92,7 @@ class ANDA extends XMLAbstract{
 		if( $content !== false ){
 			$XML = simplexml_load_string( $content );
 			foreach( $XML->record as $item ){
-				$stock_a[ (string)$item->itemNumber ] = (float)$item->amount;
+				$stock_a[ (string)$item->itemNumber ] = (int)$item->amount;
 				
 			}
 			

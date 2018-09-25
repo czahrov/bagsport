@@ -1,6 +1,9 @@
 <?php
 class ASGARD extends XMLAbstract{
-
+	private function _priceMod( $price ){
+		return $price;
+	}
+	
 	// filtrowanie kategorii
 	protected function _categoryFilter( &$cat_name, &$subcat_name, $item ){
 		$subcat_name = $cat_name;
@@ -41,70 +44,72 @@ class ASGARD extends XMLAbstract{
 	// wczytywanie XML, parsowanie danych XML, zapis do bazy danych
 	// rehash - określa czy wykonać jedynie przypisanie kategorii dla produktów
 	protected function _import( $rehash = false ){
+		// wczytywanie stanów magazynowych
+		$stock_a = array();
+		$XML = simplexml_load_file( __DIR__ . "/DND/" . basename( $this->_sources[ 'stock' ] ) );
+		foreach( $XML->product as $item ){
+			$stock_a[ (string)$item->index ] = (int)$item->stock;
+		}
+		
+		// wczytywanie cen produktów bez obniżki agencyjnej
+		$price_a  = array();
+		$XML = simplexml_load_file( __DIR__ . "/DND/" . basename( $this->_sources[ 'prices' ] ) );
+		foreach( $XML->product as $item ){
+			$price_a[ (string)$item->index ] = (float)$item->price->pln;
+		}
+		
+		// wczytywanie zdjęć produktów
+		$photo_a  = array();
+		$XML = simplexml_load_file( __DIR__ . "/DND/" . basename( $this->_sources[ 'images' ] ) );
+		foreach( $XML->product as $item ){
+			$t = array();
+			foreach( $item->files->file_name as $img ){
+				$t[] = "http://www.bluecollection.eu/assets/img/" . (string)$img;
+			}
+			$photo_a[ (string)$item->index ] = $t;
+		}
+		
+		// wczytywanie listy kolorów
+		$colors_a  = array();
+		$XML = simplexml_load_file( __DIR__ . "/DND/" . basename( $this->_sources[ 'colors' ] ) );
+		foreach( $XML->colour as $item ){
+			$colors_a[ (string)$item->id ] = (string)$item->name;
+		}
+		
 		// wczytywanie pliku XML z produktami
 		$XML = simplexml_load_file( __DIR__ . "/DND/" . basename( $this->_sources[ 'products' ] ) );
 		$dt = date( 'Y-m-d H:i:s' );
 
 		if( $rehash === true ){
-			// parsowanie danych z XML
-			foreach( $XML->children() as $item ){
-				$code = (string)$item->indeks;
-				$category = $this->_stdName( (string)$item->kategoria );
-				$subcategory = $this->_stdName( (string)$item->Akcesoria );
-
-				$this->_categoryFilter( $category, $subcategory, $item );
-				$this->_addCategory( $category, $subcategory );
-
-				if( empty( $subcategory ) ){
-					$cat_id = $this->getCategory( 'name', $category, 'ID' );
-
-				}
-				else{
-					$cat_id = $this->getCategory( 'name', $subcategory, 'ID' );
-
-				}
-				
-				$sql = "UPDATE `XML_product` SET cat_id = '{$cat_id}', data = '{$dt}' WHERE code = '{$code}'";
-				if( mysqli_query( $this->_dbConnect(), $sql ) === false )
-				{
-					$this->_log[] = $sql;
-					$this->_log[] = mysqli_error( $this->_dbConnect() );
-				}
-
-			}
+			
 
 		}
 		else{
 			// parsowanie danych z XML
 			foreach( $XML->children() as $item ){
-				$code = (string)$item->indeks;
+				$code = (string)$item->index;
 				$short = $code;
-				$price = (string)$item->cena_netto_katalogowa;
-				$netto = (float)str_replace( ",", ".", $price );
+				$price = ( $t = (float)str_replace( ',', '.', (string)$item->price->pln ) ) > 0?( $t ):( $price_a[$code] );
+				$netto = $this->_priceMod( $price );
 				$brutto = $netto * ( 1 + $this->_vat );
-				// $catalog = addslashes( (string)$item-> );
-				$cat = addslashes( (string)$item->kategoria );
+				$catalog = "";
+				$cat = addslashes( (string)$item->category->pl );
 				$category = $this->_stdName( $cat );
-				$subcat = addslashes( (string)$item->podkategoria );
+				$subcat = addslashes( (string)$item->subcategory->pl );
 				$subcategory = $this->_stdName( $subcat );
-				$name = addslashes( (string)$item->nazwa );
-				$dscr = addslashes( (string)$item->opis_produktu );
-				$material = addslashes( (string)$item->material );
-				$dims = addslashes( (string)$item->wymiary_produktu );
-				// $country = addslashes( (string)$item-> );
-				$weight = (float)str_replace( ",", ".", $item->waga_jednostkowa_netto_w_kg ) * 1000;
-				$color = addslashes( (string)$item->kolor );
-				$photo_base = "https://asgard.pl/png/product/";
-				$photo = json_encode( array(
-					$photo_base . (string)$item->obraz,
-					$photo_base . (string)$item->obraz_1,
-					
-				) );
-				$instock = (int)$item->in_stock;
-				$new = (string)$item->status == 'Nowość'?( 1 ):( 0 );
+				$name = addslashes( (string)$item->name->pl );
+				$dscr = addslashes( (string)$item->description->pl );
+				$material = addslashes( (string)$item->made_of->pl );
+				$dims = addslashes( (string)$item->measurements->pl );
+				$country = addslashes(  );
+				$weight = (float)$item->weight * 1000;
+				$color = addslashes( $colors_a[ (string)$item->product_colour->pl ] );
+				$new = 0;
 				$promotion = 0;
 				$sale = 0;
-				$marking = (string)$item->znakowanie_produktu;
+				$marking = (string)$item->product_marking->pl;
+				$photo = array_key_exists( $code, $photo_a )?( $photo_a[ $code ] ):( array( "https://asgard.pl/png/product/" . $code . ".jpg" ) );
+				$instock = $stock_a[ $code ];
 				
 				$this->_categoryFilter( $category, $subcategory, $item );
 				$this->_addCategory( $category, $subcategory );
@@ -131,15 +136,15 @@ class ASGARD extends XMLAbstract{
 					'cat_id' => $cat_id,
 					'brutto' => $brutto,
 					'netto' => $netto,
-					// 'catalog' => $catalog,
+					'catalog' => $catalog,
 					'title' => $name,
 					'description' => $dscr,
 					'materials' => $material,
 					'dimension' => $dims,
-					// 'country' => $country,
+					'country' => $country,
 					'weight' => $weight,
 					'colors' => $color,
-					'photos' => $photo,
+					'photos' => json_encode( $photo ),
 					'new' => $new,
 					'promotion' => $promotion,
 					'sale' => $sale,

@@ -8,6 +8,8 @@
 		
 	}, $XM->getProducts( 'custom', "WHERE prod.new = 1" ) );
 	
+	shuffle( $items );
+	
 ?>
 <div id='polecane' class='d-none d-lg-block'>
 	<div class="col-lg-12">
