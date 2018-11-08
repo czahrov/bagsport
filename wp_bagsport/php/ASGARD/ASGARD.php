@@ -1,7 +1,9 @@
 <?php
 class ASGARD extends XMLAbstract{
 	private function _priceMod( $price ){
-		return $price;
+		$marża = 0.30;
+		// return ( $price * -1 ) / ( $marża - 1 );
+		return $price / 1 - $marża;
 	}
 	
 	// filtrowanie kategorii
